@@ -26,7 +26,7 @@ systemctl status firewalld # 查看防火墙状态
 sudo firewall-cmd --get-active-zones # 查看已被激活的 Zone 信息
 sudo firewall-cmd --zone=public --add-port=<port>/tcp --permanent # 开放指定端口, --permanent永久生效, 不然重启失效
 sudo firewall-cmd --zone=public --remove-port=<port>/tcp --permanent # 关闭指定端口
-sudo sudo firewall-cmd --zone=public --list-ports # 查看开放的端口.
+sudo firewall-cmd --zone=public --list-ports # 查看开放的端口.
 sudo systemctl restart firewalld # 重启防火墙
 ```
 

@@ -57,14 +57,14 @@ git slash pip # 恢复之前状态,slash的内容删除
 
 # 创建并切换到dev分支, 相当于 git brach dev;git checkout dev
 git checkout -b dev
+# 切换回master分支
+git checkout master
 # 查看所有分支
 git branch
 # 删除dev分支
 git branch -d dev
 # 强制删除dev分支
 git branch -D dev
-# 切换回master分支
-git checkout master
 # 合并dev分支到当前分支
 git merge dev
 ```

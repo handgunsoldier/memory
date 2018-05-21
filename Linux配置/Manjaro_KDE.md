@@ -81,7 +81,6 @@ git pull
 pip install git+https://github.com/shadowsocks/shadowsocks.git@master
 # 2.在 .bashrc 中设置命令, 方便使用
 alias sss="sslocal -c ~/Documents/data/shadowsocks/config.json"
-alias ssc='google-chrome-stable --proxy-server="socks://127.0.0.1:1080"'
 alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
 alias unsetproxy="unset ALL_PROXY"
 ```
@@ -99,7 +98,13 @@ export XMODIFIERS="@im=fcitx"
 # 3.在fcitx输入法选项中添加pinyin
 ```
 
-### 开启AUR
+### chromium
+
+```bash
+sudo pacman -S chromium
+```
+
+### AUR
 
 - 安装
 
@@ -117,7 +122,6 @@ AURURL="https://aur.tuna.tsinghua.edu.cn"
 - 必装
 
 ```bash
-yaourt -S google-chrome
 yaourt -S typora # markdown编辑器
 yaourt -S visual-studio-code-bin # vscode
 yaourt -S wps-office ttf-wps-fonts # wps, 奇怪问题, 会导致chrome字体出问题
