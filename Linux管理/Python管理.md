@@ -21,7 +21,7 @@ pyenv install <版本>
 # 显示所有已安装环境
 pyenv versions 
 # 切换版本
-pyenv local <版本> 
+pyenv global <版本> 
 # 刷新数据, 在pip安装新包后使用
 pyenv rehash 
 # 卸载环境
@@ -31,8 +31,14 @@ pyenv uninstall <版本>
 - 更新
 
 ```shell
+# 直接更新master分支
 cd $(pyenv root)
 git pull
+
+# 更新到指定release版本
+git fetch # 只拉取, 不合并
+git tag # 查看版本
+git checkout v1.x.x # 切换到版本
 ```
 
 ### python包管理: pip

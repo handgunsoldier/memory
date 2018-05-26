@@ -68,7 +68,7 @@ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nf
 # 3.下载指定版本python
 pyenv install 3.6.5
 # 4.切换环境
-pyenv local 3.6.5
+pyenv global 3.6.5
 # 5.更新
 cd $(pyenv root)
 git pull

@@ -54,7 +54,7 @@ sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
 sudo yum --enablerepo=elrepo-kernel install kernel-ml -y
 rpm -qa | grep kernel # 查看是否安装成功
 sudo egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \' # 查看内核启动顺序
-grub2-set-default 0  # default 0 表示第一个内核设置为默认运行, 选择最新内核就对了
+sudo grub2-set-default 0  # default 0 表示第一个内核设置为默认运行, 选择最新内核就对了
 sudo shutdown -r now # 重启
 uname -r # 查看是否安装成功
 ```
@@ -129,7 +129,7 @@ net.ipv4.tcp_fastopen = 3
 #net.ipv4.tcp_congestion_control = hybla
 # for low-latency network, use htcp instead
 #net.ipv4.tcp_congestion_control = htcp
-# bbr
+# bbr, 下面两行
 net.ipv4.tcp_congestion_control = bbr
 net.core.default_qdisc=fq
 ```
@@ -143,8 +143,6 @@ net.core.default_qdisc=fq
 ```
 
 - 然后重启服务器执行`ulimit -n`，查询返回65536即可
-
-
 
 ### 必备依赖
 
@@ -179,7 +177,7 @@ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nf
 # 下载python
 pyenv install 3.x.x
 # 启动环境
-pyenv local 3.x.x
+pyenv global 3.x.x
 # 更新pyenv
 cd $(pyenv root)
 git pull
@@ -248,6 +246,6 @@ sudo yum install fontconfig mkfontscale
 # 3.然后执行
 sudo mkfontscale
 sudo mkfontdir
-sudo fc-cache-fv
+sudo fc-cache -fv
 ```
 

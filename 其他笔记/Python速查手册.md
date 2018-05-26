@@ -23,14 +23,15 @@ lst.count(x)
 lst.reverse()
 # 根据key排序, 可打开逆序开关, 原地
 lst.sort(key=None, reverse=False)
-# 返回列表的浅复制
+# 返回列表的浅拷贝
+# 浅拷贝指, 列表对象不同, 但成员指向同一块内存
 lst.copy()
 ```
 
 - dict(字典)
 
 ```python
-# 返回一个元祖(键, 值)构成的列表
+# 返回一个元组(键, 值)构成的列表
 d.items()
 # 返回字典的键构成的列表
 d.keys()
@@ -44,7 +45,8 @@ d.setdefault(key, default=None)
 d.fromkeys(iterbale, default=None)
 # 把字典dict2中的键值更新到字典d中, 会覆盖已有的键
 d.update(dict2)
-# 弹出指定元素, 并返回值, 如指定default, 则存不存在都返回default, 否则不存在抛出异常
+# 弹出指定元素, 并返回值, 若不存在, 则抛出KeyError
+# 若指定default参数, 则无论存不存在都返回default
 d.pop(k, default=None)
 # 弹出字典末尾元素, 返回一个二元组
 d.popitem()
@@ -190,10 +192,10 @@ type(obj)
 isinstance(obj, classinfo)
 issubclass(obj, classinfo)
 
+# 返回当前环境下的全局变量
 globals()
+# 返回当前环境下的局部变量
 locals()
-
-
 ```
 
 ### Python常用魔法方法

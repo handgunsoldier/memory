@@ -74,12 +74,14 @@ git merge dev
 ```bash
 # 把本地仓库和远程仓库关联, origin是给远程仓库起的别名
 git remote add origin git@github.com:zzzzer91/<远程仓库名.git>
-# 第一次向远程仓库推送用这条, 以后可使用下面的
+# 第一次向远程仓库推送用这条, 以后可简化只用`git push`
 git push -u origin master
 # 推送到远程仓库
 git push
-# 抓取远程仓库内容, 合并到本地
+# 拉取远程仓库内容, 合并到本地
 git pull
+# 只拉取, 不合并
+git fetch
 # 查看远程仓库
 git remote -v
 # 删除与远程仓库关联

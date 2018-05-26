@@ -1,0 +1,11 @@
+[Unit]
+Description=shadowsocks
+
+[Service]
+Type=forking
+PIDFile=/run/shadowsocks.pid
+ExecStart=/home/zzzzer/.pyenv/versions/3.6.5/bin/ssserver -c /home/zzzzer/Documents/code/python/ss/shadowsocks.json -d start
+ExecStop=/home/zzzzer/.pyenv/versions/3.6.5/bin/ssserver -d stop
+
+[Install]
+WantedBy=multi-user.target
