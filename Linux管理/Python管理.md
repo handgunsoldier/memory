@@ -50,6 +50,8 @@ git checkout v1.x.x # 切换到版本
 pip list 
 # 列出所有过期库
 pip list --outdate 
+# 列出所有安装的库, requirements.txt格式
+pip freeze
 # 只下载该库
 pip download <PACKAGE_NAME> 
 # 下载安装该库
@@ -86,17 +88,19 @@ pipenv install flask --dev # 初始化环境并在dev条目安装flask
 
 # 列出pip包之间依赖关系
 pipenv graph
+
 # 更新生成Pipfile.lock文件
 pipenv lock
 
 # 显示虚拟环境所在目录
 pipenv --venv
+
 # 启用虚拟环境
 pipenv shell
 
 # 删除环境
 pipenv uninstall --all-dev # 卸载dev条目所有包, 注意虚拟环境还在
 pipenv uninstall --all # 卸载所有包, 注意虚拟环境还在
-pipenv --rm # 完全删除虚拟环境, 只需这一条指令, 并删除工作目录
+pipenv --rm # 完全删除虚拟环境, 只需这一条指令
 ```
 

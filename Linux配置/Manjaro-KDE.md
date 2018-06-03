@@ -182,3 +182,10 @@ sudo mkfontdir
 sudo fc-cache -fv
 ```
 
+- 安装主题
+
+```bash
+# 图标主题放至/usr/share/icons文件夹
+# workspace主题放至/usr/share/themes文件夹
+```
+

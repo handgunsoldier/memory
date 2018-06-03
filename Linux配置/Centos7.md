@@ -1,5 +1,15 @@
 # VPS上centos7安装后配置
 
+### 更换编码和时区
+
+```bash
+# 修改为utf-8编码
+sudo vi /etc/locale.conf # 添加`LANG="en_US.UTF-8"`
+
+# 更换为Asia/Shanghai时区, timedatectl查看效果
+sudo timedatectl set-timezone Asia/Shanghai
+```
+
 ### 用户管理
 
 ```shell
