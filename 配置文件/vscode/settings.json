@@ -16,9 +16,9 @@
     "terminal.integrated.fontSize": 20,
     "markdown.preview.fontSize": 20,
     "typescript.check.npmIsInstalled": false,
-    "python.venvPath": "~/.pyenv",
-    "python.pythonPath": "python3",
     "python.linting.pylintEnabled": false,
+    "python.pythonPath": "python3",
     "C_Cpp.errorSquiggles": "Disabled",
     "C_Cpp.formatting": "Disabled",
+    "extensions.ignoreRecommendations": false,
 }
