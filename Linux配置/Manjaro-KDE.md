@@ -122,9 +122,9 @@ AURURL="https://aur.tuna.tsinghua.edu.cn"
 - 必装
 
 ```bash
-yaourt -S typora # markdown编辑器
+yaourt -S typora # 很好用的markdown编辑器, 支持导出PDF
 yaourt -S visual-studio-code-bin # vscode
-yaourt -S wps-office ttf-wps-fonts # wps, 奇怪问题, 会导致chrome字体出问题
+yaourt -S wps-office ttf-wps-fonts # wps
 ```
 
 - **注意**: 命令台用yaourt安装时不需加sudo, 否则报错
@@ -186,6 +186,5 @@ sudo fc-cache -fv
 
 ```bash
 # 图标主题放至/usr/share/icons文件夹
-# workspace主题放至/usr/share/themes文件夹
 ```
 
