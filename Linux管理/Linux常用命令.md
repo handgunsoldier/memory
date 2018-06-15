@@ -104,11 +104,9 @@ iwconfig
 # 查看arp缓存
 arp -a 
 # 查看DNS服务器地址
-cat /etc/resolv.conf 
-# 请求一个网页, 不会处理重定向
-curl <URL>
-# 下载内容
-wget <URL>
+cat /etc/resolv.conf
+# 查询主机IP地址, 也可以反向查询
+nslookup <URL|IP>
 # 测试网络, -c指定ping次数
 ping -c4 <URL> 
 # 路由追踪, 代替tracepath
@@ -117,6 +115,10 @@ tracepath
 nload 
 # 查看进程联网情况
 nethogs
+# 请求一个网页, 不会处理重定向
+curl <URL>
+# 下载内容
+wget <URL>
 ```
 
 ### 进程管理

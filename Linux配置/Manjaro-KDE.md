@@ -12,7 +12,7 @@ sudo pacman-mirrors -i -c China -m rank
 - 刷新缓存:
 
 ```bash
-sudo pacman -Syy # 两个yy代表强制刷新，即使已经是最新的
+sudo pacman -Syy # 两个yy代表强制刷新, 即使已经是最新的
 ```
 
 ### 卸载不需要软件
@@ -27,7 +27,7 @@ sudo pacman -Rsn steam-manjaro libreoffice-fresh ms-office-online hplip firefox 
 ### 更新系统
 
 ```bash
-sudo pacman -Syu # 同步源(y)，并更新系统(u)
+sudo pacman -Syu # 同步源(y), 并更新系统(u)
 ```
 
 ### git
@@ -80,7 +80,7 @@ git pull
 # 1.安装
 pip install git+https://github.com/shadowsocks/shadowsocks.git@master
 # 2.在 .bashrc 中设置命令, 方便使用
-alias sss="sslocal -c ~/Documents/data/shadowsocks/config.json"
+alias sss="sslocal -c ~/Documents/data/shadowsocks/local_config.json"
 alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
 alias unsetproxy="unset ALL_PROXY"
 ```
@@ -102,6 +102,13 @@ export XMODIFIERS="@im=fcitx"
 
 ```bash
 sudo pacman -S chromium
+```
+
+### 网络工具包
+
+```bash
+sudo pacman -S net-tools # ifconfig
+sudo pacman -S dnsutils # nslookup
 ```
 
 ### AUR
@@ -180,11 +187,5 @@ cd /usr/share/fonts/winfonts
 sudo mkfontscale
 sudo mkfontdir
 sudo fc-cache -fv
-```
-
-- 安装主题
-
-```bash
-# 图标主题放至/usr/share/icons文件夹
 ```
 
