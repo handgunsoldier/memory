@@ -41,6 +41,8 @@ git config --global user.email "zzzzer91@gmail.com"
 # 3.生成ssh密钥
 ssh-keygen -t rsa -C "zzzzer91@gmail.com"
 # 4.在github上更新密钥
+# 5.设置, 防止中文乱码
+git config –global core.quotepath false 
 ```
 
 ### vim
