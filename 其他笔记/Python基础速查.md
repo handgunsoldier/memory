@@ -46,8 +46,8 @@ d.fromkeys(iterbale, default=None)
 # 把字典dict2中的键值更新到字典d中, 会覆盖已有的键
 d.update(dict2)
 # 弹出指定元素, 并返回值, 若不存在, 则抛出KeyError
-# 若指定default参数, 则无论存不存在都返回default
-d.pop(k, default=None)
+# 若指定d参数, 则不存在返回d
+d.pop(k, d)
 # 弹出字典末尾元素, 返回一个二元组
 d.popitem()
 # 清空字典, 但会保留字典对象

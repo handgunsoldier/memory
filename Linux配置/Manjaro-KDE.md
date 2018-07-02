@@ -113,6 +113,12 @@ sudo pacman -S net-tools # ifconfig
 sudo pacman -S dnsutils # nslookup
 ```
 
+### mongodb
+
+```bash
+alias mongod="mongod --dbpath ~/Documents/data/mongodb/data"
+```
+
 ### AUR
 
 - 安装
@@ -134,6 +140,7 @@ AURURL="https://aur.tuna.tsinghua.edu.cn"
 yaourt -S typora # 很好用的markdown编辑器, 支持导出PDF
 yaourt -S visual-studio-code-bin # vscode
 yaourt -S wps-office ttf-wps-fonts # wps
+yaourt -S robo3t-bin # mongodb gui工具
 ```
 
 - **注意**: 命令台用yaourt安装时不需加sudo, 否则报错
