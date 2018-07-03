@@ -116,7 +116,22 @@ sudo pacman -S dnsutils # nslookup
 ### mongodb
 
 ```bash
+sudo pacman -S mongod
+
+# 指定数据库存放路径
 alias mongod="mongod --dbpath ~/Documents/data/mongodb/data"
+```
+
+### postgresql
+
+```bash
+sudo pacman -S postgresql
+
+# 初始化数据库, 第一次使用必须
+su - postgres -c "initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'"
+
+# 启动数据库, 后台执行
+sudo systemctl start postgresql
 ```
 
 ### AUR
@@ -153,7 +168,8 @@ pip install jupyter # jupyter notebook
 pip install requests bs4 lxml # 爬虫
 pip install numpy pandas matplotlib scipy # 科学计算
 pip install pillow # 图像处理
-pip install pymongo # mongodb驱动
+pip install pymongo # mongodb
+pip install psycopg2 # postgresql
 pip install pipenv # 包虚拟环境
 ```
 
