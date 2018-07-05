@@ -1,5 +1,13 @@
 ### postgresql
 
+- 启动
+
+```bash
+sudo -u postgres postgres -D /var/lib/postgres/data
+```
+
+- 命令
+
 ```bash
 # 连接
 psql 

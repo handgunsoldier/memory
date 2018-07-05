@@ -1,4 +1,4 @@
-# 常用HTTP状态码
+### 常用HTTP状态码
 
 **200 Ok**: 请求成功
 
@@ -20,7 +20,7 @@
 
 **503 Server Unavailable**: 服务器当前不能处理客户端请求，一段时间后可能恢复
 
-# 重要HTTP请求头
+### 重要HTTP请求头
 
 **Cookies**: 用于辨别用户身份、进行session跟踪
 
@@ -28,17 +28,18 @@
 
 **User-Agent**: 客户端系统, 浏览器等信息，可以用于区分PC端、移动端、和爬虫
 
-# requests库
+### requests库
 
 - get方法常用参数:
 ```python
 params # dict, url参数, 会自动构建url
 headers # dict, 定制向服务器提交的HTTP请求头
 cookies # dict, 定制向服务器提交的cookie
-timeout # int, 设置超时时间, 单位为秒
+timeout # int, 设置超时时间, 单位为秒, 设为None, 则永不超时
 proxies # dict, 设置代理服务器
 allow_redirects # bool, 默认True, 重定向开关, 如遇3XX, 自动跳转
 stream # bool, 默认False, 是否立即下载请求内容, 请求视频等大内容时应设为True
+verify # bool, 默认True, 开启ssl验证, 关闭可跳过ssl错误
 ```
 - post方法常用参数(拥有get方法以上的所有参数，并增加了以下参数):
 ```python
@@ -71,7 +72,7 @@ r.raise_for_status() # 如果返回的http状态码在400和500或500和600之�
 
 - `from requests.exceptions import RequestException`, 引入requests所有异常的基类, except该异常, 可以捕获所有requests的异常.
 
-# bs4库
+### bs4库
 
 - 令`soup = BeautifulSoup(html, 'lxml')`, 下面是`BeautifulSoup`对象的常用属性和方法:
 ```python
@@ -106,7 +107,7 @@ tag.decompose() # 销毁该标签
 tag.select('[target=_blank]') # tag可以继续使用select方法
 ```
 
-# re模块
+### re模块
 
 - 正则语法:
 ```python
@@ -118,10 +119,12 @@ tag.select('[target=_blank]') # tag可以继续使用select方法
 '\s'   # 匹配任意的空白符, 等价于 [\f\n\r\t\v]
 '\S'   # 匹配任何非空白字符, 等价于 [^\f\n\r\t\v]
 '\d'   # 匹配数字, 等价于 [0-9]
+'\D'   # 匹配任意非数字的字符, 等价于 [^0-9]
+'\n'   # 匹配一个换行符
+'\t'   # 匹配一个制表符
 
 '{m}'  # 匹配前一个字符m次
 '{m,n}'# 匹配前一个字符m到n次(包含n)
-'\D'   # 匹配任意非数字的字符, 等价于 [^0-9]
 '*'    # 匹配前面一个字符0到无限次
 '+'    # 匹配前面一个字符1到无限次
 '?'    # 匹配前面一个字符0或1次, 也可以代表非贪婪匹配

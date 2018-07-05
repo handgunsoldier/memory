@@ -55,6 +55,8 @@ ldd <程序名>
 ```bash
 # 查看所有IP
 ip addr 
+# 查看所有IPV6
+ip -6 addr
 # 查看指定网卡ip
 ip addr show <网卡名> 
 # 查看路由

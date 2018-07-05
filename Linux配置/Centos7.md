@@ -56,6 +56,21 @@ vi /etc/ssh/sshd_config # 在`Port 22`下面添加`Port 端口号`, 并且把`#P
 sudo systemctl restart sshd.service # 重启ssh
 ```
 
+### 更新系统
+
+```bash
+sudo yum upgrade
+```
+
+### 必备依赖
+
+```shell
+# python3依赖
+sudo yum install perl gcc gcc-c++ automake make openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel libffi-devel
+# git依赖
+sudo yum install perl-ExtUtils-MakeMaker libcurl-devel
+```
+
 ### 更换内核
 
 ```bash
@@ -71,11 +86,11 @@ uname -r # 查看是否安装成功
 
 ### vps网络优化
 
-- `modprobe tcp_hybla` 开启hybla算法, 适用高延迟的网络
+- `sudo modprobe tcp_hybla` 开启hybla算法, 适用高延迟的网络
 
-- `modprobe tcp_htcp` 开启htcp算法, 适用低延迟的网络(如日本，香港等)
+- `sudo modprobe tcp_htcp` 开启htcp算法, 适用低延迟的网络(如日本，香港等)
 
-- `modprobe tcp_bbr` 开启bbr算法, bbr目的是要尽量跑满带宽
+- `sudo modprobe tcp_bbr` 开启bbr算法, bbr目的是要尽量跑满带宽
 
 - `sysctl net.ipv4.tcp_available_congestion_control`查看开启的tcp拥塞算法
 
@@ -153,15 +168,6 @@ net.core.default_qdisc=fq
 ```
 
 - 然后重启服务器执行`ulimit -n`，查询返回65536即可
-
-### 必备依赖
-
-```shell
-# python3依赖
-sudo yum install perl gcc gcc-c++ automake make openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel libffi-devel
-# git依赖
-sudo yum install perl-ExtUtils-MakeMaker libcurl-devel
-```
 
 ### git
 

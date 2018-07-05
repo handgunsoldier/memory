@@ -34,6 +34,18 @@ lst = [{'one':1}, {'one':2}, {'one':3}]
 pd.DataFrame(lst)
 ```
 
+- pandas类型
+```python
+float 
+int 
+bool 
+datetime64[ns] 
+datetime64[ns, tz] 
+timedelta[ns] 
+category 
+object # 字符串也是这个类型
+```
+
 - `Series`对象的选取方式(位置索引和自定义索引不能混用):
 ```python
 '''位置索引'''
@@ -57,6 +69,8 @@ s[s.between(10, 20)] # 选取所有value大于等于10, 小于20的s
 df['xm'] # 选择xm这一列, 是Series类型
 df[['xm']] # 选择xm这一列, 是DataFrame类型
 df[['xm','csrq']] # 选择xm, csrq两列, 是DataFrame类型
+# 列顺序会根据输入顺序返回, 所以这种方法可以改变列顺序
+df = df[['xm','csrq']]
 
 '''位置索引'''
 df.iloc[2] # 选择第二行所有数据, 是Series类型
@@ -139,7 +153,7 @@ df.values # 查看所有元素的value
 df.dtypes # 查看所有元素的类型
 df.index # 查看所有行名
 df.index = ['总数', '不同', '最多', '频率'] # 重命名行名
-df.columns # 查看所有列名
+df.columns # 查看所有列名, 后加tolist(), 可以返回列表
 df.columns = ['班级', '姓名', '性别', '出生日期'] # 重命名列名
 df.T # 转置后的df, 非原地
 
@@ -176,7 +190,8 @@ df.sort_values(by='csrq') # 根据csrq排序, 默认升序, 非原地
 df.sort_values(['col1', 'col2'], ascending=[True, False]) # ascending决定升序降序
 df.replace(1,'one') # 用'one'代替所有等于1的值
 df.replace([1,3], ['one','three']) # 用'one'代替1，用'three'代替3
-df.fillna(x) # 用x替换df中所有的空值
+df.fillna(x) # 用x替换df中所有的空值, 非原地
+df.fillna({'xh':0}) # 用x替换df的xh列中所有的空值
 df.dropna() # 删除所有包含空值的行
 df.dropna(axis=1) # 删除所有包含空值的列
 

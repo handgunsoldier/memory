@@ -41,7 +41,7 @@ git config --global user.email "zzzzer91@gmail.com"
 # 3.生成ssh密钥
 ssh-keygen -t rsa -C "zzzzer91@gmail.com"
 # 4.在github上更新密钥
-# 5.设置, 防止中文乱码
+# 5.设置, 防止`git status`中文乱码
 git config –global core.quotepath false 
 ```
 
@@ -68,12 +68,9 @@ echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
 # 3.下载指定版本python
-pyenv install 3.6.5
+pyenv install 3.x.x
 # 4.切换环境
-pyenv global 3.6.5
-# 5.更新
-cd $(pyenv root)
-git pull
+pyenv global 3.x.x
 ```
 
 ### shadowsocks
@@ -82,7 +79,7 @@ git pull
 # 1.安装
 pip install git+https://github.com/shadowsocks/shadowsocks.git@master
 # 2.在 .bashrc 中设置命令, 方便使用
-alias sss="sslocal -c ~/Documents/data/shadowsocks/local_config.json"
+alias sss="ss-local -c /etc/shadowsocks.json"
 alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
 alias unsetproxy="unset ALL_PROXY"
 ```
@@ -118,8 +115,7 @@ sudo pacman -S dnsutils # nslookup
 ```bash
 sudo pacman -S mongod
 
-# 指定数据库存放路径
-alias mongod="mongod --dbpath ~/Documents/data/mongodb/data"
+alias runmongod="sudo -u mongodb mongod -f /etc/mongodb.conf"
 ```
 
 ### postgresql
@@ -128,10 +124,17 @@ alias mongod="mongod --dbpath ~/Documents/data/mongodb/data"
 sudo pacman -S postgresql
 
 # 初始化数据库, 第一次使用必须
-su - postgres -c "initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'"
+sudo -u postgres initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'
 
-# 启动数据库, 后台执行
-sudo systemctl start postgresql
+alias runmongod="sudo -u postgres postgres -D /var/lib/postgres/data"
+```
+
+### redis
+
+```bash
+sudo pacman -S redis
+
+alias runredis="sudo -u redis redis-server /etc/redis.conf"
 ```
 
 ### AUR
@@ -168,9 +171,10 @@ pip install jupyter # jupyter notebook
 pip install requests bs4 lxml # 爬虫
 pip install numpy pandas matplotlib scipy # 科学计算
 pip install pillow # 图像处理
+pip install pipenv # 包虚拟环境
 pip install pymongo # mongodb
 pip install psycopg2 # postgresql
-pip install pipenv # 包虚拟环境
+pip install redis # redis
 ```
 
 ### jupyter的配置
@@ -188,13 +192,6 @@ c.NotebookApp.open_browser = False
 ```
 
 ### 其他
-
-- 设置其他命令
-
-```bash
-# mongod
-alias mongod="/opt/mongodb/bin/mongod --config=~/Documents/data/mongodb/mongodb.conf"
-```
 
 - 选择bash下默认编辑器
 

@@ -1,5 +1,13 @@
  ### mongodb
 
+- 启动
+
+```bash
+sudo -u mongodb mongod -f /etc/mongodb.conf
+```
+
+- 命令
+
 ```bash
 # 获取帮助
 db.help()
@@ -36,5 +44,30 @@ db.dropDatabase()
 mongodump -h 127.0.0.1 -d dbname -o ~/Documents/backup
 # 从当前目录读取(.), 恢复数据库
 mongorestore -h 127.0.0.1 -d dbname .
+```
+
+- 配置文件/etc/mongodb.conf参数说明
+
+```bash
+# 数据库数据存放目录
+dbpath=/var/lib/mongodb/data
+# 数据库日志存放目录
+logpath=/var/log/mongodb/mongodb.log 
+# 以追加的方式记录日志
+logappend = true
+# 端口号 默认为27017
+port=27017 
+# 以后台方式运行进程
+fork=true 
+# 开启用户认证
+auth=true
+# 关闭http接口，默认关闭http端口访问
+nohttpinterface=true
+# mongodb所绑定的ip地址
+bind_ip = 127.0.0.1 
+# 启用日志文件，默认启用
+journal=true 
+# 这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false
+quiet=true 
 ```
 
