@@ -175,6 +175,10 @@ pip install pipenv # 包虚拟环境
 pip install pymongo # mongodb
 pip install psycopg2 # postgresql
 pip install redis # redis
+pip install uvloop # 异步 I/O框架
+pip install aiohttp # 异步网络框架
+pip install aiodns # 异步解析DNS
+pip install cchardet # 更快的编码探测
 ```
 
 ### jupyter的配置
