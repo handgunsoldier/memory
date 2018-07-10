@@ -118,6 +118,14 @@ sudo pacman -S mongod
 alias runmongod="sudo -u mongodb mongod -f /etc/mongodb.conf"
 ```
 
+### redis
+
+```bash
+sudo pacman -S redis
+
+alias runredis="sudo -u redis redis-server /etc/redis.conf"
+```
+
 ### postgresql
 
 ```bash
@@ -129,12 +137,16 @@ sudo -u postgres initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'
 alias runmongod="sudo -u postgres postgres -D /var/lib/postgres/data"
 ```
 
-### redis
+### mysql(arch下用mariadb代替)
 
 ```bash
-sudo pacman -S redis
+sudo pacman -S mariadb
 
-alias runredis="sudo -u redis redis-server /etc/redis.conf"
+# 初始化数据库
+sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+
+# 设置密码
+mysqladmin -u root password "newpass"
 ```
 
 ### AUR
@@ -172,13 +184,16 @@ pip install requests bs4 lxml # 爬虫
 pip install numpy pandas matplotlib scipy # 科学计算
 pip install pillow # 图像处理
 pip install pipenv # 包虚拟环境
-pip install pymongo # mongodb
-pip install psycopg2 # postgresql
-pip install redis # redis
 pip install uvloop # 异步 I/O框架
 pip install aiohttp # 异步网络框架
 pip install aiodns # 异步解析DNS
 pip install cchardet # 更快的编码探测
+
+# 数据库
+pip install pymongo # mongodb
+pip install redis # redis
+pip install psycopg2 # postgresql
+pip install pymysql # mysql
 ```
 
 ### jupyter的配置
