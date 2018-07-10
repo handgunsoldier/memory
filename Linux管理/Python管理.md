@@ -1,15 +1,4 @@
-### python版本管理: pyenv
-
-- 安装
-
-```bash
-# 安装
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-# 配置(自动补全功能等)
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
-```
+### 版本管理: pyenv
 
 - 命令
 
@@ -31,17 +20,40 @@ pyenv uninstall <版本>
 - 更新
 
 ```shell
-# 直接更新master分支
-cd $(pyenv root)
-git pull
-
-# 更新到指定release版本
-git fetch # 只拉取, 不合并
-git tag # 查看版本
-git checkout v1.x.x # 切换到版本
+# git pull下来的是master版本, 不稳定, 需切换到指定标签
+cd .pyenv
+git pull origin master:master
+git tag # 检查可用版本
+git checkout <tag名> # 切换
 ```
 
-### python包管理: pip
+### 虚拟环境: pyenv-virtualenv
+
+- 命令
+
+```bash
+# 用当前环境创建虚拟容器
+pyenv virtualenv <name>
+# 查看已有容器, 注意多个s
+pyenv virtualenvs
+# 切换到容器
+pyenv activate <name>
+# 退出容器
+pyenv deactivate
+# 卸载容器
+pyenv uninstall <name>
+```
+
+- 更新
+
+```shell
+cd .pyenv/plugins/pyenv-virtualenv
+git pull origin master:master
+git tag # 检查可用版本
+git checkout <tag名> # 切换
+```
+
+### 包管理: pip
 
 - 命令
 
@@ -70,13 +82,7 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple <PACKAGE_NAME>
 pip uninstall <PACKAGE_NAME> 
 ```
 
-### 虚拟环境管理: pipenv
-
-- 安装
-
-```shell
-pip install pipenv
-```
+### pipenv
 
 - 命令
 

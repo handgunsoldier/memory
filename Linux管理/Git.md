@@ -1,5 +1,17 @@
 ### git
 
+-  建议
+
+```bash
+# 推荐使用这种方法更新本地分支
+git fetch origin <远程分支名> # 拉取指定远程分支到本地, 远程分支在本地名为origin/master
+git branch -a # 查看所有分支
+git merge orgin/<远程分支名> # 合并到当前分支
+
+# 推荐使用这种方法推送本地分支
+git push origin <远程分支名> # 推送当前分支到指定远程分支
+```
+
 -  初始准备
 
 ```bash
@@ -45,8 +57,6 @@ git tag <tag_name> # 默认打在最新提交的commit上
 git tag <tag_name> <commit_id> # 打在指定commit上
 # 查看本地标签, 注意不是按时间顺序给出, 而是按字母排序
 git tag
-# 查看远程标签
- git tag -r
 # 查看指定标签信息
 git show <tag_name>
 # 删除commit上的标签
@@ -84,25 +94,32 @@ git merge dev
 - 远程仓库
 
 ```bash
+# 从目标克隆所有分支到本地, 除了HEAD分支, 其他分支以origin/<分支名>形式命名
+git clone <版本库的网址>
 # 把本地仓库和远程仓库关联, origin是给远程仓库起的别名
 git remote add origin git@github.com:zzzzer91/<远程仓库名.git>
 # 第一次向远程仓库推送用这条, 以后推送master可简化只用`git push`
 git push -u origin master
-# 推送到远程仓库
-git push
-# 拉取远程仓库内容, 合并到本地
+# 把当前分支推送到远程的dev分支
+git push origin dev
+# 拉取远程仓库内容(所有分支), 合并到本地
 git pull
-# 只拉取, 不合并
+# 拉取远程next分支, 合并到本地master分支
+# 等同于`git fetch origin; git merge origin/master`
+git pull origin next:master
+# 只拉取(所有分支), 不合并
+# 所取回的更新, 在本地主机上要用"远程主机名/分支名"的形式读取. 比如origin主机的master, 就要用origin/master读取
+# 用`git branch -r`查看
 git fetch
+# 拉取指定分支
+git fetch origin master
+# 合并取回的分支
+git merge origin/master
+# 根据远程分支创建本地分支
+git checkout <本地分支名> origin/<远程分支名>
 # 查看远程仓库
 git remote -v
 # 删除与远程仓库关联
 git remote rm origin
-
-# 推送本地分支到远程分支
-# 1.远程先开好分支然后拉到本地
-git checkout -b <本地分支名> origin/<远程分支名>
-# 2.本地先开好分支然后推送到远程
-git push origin <本地分支名>
 ```
 

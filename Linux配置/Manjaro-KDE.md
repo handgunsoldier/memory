@@ -63,14 +63,31 @@ alias vi='vim'
 ``` bash
 # 1.安装
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-# 2.配置(自动补全功能等)
+# 2.切换到最新版本(git clone下来的是master版本, 不稳定)
+cd .pyenv
+git tag # 检查可用版本
+git checkout <tag名> # 切换
+# 3.配置(自动补全功能等)
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
-# 3.下载指定版本python
-pyenv install 3.x.x
-# 4.切换环境
-pyenv global 3.x.x
+# 4.下载指定版本python
+pyenv install <版本>
+# 5.切换环境
+pyenv global <版本>
+```
+
+### pyenv-virtualenv(pyenv虚拟环境插件)
+
+```bash
+# 1.安装
+git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+# 2.切换到最新版本
+cd .pyenv/plugins/pyenv-virtualenv
+git tag # 检查可用版本
+git checkout <tag名> # 切换
+# 3.配置自动补全
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 ```
 
 ### shadowsocks

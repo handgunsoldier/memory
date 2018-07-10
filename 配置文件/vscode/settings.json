@@ -14,7 +14,7 @@
     "editor.wrappingIndent": "none",
     "editor.fontSize": 20,
     "terminal.integrated.fontSize": 20,
-    "markdown.preview.fontSize": 20,
+    "markdown.preview.fontSize": 18,
     "typescript.check.npmIsInstalled": false,
     "python.linting.pylintEnabled": false,
     "python.pythonPath": "python3",
