@@ -1,18 +1,94 @@
+
+
+## MongoDB
+
+### 1. 启动
+
+```bash
+# 后台
+sudo systemctl start mongodb
+# 前台
+sudo -u mongodb mongod -f /etc/mongodb.conf
+
+# 客户端
+mongo
+```
+
+### 2. 命令
+
+```bash
+# 获取帮助
+db.help()
+
+# 显示所有数据库
+show dbs
+# 切换到指定db, 不存在则创建
+use db
+# 显示当前db下所有collection
+show tables
+
+# 获取当前colletcion名
+db.getName()
+# 获取当前colletcion状态
+db.stats()
+
+# 查找所有name是D或E开头的记录, 斜杆不能少
+# 后加limit(数字), 限制返回记录数量
+# 后加.sort({'要排序的key':1})排序, 1指升序, -1指降序
+# 后加.pretty()格式化输出
+db.collection.find({name:{/^D|E/}})
+# 过滤指定字段, 1显示, 0不显示
+db.collection.find({}, {'name':1})
+# 查询age字段不包括21, 22的记录, nin改in就是包括
+db.collection.find({age:{$nin:[21,22]}})
+
+# 删除指定条目, {}中为空, 则删除所有
+db.collection.remove({'title':'xxx'})
+# 删除指定colletcion
+db.collection.drop()
+# 删除当前数据库
+db.dropDatabase()
+
+# 备份数据库, -d省略则备份所有
+mongodump -h 127.0.0.1 -d dbname -o ~/Documents/backup
+# 从当前目录读取(.), 恢复数据库
+mongorestore -h 127.0.0.1 -d dbname .
+```
+
+### 3. 配置文件/etc/mongodb.conf参数说明
+
+```bash
+# 数据库数据存放目录
+dbpath=/var/lib/mongodb/data
+# 数据库日志存放目录
+logpath=/var/log/mongodb/mongodb.log 
+# 以追加的方式记录日志
+logappend = true
+# 端口号 默认为27017
+port=27017 
+# 以后台方式运行进程
+fork=true 
+# 开启用户认证
+auth=true
+# 关闭http接口，默认关闭http端口访问
+nohttpinterface=true
+# mongodb所绑定的ip地址
+bind_ip = 127.0.0.1 
+# 启用日志文件，默认启用
+journal=true 
+# 这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false
+quiet=true 
+```
+
 ## Pymongo
 
-MongoDB 是由 C++ 语言编写的非关系型数据库，是一个基于分布式文件存储的开源数据库系统，其内容存储形式类似 Json 对象，它的字段值可以包含其他文档，数组及文档数组，非常灵活，在这一节我们来看一下 Python3 下 MongoDB 的存储操作。
-
-### 1. 准备工作
-
-在本节开始之前请确保已经安装好了 MongoDB 并启动了其服务，另外安装好了 Python 的 PyMongo库，如没有安装可以参考第一章的安装过程。
-
-### 2. 连接MongoDB
+### 1. 连接MongoDB
 
 连接 MongoDB 我们需要使用 PyMongo 库里面的 MongoClient，一般来说传入 MongoDB 的 IP 及端口即可，第一个参数为地址 host，第二个参数为端口 port，端口如果不传默认是 27017。
 
 ```python
 import pymongo
-client = pymongo.MongoClient(host='localhost', port=27017)
+client = pymongo.MongoClient(host='localhost', port=27017) # 两个参数都可省略
 ```
 
 这样我们就可以创建一个 MongoDB 的连接对象了。
@@ -25,7 +101,7 @@ client = MongoClient('mongodb://localhost:27017/')
 
 可以达到同样的连接效果。
 
-### 3. 指定数据库
+### 2. 指定数据库
 
 MongoDB 中还分为一个个数据库，我们接下来的一步就是指定要操作哪个数据库，在这里我以 test 数据库为例进行说明，所以下一步我们需要在程序中指定要使用的数据库。
 
@@ -41,7 +117,7 @@ db = client['test']
 
 两种方式是等价的。
 
-### 4. 指定集合
+### 3. 指定集合
 
 MongoDB 的每个数据库又包含了许多集合 Collection，也就类似与关系型数据库中的表，下一步我们需要指定要操作的集合，在这里我们指定一个集合名称为 students，学生集合，还是和指定数据库类似，指定集合也有两种方式：
 
@@ -55,7 +131,7 @@ collection = db['students']
 
 这样我们便声明了一个 Collection 对象。
 
-### 5. 插入数据
+### 4. 插入数据
 
 接下来我们便可以进行数据插入了，对于 students 这个Collection，我们新建一条学生数据，以字典的形式表示：
 
@@ -75,7 +151,7 @@ result = collection.insert(student)
 print(result)
 ```
 
-在 MongoDB 中，每条数据其实都有一个 _id 属性来唯一标识，如果没有显式指明 _id，MongoDB 会自动产生一个 ObjectId 类型的 _id 属性。insert() 方法会在执行后返回的 _id 值。
+在 MongoDB 中，每条数据其实都有一个 _id 属性来唯一标识，**如果没有显式指明 _id**，MongoDB 会自动产生一个 ObjectId 类型的 _id 属性。insert() 方法会在执行后返回的 _id 值。
 
 运行结果：
 
@@ -163,7 +239,7 @@ insert_many() 方法返回的类型是 InsertManyResult，调用inserted_ids 属
 [ObjectId('5932abf415c2607083d3b2ac'), ObjectId('5932abf415c2607083d3b2ad')]
 ```
 
-### 6. 查询
+### 5. 查询
 
 插入数据后我们可以利用 find_one() 或 find() 方法进行查询，find_one() 查询得到是单个结果，find() 则返回一个生成器对象。
 
@@ -260,7 +336,7 @@ results = collection.find({'name': {'$regex': '^M.*'}})
 
 这些操作的更详细用法在可以在 MongoDB 官方文档找到：<https://docs.mongodb.com/manual/reference/operator/query/>。
 
-### 7. 计数
+### 6. 计数
 
 要统计查询结果有多少条数据，可以调用 count() 方法，如统计所有数据条数：
 
@@ -278,7 +354,7 @@ print(count)
 
 结果是一个数值，即符合条件的数据条数。
 
-### 8. 排序
+### 7. 排序
 
 可以调用 sort() 方法，传入排序的字段及升降序标志即可，示例如下：
 
@@ -295,7 +371,7 @@ print([result['name'] for result in results])
 
 在这里我们调用了 pymongo.ASCENDING 指定升序，如果要降序排列可以传入 pymongo.DESCENDING。
 
-### 9. 偏移
+### 8. 偏移
 
 在某些情况下我们可能想只取某几个元素，在这里可以利用skip() 方法偏移几个位置，比如偏移 2，就忽略前 2 个元素，得到第三个及以后的元素。
 
@@ -334,7 +410,7 @@ collection.find({'_id': {'$gt': ObjectId('593278c815c2602678bb2b8d')}})
 
 这时记录好上次查询的 _id。
 
-### 10. 更新
+### 9. 更新
 
 对于数据更新可以使用 update() 方法，指定更新的条件和更新后的数据即可，例如：
 
@@ -422,7 +498,7 @@ print(result.matched_count, result.modified_count)
 
 可以看到这时所有匹配到的数据都会被更新。
 
-### 11. 删除
+### 10. 删除
 
 删除操作比较简单，直接调用 remove() 方法指定删除的条件即可，符合条件的所有数据均会被删除，示例如下：
 
@@ -457,7 +533,7 @@ print(result.deleted_count)
 
 delete_one() 即删除第一条符合条件的数据，delete_many() 即删除所有符合条件的数据，返回结果是 DeleteResult 类型，可以调用 deleted_count 属性获取删除的数据条数。
 
-### 12. 更多
+### 11. 更多
 
 另外 PyMongo 还提供了一些组合方法，如find_one_and_delete()、find_one_and_replace()、find_one_and_update()，就是查找后删除、替换、更新操作，用法与上述方法基本一致。
 
@@ -466,79 +542,3 @@ delete_one() 即删除第一条符合条件的数据，delete_many() 即删除�
 详细用法可以参见官方文档：<http://api.mongodb.com/python/current/api/pymongo/collection.html>。
 
 另外还有对数据库、集合本身以及其他的一些操作，在这不再一一讲解，可以参见官方文档：<http://api.mongodb.com/python/current/api/pymongo/>。
-
-
-## MongoDB
-
-### 1. 启动
-
-```bash
-sudo -u mongodb mongod -f /etc/mongodb.conf
-```
-
-### 2. 命令
-
-```bash
-# 获取帮助
-db.help()
-
-# 显示所有数据库
-show dbs
-# 切换到指定db, 不存在则创建
-use db
-# 显示当前db下所有collection
-show tables
-
-# 获取当前colletcion名
-db.getName()
-# 获取当前colletcion状态
-db.stats()
-
-# 查找所有name是D或E开头的记录, 斜杆不能少
-# 后加limit(数字), 限制返回记录数量
-# 后加.sort({'要排序的key':1})排序, 1指升序, -1指降序
-# 后加.pretty()格式化输出
-db.collection.find({name:{/^D|E/}})
-# 过滤指定字段, 1显示, 0不显示
-db.collection.find({}, {'name':1})
-# 查询age字段不包括21, 22的记录, nin改in就是包括
-db.collection.find({age:{$nin:[21,22]}})
-
-# 删除指定条目, {}中为空, 则删除所有
-db.collection.remove({'title':'xxx'})
-# 删除指定colletcion
-db.collection.drop()
-# 删除当前数据库
-db.dropDatabase()
-
-# 备份数据库, -d省略则备份所有
-mongodump -h 127.0.0.1 -d dbname -o ~/Documents/backup
-# 从当前目录读取(.), 恢复数据库
-mongorestore -h 127.0.0.1 -d dbname .
-```
-
-### 3. 配置文件/etc/mongodb.conf参数说明
-
-```bash
-# 数据库数据存放目录
-dbpath=/var/lib/mongodb/data
-# 数据库日志存放目录
-logpath=/var/log/mongodb/mongodb.log 
-# 以追加的方式记录日志
-logappend = true
-# 端口号 默认为27017
-port=27017 
-# 以后台方式运行进程
-fork=true 
-# 开启用户认证
-auth=true
-# 关闭http接口，默认关闭http端口访问
-nohttpinterface=true
-# mongodb所绑定的ip地址
-bind_ip = 127.0.0.1 
-# 启用日志文件，默认启用
-journal=true 
-# 这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false
-quiet=true 
-```
-

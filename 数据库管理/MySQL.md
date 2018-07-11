@@ -1,3 +1,57 @@
+## MySQL
+
+### 1. 初始化
+
+```bash
+# 初始化数据库
+sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+
+# 设置密码
+mysqladmin -u root password "newpass"
+
+# 修改密码, 登录mysql后, 输入
+mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('newpass');
+```
+
+### 2. 启动
+
+```bash
+# 后台
+sudo systemctl start mysqld
+```
+
+### 3. 导入数据
+
+```bash
+# 1.创建数据库
+create database <数据库名>;
+# 2.切换数据库
+use <数据库名>;
+# 3.设置数据库编码
+set names utf8;
+# 4.导入
+mysql>source /home/abc/abc.sql;
+```
+
+### 4. 命令
+
+```mysql
+# 创建数据库
+create database <数据库名>;
+# 显示可用数据库
+show database; 
+# 切换数据库
+use <数据库名>;
+# 设置数据库编码
+set names utf8;
+# 创建表
+create table <表名>;
+# 显示可用表
+show tables; 
+# 显示指定表信息
+describe <表名>; 
+```
+
 ## Pymysql
 
 ### 1. 连接数据库
@@ -304,57 +358,3 @@ except:
 ```
 
 这样每循环一次，指针就会偏移一条数据，随用随取，简单高效。
-
-## MySQL
-
-### 1. 初始化
-
-```bash
-# 初始化数据库
-sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-
-# 设置密码
-mysqladmin -u root password "newpass"
-
-# 修改密码, 登录mysql后, 输入
-mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('newpass');
-```
-
-### 2. 运行服务
-
-```bash
-/usr/bin/mysqld_safe --datadir='/var/lib/mysql'
-```
-
-### 3. 导入数据
-
-```bash
-# 1.创建数据库
-create database <数据库名>;
-# 2.切换数据库
-use <数据库名>;
-# 3.设置数据库编码
-set names utf8;
-# 4.导入
-mysql>source /home/abc/abc.sql;
-```
-
-### 4. 命令
-
-```mysql
-# 创建数据库
-create database <数据库名>;
-# 显示可用数据库
-show database; 
-# 切换数据库
-use <数据库名>;
-# 设置数据库编码
-set names utf8;
-# 创建表
-create table <表名>;
-# 显示可用表
-show tables; 
-# 显示指定表信息
-describe <表名>; 
-```
-

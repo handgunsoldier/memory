@@ -1,12 +1,13 @@
-### postgresql
+## postgresql
 
-- 启动
+### 启动
 
 ```bash
-sudo -u postgres postgres -D /var/lib/postgres/data
+# 后台
+sudo systemctl start postgres
 ```
 
-- 命令
+### 命令
 
 ```bash
 # 连接

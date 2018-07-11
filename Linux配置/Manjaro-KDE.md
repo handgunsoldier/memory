@@ -139,8 +139,6 @@ alias runmongod="sudo -u mongodb mongod -f /etc/mongodb.conf"
 
 ```bash
 sudo pacman -S redis
-
-alias runredis="sudo -u redis redis-server /etc/redis.conf"
 ```
 
 ### postgresql
@@ -150,8 +148,6 @@ sudo pacman -S postgresql
 
 # 初始化数据库, 第一次使用必须
 sudo -u postgres initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'
-
-alias runmongod="sudo -u postgres postgres -D /var/lib/postgres/data"
 ```
 
 ### mysql(arch下用mariadb代替)

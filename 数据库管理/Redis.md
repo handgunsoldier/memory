@@ -1,3 +1,191 @@
+## Redis
+
+### 1. 启动
+
+```bash
+# 后台
+sudo systemctl start redis
+# 前台
+sudo -u redis redis-server /etc/redis.conf
+
+# 客户端
+redis-cli
+```
+
+### 2. 设置密码
+
+```bash
+# 1.修改配置文件
+sudo vim /etc/redis.conf
+
+# 2.取消requirepass的注释, 后面加上密码
+
+# 3.重启redis
+```
+
+### 3. 命令
+
+```bash
+# redis默认连接db0, 默认16个数据库
+select 2 # 切换第三个数据库db2
+
+# 获取所有配置
+config get *
+
+# 查看所有已有key
+keys *
+
+# 获取key的数量
+dbsize
+
+# 保存所有数据到磁盘
+save
+
+# 字符串
+# Redis中的字符串是一个字节序列。Redis中的字符串是二进制安全的，这意味着它们的长度不由任何特殊的终止字符决定。因此，可以在一个字符串中存储高达512兆字节的任何内容。
+set name "xiaoming" # 设置名字, 不存在创建, 存在覆盖
+get name # 获取对应值
+del name # 删除键
+
+# 散列/哈希
+# Redis散列/哈希(Hashes)是键值对的集合。Redis散列/哈希是字符串字段和字符串值之间的映射。因此，它们用于表示对象。
+hmset myhash field1 "Hello" field2 "World" # 可以同时设置多个键值对
+hget myhash field1 # 获取键对应值
+hetall myhash # 获取所有值
+
+# 列表
+# Redis列表只是字符串列表，按插入顺序排序。您可以向Redis列表的头部或尾部添加元素。
+lpush alist "redis" # 在头部压入"redis"字符串
+rpush alist "redis" # 在尾部压入"redis"字符串
+lpop alist # 在头部弹出元素, 并返回它
+rpop alist # 在尾部弹出元素, 并返回它
+llen alist # 返回列表长度
+lrange alist 0 10 # 返回列表中这个范围所有值, 第二个数字用-1代表最后一个, 两点都会取到
+
+# 集合
+# Redis集合是字符串的无序集合。在Redis中，您可以添加，删除和测试成员存在的时间O(1)复杂性。
+sadd runoob "redis" # 添加成员
+srem runoob "redis" # 移除成员
+sismember runoob "redis" # 判断是不是该集合成员
+smembers runoob # 输出成员
+scard runoob # 集合元素个数
+sunion superpowers birdpowers # 组合集合, 自动去重
+
+# 可排序集合
+# Redis可排序集合类似于Redis集合，是不重复的字符集合。 不同之处在于，排序集合的每个成员都与分数相关联，这个分数用于按最小分数到最大分数来排序的排序集合。虽然成员是唯一的，但分数值可以重复。
+zadd runoob 0 "redis" # 0是redis的分数
+zrangebyscore runoob 0 1000 # 排序输入
+
+# 事务
+# Redis事务允许在单个步骤中执行一组命令
+multi # 创建事务
+/* list of command */
+exec # 开始执行
+```
+
+### 4. 配置文件/etc/redis.conf参数说明
+
+```bash
+1. Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程
+    daemonize no
+    
+2. 当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定
+    pidfile /var/run/redis.pid
+    
+3. 指定Redis监听端口，默认端口为6379，作者在自己的一篇博文中解释了为什么选用6379作为默认端口，因为6379在手机按键上MERZ对应的号码，而MERZ取自意大利歌女Alessia Merz的名字
+    port 6379
+    
+4. 绑定的主机地址
+    bind 127.0.0.1
+
+5.当 客户端闲置多长时间后关闭连接，如果指定为0，表示关闭该功能
+    timeout 300
+
+6. 指定日志记录级别，Redis总共支持四个级别：debug、verbose、notice、warning，默认为verbose
+    loglevel verbose
+
+7. 日志记录方式，默认为标准输出，如果配置Redis为守护进程方式运行，而这里又配置为日志记录方式为标准输出，则日志将会发送给/dev/null
+    logfile stdout
+
+8. 设置数据库的数量，默认数据库为0，可以使用SELECT <dbid>命令在连接上指定数据库id
+    databases 16
+
+9. 指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合
+    save <seconds> <changes>
+    Redis默认配置文件中提供了三个条件：
+    save 900 1
+    save 300 10
+    save 60 10000
+    分别表示900秒（15分钟）内有1个更改，300秒（5分钟）内有10个更改以及60秒内有10000个更改。
+
+10. 指定存储至本地数据库时是否压缩数据，默认为yes，Redis采用LZF压缩，如果为了节省CPU时间，可以关闭该选项，但会导致数据库文件变的巨大
+    rdbcompression yes
+
+11. 指定本地数据库文件名，默认值为dump.rdb
+    dbfilename dump.rdb
+
+12. 指定本地数据库存放目录
+    dir /var/lib/redis/
+
+13. 设置当本机为slav服务时，设置master服务的IP地址及端口，在Redis启动时，它会自动从master进行数据同步
+    slaveof <masterip> <masterport>
+
+14. 当master服务设置了密码保护时，slav服务连接master的密码
+    masterauth <master-password>
+
+15. 设置Redis连接密码，如果配置了连接密码，客户端在连接Redis时需要通过AUTH <password>命令提供密码，默认关闭
+    requirepass foobared
+
+16. 设置同一时间最大客户端连接数，默认无限制，Redis可以同时打开的客户端连接数为Redis进程可以打开的最大文件描述符数，如果设置 maxclients 0，表示不作限制。当客户端连接数到达限制时，Redis会关闭新的连接并向客户端返回max number of clients reached错误信息
+    maxclients 128
+
+17. 指定Redis最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先尝试清除已到期或即将到期的Key，当此方法处理 后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作。Redis新的vm机制，会把Key存放内存，Value会存放在swap区
+    maxmemory <bytes>
+
+18. 指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，如果不开启，可能会在断电时导致一段时间内的数据丢失。因为 redis本身同步数据文件是按上面save条件来同步的，所以有的数据会在一段时间内只存在于内存中。默认为no
+    appendonly no
+
+19. 指定更新日志文件名，默认为appendonly.aof
+     appendfilename appendonly.aof
+
+20. 指定更新日志条件，共有3个可选值： 
+    no：表示等操作系统进行数据缓存同步到磁盘（快） 
+    always：表示每次更新操作后手动调用fsync()将数据写到磁盘（慢，安全） 
+    everysec：表示每秒同步一次（折衷，默认值）
+    appendfsync everysec
+
+21. 指定是否启用虚拟内存机制，默认值为no，简单的介绍一下，VM机制将数据分页存放，由Redis将访问量较少的页即冷数据swap到磁盘上，访问多的页面由磁盘自动换出到内存中（在后面的文章我会仔细分析Redis的VM机制）
+     vm-enabled no
+
+22. 虚拟内存文件路径，默认值为/tmp/redis.swap，不可多个Redis实例共享
+     vm-swap-file /tmp/redis.swap
+
+23. 将所有大于vm-max-memory的数据存入虚拟内存,无论vm-max-memory设置多小,所有索引数据都是内存存储的(Redis的索引数据 就是keys),也就是说,当vm-max-memory设置为0的时候,其实是所有value都存在于磁盘。默认值为0
+     vm-max-memory 0
+
+24. Redis swap文件分成了很多的page，一个对象可以保存在多个page上面，但一个page上不能被多个对象共享，vm-page-size是要根据存储的 数据大小来设定的，作者建议如果存储很多小对象，page大小最好设置为32或者64bytes；如果存储很大大对象，则可以使用更大的page，如果不 确定，就使用默认值
+     vm-page-size 32
+
+25. 设置swap文件中的page数量，由于页表（一种表示页面空闲或使用的bitmap）是在放在内存中的，，在磁盘上每8个pages将消耗1byte的内存。
+     vm-pages 134217728
+
+26. 设置访问swap文件的线程数,最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的，可能会造成比较长时间的延迟。默认值为4
+     vm-max-threads 4
+
+27. 设置在向客户端应答时，是否把较小的包合并为一个包发送，默认为开启
+    glueoutputbuf yes
+
+28. 指定在超过一定的数量或者最大的元素超过某一临界值时，采用一种特殊的哈希算法
+    hash-max-zipmap-entries 64
+    hash-max-zipmap-value 512
+
+29. 指定是否激活重置哈希，默认为开启（后面在介绍Redis的哈希算法时具体介绍）
+    activerehashing yes
+
+30. 指定包含其它的配置文件，可以在同一主机上多个Redis实例之间使用同一份配置文件，而同时各个实例又拥有自己的特定配置文件
+    include /path/to/local.conf
+```
+
 ## Redispy
 
 ### 1. Redis、StrictRedis
@@ -178,190 +366,4 @@ Hash，即哈希。Redis 还提供了哈希表的数据结构，我们可以用n
 | hkeys(name)                  | 从key为name的hash中获取所有映射键名             | name: key名                               | `redis.hkeys('price')`                           | 从key为price的hash中获取所有映射键名          | [b'cake', b'book', b'banana', b'pear']                       |
 | hvals(name)                  | 从key为name的hash中获取所有映射键值             | name: key名                               | `redis.hvals('price')`                           | 从key为price的hash中获取所有映射键值          | [b'5', b'6', b'2', b'6']                                     |
 | hgetall(name)                | 从key为name的hash中获取所有映射键值对           | name: key名                               | `redis.hgetall('price')`                         | 从key为price的hash中获取所有映射键值对        | {b'cake': b'5', b'book': b'6', b'orange': b'7', b'pear': b'6'} |
-
-## Redis
-
-### 1. 启动
-
-```bash
-# 服务器
-sudo -u redis redis-server /etc/redis.conf
-
-# 客户端
-redis-cli
-```
-
-### 2. 设置密码
-
-```bash
-# 1.修改配置文件
-sudo vim /etc/redis.conf
-
-# 2.取消requirepass的注释, 后面加上密码
-
-# 3.重启redis
-```
-
-### 3. 命令
-
-```bash
-# redis默认连接db0, 默认16个数据库
-select 2 # 切换第三个数据库db2
-
-# 获取所有配置
-config get *
-
-# 查看所有已有key
-keys *
-
-# 获取key的数量
-dbsize
-
-# 保存所有数据到磁盘
-save
-
-# 字符串
-# Redis中的字符串是一个字节序列。Redis中的字符串是二进制安全的，这意味着它们的长度不由任何特殊的终止字符决定。因此，可以在一个字符串中存储高达512兆字节的任何内容。
-set name "xiaoming" # 设置名字, 不存在创建, 存在覆盖
-get name # 获取对应值
-del name # 删除键
-
-# 散列/哈希
-# Redis散列/哈希(Hashes)是键值对的集合。Redis散列/哈希是字符串字段和字符串值之间的映射。因此，它们用于表示对象。
-hmset myhash field1 "Hello" field2 "World" # 可以同时设置多个键值对
-hget myhash field1 # 获取键对应值
-hetall myhash # 获取所有值
-
-# 列表
-# Redis列表只是字符串列表，按插入顺序排序。您可以向Redis列表的头部或尾部添加元素。
-lpush alist "redis" # 在头部压入"redis"字符串
-rpush alist "redis" # 在尾部压入"redis"字符串
-lpop alist # 在头部弹出元素, 并返回它
-rpop alist # 在尾部弹出元素, 并返回它
-llen alist # 返回列表长度
-lrange alist 0 10 # 返回列表中这个范围所有值, 第二个数字用-1代表最后一个, 两点都会取到
-
-# 集合
-# Redis集合是字符串的无序集合。在Redis中，您可以添加，删除和测试成员存在的时间O(1)复杂性。
-sadd runoob "redis" # 添加成员
-srem runoob "redis" # 移除成员
-sismember runoob "redis" # 判断是不是该集合成员
-smembers runoob # 输出成员
-scard runoob # 集合元素个数
-sunion superpowers birdpowers # 组合集合, 自动去重
-
-# 可排序集合
-# Redis可排序集合类似于Redis集合，是不重复的字符集合。 不同之处在于，排序集合的每个成员都与分数相关联，这个分数用于按最小分数到最大分数来排序的排序集合。虽然成员是唯一的，但分数值可以重复。
-zadd runoob 0 "redis" # 0是redis的分数
-zrangebyscore runoob 0 1000 # 排序输入
-
-# 事务
-# Redis事务允许在单个步骤中执行一组命令
-multi # 创建事务
-/* list of command */
-exec # 开始执行
-```
-
-###  4. 配置文件/etc/redis.conf参数说明
-
-```bash
-1. Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程
-    daemonize no
-    
-2. 当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定
-    pidfile /var/run/redis.pid
-    
-3. 指定Redis监听端口，默认端口为6379，作者在自己的一篇博文中解释了为什么选用6379作为默认端口，因为6379在手机按键上MERZ对应的号码，而MERZ取自意大利歌女Alessia Merz的名字
-    port 6379
-    
-4. 绑定的主机地址
-    bind 127.0.0.1
-
-5.当 客户端闲置多长时间后关闭连接，如果指定为0，表示关闭该功能
-    timeout 300
-
-6. 指定日志记录级别，Redis总共支持四个级别：debug、verbose、notice、warning，默认为verbose
-    loglevel verbose
-
-7. 日志记录方式，默认为标准输出，如果配置Redis为守护进程方式运行，而这里又配置为日志记录方式为标准输出，则日志将会发送给/dev/null
-    logfile stdout
-
-8. 设置数据库的数量，默认数据库为0，可以使用SELECT <dbid>命令在连接上指定数据库id
-    databases 16
-
-9. 指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合
-    save <seconds> <changes>
-    Redis默认配置文件中提供了三个条件：
-    save 900 1
-    save 300 10
-    save 60 10000
-    分别表示900秒（15分钟）内有1个更改，300秒（5分钟）内有10个更改以及60秒内有10000个更改。
-
-10. 指定存储至本地数据库时是否压缩数据，默认为yes，Redis采用LZF压缩，如果为了节省CPU时间，可以关闭该选项，但会导致数据库文件变的巨大
-    rdbcompression yes
-
-11. 指定本地数据库文件名，默认值为dump.rdb
-    dbfilename dump.rdb
-
-12. 指定本地数据库存放目录
-    dir /var/lib/redis/
-
-13. 设置当本机为slav服务时，设置master服务的IP地址及端口，在Redis启动时，它会自动从master进行数据同步
-    slaveof <masterip> <masterport>
-
-14. 当master服务设置了密码保护时，slav服务连接master的密码
-    masterauth <master-password>
-
-15. 设置Redis连接密码，如果配置了连接密码，客户端在连接Redis时需要通过AUTH <password>命令提供密码，默认关闭
-    requirepass foobared
-
-16. 设置同一时间最大客户端连接数，默认无限制，Redis可以同时打开的客户端连接数为Redis进程可以打开的最大文件描述符数，如果设置 maxclients 0，表示不作限制。当客户端连接数到达限制时，Redis会关闭新的连接并向客户端返回max number of clients reached错误信息
-    maxclients 128
-
-17. 指定Redis最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先尝试清除已到期或即将到期的Key，当此方法处理 后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作。Redis新的vm机制，会把Key存放内存，Value会存放在swap区
-    maxmemory <bytes>
-
-18. 指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，如果不开启，可能会在断电时导致一段时间内的数据丢失。因为 redis本身同步数据文件是按上面save条件来同步的，所以有的数据会在一段时间内只存在于内存中。默认为no
-    appendonly no
-
-19. 指定更新日志文件名，默认为appendonly.aof
-     appendfilename appendonly.aof
-
-20. 指定更新日志条件，共有3个可选值： 
-    no：表示等操作系统进行数据缓存同步到磁盘（快） 
-    always：表示每次更新操作后手动调用fsync()将数据写到磁盘（慢，安全） 
-    everysec：表示每秒同步一次（折衷，默认值）
-    appendfsync everysec
-
-21. 指定是否启用虚拟内存机制，默认值为no，简单的介绍一下，VM机制将数据分页存放，由Redis将访问量较少的页即冷数据swap到磁盘上，访问多的页面由磁盘自动换出到内存中（在后面的文章我会仔细分析Redis的VM机制）
-     vm-enabled no
-
-22. 虚拟内存文件路径，默认值为/tmp/redis.swap，不可多个Redis实例共享
-     vm-swap-file /tmp/redis.swap
-
-23. 将所有大于vm-max-memory的数据存入虚拟内存,无论vm-max-memory设置多小,所有索引数据都是内存存储的(Redis的索引数据 就是keys),也就是说,当vm-max-memory设置为0的时候,其实是所有value都存在于磁盘。默认值为0
-     vm-max-memory 0
-
-24. Redis swap文件分成了很多的page，一个对象可以保存在多个page上面，但一个page上不能被多个对象共享，vm-page-size是要根据存储的 数据大小来设定的，作者建议如果存储很多小对象，page大小最好设置为32或者64bytes；如果存储很大大对象，则可以使用更大的page，如果不 确定，就使用默认值
-     vm-page-size 32
-
-25. 设置swap文件中的page数量，由于页表（一种表示页面空闲或使用的bitmap）是在放在内存中的，，在磁盘上每8个pages将消耗1byte的内存。
-     vm-pages 134217728
-
-26. 设置访问swap文件的线程数,最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的，可能会造成比较长时间的延迟。默认值为4
-     vm-max-threads 4
-
-27. 设置在向客户端应答时，是否把较小的包合并为一个包发送，默认为开启
-    glueoutputbuf yes
-
-28. 指定在超过一定的数量或者最大的元素超过某一临界值时，采用一种特殊的哈希算法
-    hash-max-zipmap-entries 64
-    hash-max-zipmap-value 512
-
-29. 指定是否激活重置哈希，默认为开启（后面在介绍Redis的哈希算法时具体介绍）
-    activerehashing yes
-
-30. 指定包含其它的配置文件，可以在同一主机上多个Redis实例之间使用同一份配置文件，而同时各个实例又拥有自己的特定配置文件
-    include /path/to/local.conf
-```
 

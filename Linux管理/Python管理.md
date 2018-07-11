@@ -20,9 +20,9 @@ pyenv uninstall <版本>
 - 更新
 
 ```shell
-# git pull下来的是master版本, 不稳定, 需切换到指定标签
+# git fetch下来的是master版本, 不稳定, 需切换到指定标签
 cd .pyenv
-git pull origin master:master
+git fetch origin masterr
 git tag # 检查可用版本
 git checkout <tag名> # 切换
 ```
@@ -48,7 +48,7 @@ pyenv uninstall <name>
 
 ```shell
 cd .pyenv/plugins/pyenv-virtualenv
-git pull origin master:master
+git fetch origin masterr
 git tag # 检查可用版本
 git checkout <tag名> # 切换
 ```

@@ -142,6 +142,8 @@ kill [-signum] <pid>
 ```bash
 # 查看所有服务单元
 systemctl list-unit-files --type service
+# 查看所有正在运行的服务单元
+systemctl list-units --type=service
 # 启动, 重启和结束服务
 systemctl <start|restart|stop> <服务名> 
 # 开机启动开关
@@ -157,10 +159,17 @@ journalctl -f <服务名>
 ```bash
 # 切换用户, 加上-会使shell环境也切换
 su - <用户名>
-# 指定用户(-u)执行命令, 类似`su - <用户名> -c <命令>`
+# 指定用户(-u)执行命令, nologin用户可以执行
 sudo -u <用户名> <命令>
+# 指定用户执行命令, nologin用户无法执行
+su - <用户名> -c <命令>
 # 创建用户, -m自动创建家目录
 useradd -m <用户名>
+# 创建用户, 详细
+# -s指定shell
+# -M不创建家目录
+# -g指定组名
+useradd -s /sbin/nologin -M -g mysql mysql
 # 删除用户, -r自动删除家目录
 userdel -r <用户名> 
 # 修改用户密码
