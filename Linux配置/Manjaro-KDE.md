@@ -20,7 +20,7 @@ sudo pacman -Syy # 两个yy代表强制刷新, 即使已经是最新的
 ```bash
 # 仅供参考
 # 删除指定软件包，及所有没有被其他已安装软件包使用的依赖关系(s)，及配置文件(n)
-sudo pacman -Rsn steam-manjaro libreoffice-fresh ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en konversation thunderbird kget cantata vlc bluedevil pulseaudio-bluetooth kwalletmanager kwallet-pam user-manager subversion ruby
+sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en konversation thunderbird kget cantata vlc bluedevil pulseaudio-bluetooth kwalletmanager kwallet-pam user-manager subversion
 # vlc用mpv代替
 ```
 
@@ -43,6 +43,10 @@ ssh-keygen -t rsa -C "zzzzer91@gmail.com"
 # 4.在github上更新密钥
 # 5.设置, 防止`git status`中文乱码
 git config –global core.quotepath false 
+
+# 可选, 设置使用socks5代理
+git config --global http.proxy 'socks5://127.0.0.1:1080'
+git config --global https.proxy 'socks5://127.0.0.1:1080'
 ```
 
 ### vim
@@ -193,11 +197,11 @@ yaourt -S robo3t-bin # mongodb gui工具
 ```bash
 pip install ipython
 pip install jupyter # jupyter notebook
-pip install requests bs4 lxml # 爬虫
+pip install requests requests[socks] # http请求
+pip install bs4 lxml # html解析
 pip install numpy pandas matplotlib scipy # 科学计算
 pip install pillow # 图像处理
 pip install pipenv # 包虚拟环境
-pip install uvloop # 异步 I/O框架
 pip install aiohttp # 异步网络框架
 pip install aiodns # 异步解析DNS
 pip install cchardet # 更快的编码探测
