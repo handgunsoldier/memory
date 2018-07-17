@@ -20,7 +20,7 @@ sudo pacman -Syy # 两个yy代表强制刷新, 即使已经是最新的
 ```bash
 # 仅供参考
 # 删除指定软件包，及所有没有被其他已安装软件包使用的依赖关系(s)，及配置文件(n)
-sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en konversation thunderbird kget cantata vlc bluedevil pulseaudio-bluetooth kwalletmanager kwallet-pam user-manager subversion
+sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en konversation thunderbird kget cantata vlc bluedevil pulseaudio-bluetooth kwalletmanager kwallet-pam user-manager
 # vlc用mpv代替
 ```
 
@@ -28,6 +28,13 @@ sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-m
 
 ```bash
 sudo pacman -Syu # 同步源(y), 并更新系统(u)
+```
+
+### zsh
+
+```bash
+# 它的配置文件为~/.zshrc
+sudo pacman -S zsh manjaro-zsh-config
 ```
 
 ### git
@@ -58,7 +65,7 @@ sudo pacman -S vim
 # 3.下载vim插件管理器
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # 4.进入vim后, 执行PluginInstall安装相关插件
-# 5.起别名, `vim ~/.bashrc`, 添加:
+# 5.起别名, `vim ~/.zshrc`, 添加:
 alias vi='vim' 
 ```
 
@@ -72,26 +79,13 @@ cd .pyenv
 git tag # 检查可用版本
 git checkout <tag名> # 切换
 # 3.配置(自动补全功能等)
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
 # 4.下载指定版本python
 pyenv install <版本>
 # 5.切换环境
 pyenv global <版本>
-```
-
-### pyenv-virtualenv(pyenv虚拟环境插件)
-
-```bash
-# 1.安装
-git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
-# 2.切换到最新版本
-cd .pyenv/plugins/pyenv-virtualenv
-git tag # 检查可用版本
-git checkout <tag名> # 切换
-# 3.配置自动补全
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 ```
 
 ### shadowsocks
@@ -99,7 +93,7 @@ echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 ```bash
 # 1.安装
 pip install git+https://github.com/shadowsocks/shadowsocks.git@master
-# 2.在 .bashrc 中设置命令, 方便使用
+# 2.在 .zshrc 中设置命令, 方便使用
 alias sss="ss-local -c /etc/shadowsocks.json"
 alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
 alias unsetproxy="unset ALL_PROXY"
@@ -131,21 +125,21 @@ sudo pacman -S net-tools # ifconfig
 sudo pacman -S dnsutils # nslookup
 ```
 
-### mongodb
+### 数据库
+
+- mongodb
 
 ```bash
 sudo pacman -S mongod
-
-alias runmongod="sudo -u mongodb mongod -f /etc/mongodb.conf"
 ```
 
-### redis
+- redis
 
 ```bash
 sudo pacman -S redis
 ```
 
-### postgresql
+- postgresql
 
 ```bash
 sudo pacman -S postgresql
@@ -154,7 +148,7 @@ sudo pacman -S postgresql
 sudo -u postgres initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'
 ```
 
-### mysql(arch下用mariadb代替)
+- mysql(arch下用mariadb代替)
 
 ```bash
 sudo pacman -S mariadb
@@ -188,9 +182,11 @@ yaourt -S typora # 很好用的markdown编辑器, 支持导出PDF
 yaourt -S visual-studio-code-bin # vscode
 yaourt -S wps-office ttf-wps-fonts # wps
 yaourt -S robo3t-bin # mongodb gui工具
+yaourt -S genymotion # 安卓模拟器
 ```
 
 - **注意**: 命令台用yaourt安装时不需加sudo, 否则报错
+- 出现`one or more PGP signatures could not be verified!` , 则检查`PKGBUILD` 中的key, 导入key, `gpg --recv-keys <KEYID - See validpgpkeys array in PKGBUILD>`
 
 ### pip必装
 
@@ -205,6 +201,7 @@ pip install pipenv # 包虚拟环境
 pip install aiohttp # 异步网络框架
 pip install aiodns # 异步解析DNS
 pip install cchardet # 更快的编码探测
+pip install mitmproxy # 交互式命令行http抓包工具
 
 # 数据库
 pip install pymongo # mongodb
@@ -232,7 +229,7 @@ c.NotebookApp.open_browser = False
 - 选择bash下默认编辑器
 
 ```bash
-# 在.bashrc下添加如下一行
+# 在.zshrc下添加如下一行
 EDITOR="/usr/bin/vim"
 ```
 
