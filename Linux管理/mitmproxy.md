@@ -40,7 +40,8 @@ d  # 删除参数
 - 过滤规则
 
 ```bash
-
+~u regex  # url
+～t regex  # 头类型, 如 ~t image 拦截图片
 ```
 
 - 代理模式
