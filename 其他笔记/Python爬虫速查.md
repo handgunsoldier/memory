@@ -1,34 +1,34 @@
-### 常用HTTP状态码
+## 常用HTTP状态码
 
-**200 Ok**: 请求成功
+- **200 Ok**: 请求成功
 
-**301 Moved Permanently**: 永久重定向
+- **301 Moved Permanently**: 永久重定向
 
-**302 Moved Temporarily**: 临时重定向
+- **302 Moved Temporarily**: 临时重定向
 
-**303 See Other**: 资源url已经更新，和302的区别是，明确应当采用get请求该资源
+- **303 See Other**: 资源url已经更新，和302的区别是，明确应当采用get请求该资源
 
-**400 Bad Request**: 客户端请求有语法错误，不能被服务器理解
+- **400 Bad Request**: 客户端请求有语法错误，不能被服务器理解
 
-**401 Unauthorized**: 请求未经授权
+- **401 Unauthorized**: 请求未经授权
 
-**403 Forbidden**: 服务器收到请求，但拒绝提供服务
+- **403 Forbidden**: 服务器收到请求，但拒绝提供服务
 
-**404 Not Found**: 请求资源不存在
+- **404 Not Found**: 请求资源不存在
 
-**500 Internal Server Error**: 表明服务器本身发生错误
+- **500 Internal Server Error**: 表明服务器本身发生错误
 
-**503 Server Unavailable**: 服务器当前不能处理客户端请求，一段时间后可能恢复
+- **503 Server Unavailable**: 服务器当前不能处理客户端请求，一段时间后可能恢复
 
-### 重要HTTP请求头
+## 重要HTTP请求头
 
-**Cookies**: 用于辨别用户身份、进行session跟踪
+- **Cookies**: 用于辨别用户身份、进行session跟踪
 
-**Refer**: 表示从哪个网址访问当前网址的
+- **Refer**: 表示从哪个网址访问当前网址的
 
-**User-Agent**: 客户端系统, 浏览器等信息，可以用于区分PC端、移动端、和爬虫
+- **User-Agent**: 客户端系统, 浏览器等信息，可以用于区分PC端、移动端、和爬虫
 
-### requests库
+## requests
 
 - get方法常用参数:
 ```python
@@ -65,14 +65,23 @@ r.raise_for_status() # 如果返回的http状态码在400和500或500和600之�
 ```
 
 - 如果不传入headers参数, requests会采用一个默认的headers, 为`{'User-Agent': 'python-requests/x.x.x', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}`. 传入headers参数后, 会在默认headers的基础上更新, 即字典的update()方法.
-
 - `proxies`参数接受一个字典, 该字典一般有两个key, "http"和"https", 如果是https请求就会使用https对应的代理, 否则使用http对应的. 如果与协议对应的key不存在, 那么会不使用代理(即其实使用的是**你真实主机IP**), 这点很坑, 会让人误以为当前代理是可用的.
-
 - `s = requests.Session()`创建一个会话对象, 支持上下文管理器. 会话对象让你能够跨请求保持某些参数, 它也会在同一个Session实例发出的所有请求之间保持cookie, 所以如果你向同一主机发送多个请求, 底层的 TCP 连接将会被重用, 从而带来显著的性能提升.
-
 - `from requests.exceptions import RequestException`, 引入requests所有异常的基类, except该异常, 可以捕获所有requests的异常.
 
-### bs4库
+## lxml
+
+- 使用xpath:
+
+```python
+from lxml import etree
+
+selector = etree.HTML(r.text)  # 会自动补全丢失的标签, 并且加上<html>和<body>标签
+container = selector.xpath('./div')  # 使用xpath, 返回一个列表
+element = container[0]  # 获取一个标签
+```
+
+## bs4
 
 - 令`soup = BeautifulSoup(html, 'lxml')`, 下面是`BeautifulSoup`对象的常用属性和方法:
 ```python
@@ -107,7 +116,7 @@ tag.decompose() # 销毁该标签
 tag.select('[target=_blank]') # tag可以继续使用select方法
 ```
 
-### re模块
+## re
 
 - 正则语法:
 ```python
@@ -129,32 +138,35 @@ tag.select('[target=_blank]') # tag可以继续使用select方法
 '+'    # 匹配前面一个字符1到无限次
 '?'    # 匹配前面一个字符0或1次, 也可以代表非贪婪匹配
 
-'|'    # 左右表达式任意一个, 如abc|def, 匹配abc或def
-'()'   # 分组标记, 内部只能使用'|'操作符
 '^'    # 匹配字符串开头
-'&'    # 匹配字符串结尾
+'&'    # 匹配字符串结尾, 以换行符为准
+'\Z'   # 匹配字符串结尾, 建议使用这个, 符合思考习惯
+'|'    # 左右表达式任意一个, 如abc\d|def, 匹配abc\d或def
+'()'   # 分组标记, 内部只能使用'|'操作符
+'(?P<name>...)' # 给分组命名
 ```
 - re模块主要函数:
 ```python
 # 如果一个正则表达式要用很多次, 应该先预编译, 会生成一个对象, 包含下列所有方法
-re.compile() 
+pattern = re.compile(r'xxx') 
+# 用.group()拿到所有内容, .group(1)拿到第一个分组
+# 注意: match( )匹配的是以xxx开头的字符串, 若不是开头的, 尽管属于str内, 也无法匹配
+# 要找到字符串内所有符合内容, 则用findall
+pattern.match(s)
 # 找到所有匹配内容, 返回一个列表
-re.findall() 
+pattern.findall(s) 
 # 替换字符串中所有匹配的内容, 返回替换后的字符串
-re.sub() 
+pattern.sub() 
 # 将字符串按匹配内容分割, 比str自带的spilt更灵活
-re.spilt() 
+pattern.spilt(s) 
 ```
 
-- re函数的flag
-| 标志               | 含义                                                     |
-| ------------------ | -------------------------------------------------------- |
-| re.S(DOTALL)       | 使.匹配包括换行在内的所有字符                            |
-| re.I（IGNORECASE） | 使匹配对大小写不敏感                                     |
-| re.L（LOCALE）     | 做本地化识别（locale-aware)匹配，法语等                  |
-| re.M(MULTILINE)    | 多行匹配，影响^和$                                       |
-| re.X(VERBOSE)      | 该标志通过给予更灵活的格式以便将正则表达式写得更易于理解 |
-| re.U               | 根据Unicode字符集解析字符，这个标志影响\w,\W,\b,\B       |
+- re.compile()的flag参数:
+| 标志 | 含义                                               |
+| ---- | -------------------------------------------------- |
+| re.S | 使`.`匹配包括换行在内的所有字符                    |
+| re.I | 使匹配对大小写不敏感                               |
+| re.U | 根据Unicode字符集解析字符，这个标志影响\w,\W,\b,\B |
 
 - 实例, 一般加上r前缀,就不用考虑转义的问题了:
 ```python
@@ -167,5 +179,5 @@ re.compile(r'[\u4e00-\u9fa5]*')
 # 匹配国内电话号码
 re.compile(r'\d{3}-\d{8}|\d{4}-\d{7}') 
 # 精确匹配一个IP地址
-re.compile(r'(([1‐9]?\d|1\d{2}|2[0‐4]\d|25[0‐5]).){3}([1‐9]?\d|1\d{2}|2[0‐4]\d|25[0‐5])')
+re.compile(r'(([1‐9]?\d|1\d{2}|2[0‐4]\d|25[0‐5])\.){3}([1‐9]?\d|1\d{2}|2[0‐4]\d|25[0‐5])')
 ```

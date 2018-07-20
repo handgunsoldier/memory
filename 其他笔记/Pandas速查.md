@@ -222,7 +222,7 @@ pd.read_csv('example.csv') # 从csv文件导入数据
 
 '''excel'''
 df.to_excel('example.xlsx', index=False) # 导出数据到excel文件, 不包含索引
-pd.read_excel('example.xlsx') # 从excel文件导入数据
+pd.read_excel('example.xlsx', engine='xlsxwriter') # 从excel文件导入数据
 ```
 
 - pandas常用函数:

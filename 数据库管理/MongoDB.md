@@ -32,11 +32,11 @@ db.getName()
 # 获取当前colletcion状态
 db.stats()
 
-# 查找所有name是D或E开头的记录, 斜杆不能少
+# 查找所有name包含bar的记录, 斜杆不能少
 # 后加limit(数字), 限制返回记录数量
 # 后加.sort({'要排序的key':1})排序, 1指升序, -1指降序
 # 后加.pretty()格式化输出
-db.collection.find({name:{/^D|E/}})
+db.collection.find({name:{/bar/}})
 # 过滤指定字段, 1显示, 0不显示
 db.collection.find({}, {'name':1})
 # 查询age字段不包括21, 22的记录, nin改in就是包括
