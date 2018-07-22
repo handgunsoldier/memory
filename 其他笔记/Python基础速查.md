@@ -1,8 +1,12 @@
-### Python基本数据类型方法
+### 基本数据类型方法
 
 - list(列表)
 
 ```python
+"""
+对列表的任何修改操作都是原地的.
+"""
+
 # 将元素x添加到列表lst尾部
 lst.append(x)
 # 在下标index处添加元素x, 原来该位置元素及之后元素后移
@@ -31,6 +35,10 @@ lst.copy()
 - dict(字典)
 
 ```python
+"""
+对字典的任何修改操作都是原地的.
+"""
+
 # 返回一个元组(键, 值)构成的列表
 d.items()
 # 返回字典的键构成的列表
@@ -59,6 +67,11 @@ d.copy()
 - str(字符串)
 
 ```python
+"""
+对字符串的任何修改操作都是非原地的,
+因为字符串是不可变对象.
+"""
+
 """查找"""
 # 返回子串sub在s中出现的次数, 可指定范围
 s.count(sub, start=None, end=None)
@@ -146,7 +159,38 @@ s.isprintable()
 s.encode(encoding='utf-8', errors='strict')
 ```
 
-### Python内置函数
+- set(集合)
+
+```python
+"""
+对集合的任何修改操作都是原地的.
+"""
+
+# 添加成员, 自动去重
+s.add(k)
+# 添加一个对象到当前集合, 自动去重
+s.update([1, 2, 3])
+# 弹出一个随机key
+s.pop()
+# 弹出一个指定key
+s.remove(k)
+# 清空集合
+s.clear()
+# 返回集合的浅拷贝
+s.copy()
+
+# 集合 差, 并, 交 操作
+# 在 a 中的成员, 但不在 b 中
+a - b
+# 在 a 或 b 中的成员
+a | b
+# 在 a 和 b 中都有的成员
+a & b
+# 在 a 或 b 中的成员, 但不同时在 a 和 b 中
+a ^ b
+```
+
+### 内置函数
 
 ```python
 # 返回数字x的绝对值或复数x的模
@@ -184,6 +228,7 @@ sum(iterable)
 sorted(iterable)
 reversed(iterable)
 
+# 下面3个函数, 既可用于类, 又可用于模块
 hasattr(obj)
 getattr(obj, name[, default])
 delattr(obj, name)
@@ -198,25 +243,68 @@ globals()
 locals()
 ```
 
-### Python常用魔法方法
+### 类与对象
+
+- 内置属性
+
+```python
+""""
+注意有些属性是类独有的,
+存放在 __dict__ 属性中,
+类的 __dict__ 中存放的是类属性,
+对象的 __dict__ 中存放的是对象属性.
+当对象的 __dict__ 中找不到某个属性时,
+会试图从类的 __dict__ 中找.
+"""
+
+# 获取所有属性
+__dict__
+# 获取类和对象的类
+# 这里有点绕, 类也是有"类"的， 是元类
+__class__
+# 获取所在的模块
+__module__
+# 获取文档信息
+__doc__
+```
+
+- 常用魔法方法
 
 ```python
 # 使用str()和print()会调用这个方法
-__str(self)__
+__str__(self)
 # 使用repr()会调用这个方法, 或交互环境显示
 __repr__(self)
 # 让类实例支持len()函数
 __len__(self)
+# 析构方法, 当对象在内存中被释放时, 自动触发此方法
+__del__(self)
 # 使类实例能像函数一样被调用
-__call__(self)
-# 让类实例能被下标访问
-__getitem__(self, index)
-# 当用户访问一个不存在的属性时, 可用这个方法定义行为
-__getattr__(self, value)
+__call__(self, *args, **kwargs)
+# `a = 标识符[]`, 执行__getitem__方法
+__getitem__(self, key)
+# `标识符[] = a`, 执行__setitem__方法
+__setitem__(self, key, value)
+# `del 标识符[]`, 执行__delitem__方法
+__delitem__(self, key)
 # 在`self.name=value`时被调用
 __setattr__(self, name, value)
 # 限制实例的属性, 如不能指定name, age属性
 __slots__ = ('name', 'age') 
+
+"""运算符重载"""
+# 加运算
+__add__(self,other)
+# 减运算
+__sub__(self,other)
+# 乘运算
+__mul__(self,other)
+# 除运算
+__div__(self,other)
+# 求余运算
+__mod__(self,other)
+# 幂运算
+__pow__(self,other)
 ```
 
 
