@@ -39,7 +39,6 @@ syntax on
 
 " airline config
 let g:airline_powerline_fonts = 1
-
 "let g:airline_section_x = airline#section#create(['ffenc'])
 "let g:airline_section_x = ''
 let g:airline_section_error = ''
