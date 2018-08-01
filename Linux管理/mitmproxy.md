@@ -252,9 +252,9 @@ class Events:
 - 证书(必须在对应系统设置, 否则报错)
 
 ```bash
-mitmproxy-ca.pem # PEM格式的私钥和证书。
-mitmproxy-CA-cert.pem # PEM格式的证书。使用此分发大多数非Windows平台。
-mitmproxy-CA-cert.p12 # 在PKCS12格式的证书。在Windows上使用。
-mitmproxy-CA-cert.cer # 相同的文件质子交换膜，但预计一些Android设备的扩展。
+mitmproxy-ca.pem # PEM格式的私钥和证书
+mitmproxy-CA-cert.pem # 非Windows使用
+mitmproxy-CA-cert.p12 # Windows使用
+mitmproxy-CA-cert.cer # Android设备使用
 ```
 

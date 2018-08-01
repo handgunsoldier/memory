@@ -3,11 +3,15 @@
 ### 1. 初始化
 
 ```bash
-# 初始化数据库
+# 初始化数据库, 第一次安装需运行
 sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 
 # 设置密码
 mysqladmin -u root password "newpass"
+
+# 设置mysql client自动补全
+vi /etc/mysql/my.cnf
+# replace `no-auto-rehash` by `auto-rehash`
 
 # 修改密码, 登录mysql后, 输入
 mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('newpass');
@@ -18,17 +22,24 @@ mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('newpass');
 ```bash
 # 后台
 sudo systemctl start mysqld
+
+# 客户端
+mysql -u root -p
 ```
 
 ### 3. 导入数据
 
 ```bash
-# 1.创建数据库
-create database <数据库名>;
+# 1.创建数据库, 默认utf8mb4
+create database if not exists <数据库名>;
 # 2.切换数据库
 use <数据库名>;
-# 3.设置数据库编码
-set names utf8;
+# 3.设置数据库编码(可选, 不建议修改)
+# 目前安装的mariadb默认utf8mb4,
+# 占4个字节, 为了支持移动端的一些表情,
+# 而utf8占三个字节, 无法放下某些表情,
+# 所以坚持使用utf8mb4
+set names utf8mb4;
 # 4.导入
 mysql>source /home/abc/abc.sql;
 ```
@@ -42,14 +53,31 @@ create database <数据库名>;
 show database; 
 # 切换数据库
 use <数据库名>;
-# 设置数据库编码
-set names utf8;
 # 创建表
 create table <表名>;
 # 显示可用表
 show tables; 
 # 显示指定表信息
 describe <表名>; 
+```
+
+### 5. 一些常见问题
+
+```bash
+# 1.default collation 和 default characterset 是什么?
+#   defalut characterse 就是schema或table用的字符集, 默认utf8mb4,
+#   default collation 影响字符串的排序规则, 默认utf8mb4_unicode_ci,
+#   ci 是 case insensitive, 即 "大小写不敏感", a 和 A 会在字符判断中会被当做一样的
+
+# 2.workbench 创建表时, 后面的字段意义
+#   PK: primary key  主键
+#   NN: not null  非空
+#   UQ: unique  唯一
+#   AI: auto increment  自增
+#   BIN: binary  二进制(比text更大的二进制数据)
+#   UN: unsigned  无符号整数
+#   ZF: zero fill 填充0位(例如指定3位小数，整数18就会变成18.000)
+#   G : Generated column  基于其他列的公式生成值的列
 ```
 
 ## Pymysql
@@ -61,12 +89,14 @@ describe <表名>;
 ```python
 import pymysql
 
-db = pymysql.connect(host='localhost',user='root', password='123456', port=3306)
+db = pymysql.connect(host='localhost', port=3306, user='root', password='123456')
 cursor = db.cursor()
 cursor.execute('SELECT VERSION()')
 data = cursor.fetchone()
 print('Database version:', data)
-cursor.execute("CREATE DATABASE spiders DEFAULT CHARACTER SET utf8")
+cursor.execute(
+    'CREATE DATABASE spiders DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci'
+)
 db.close()
 ```
 
@@ -78,7 +108,7 @@ Database version: ('5.6.22',)
 
 在这里我们通过 PyMySQL 的 connect() 方法声明了一个 MySQL 连接对象，需要传入 MySQL 运行的 host 即 IP，此处由于 MySQL 在本地运行，所以传入的是 localhost，如果 MySQL 在远程运行，则传入其公网 IP 地址，然后后续的参数 user 即用户名，password 即密码，port 即端口默认 3306。
 
-连接成功之后，我们需要再调用 cursor() 方法获得 MySQL 的操作游标，利用游标来执行 SQL 语句，例如在这里我们执行了两句 SQL，用 execute() 方法执行相应的 SQL 语句即可，第一句 SQL 是获得 MySQL 当前版本，然后调用fetchone() 方法来获得第一条数据，也就得到了版本号，另外我们还执行了创建数据库的操作，数据库名称叫做 spiders，默认编码为 utf-8，由于该语句不是查询语句，所以直接执行后我们就成功创建了一个数据库 spiders，接着我们再利用这个数据库进行后续的操作。
+连接成功之后，我们需要再调用 cursor() 方法获得 MySQL 的操作游标，利用游标来执行 SQL 语句，例如在这里我们执行了两句 SQL，用 execute() 方法执行相应的 SQL 语句即可，第一句 SQL 是获得 MySQL 当前版本，然后调用fetchone() 方法来获得第一条数据，也就得到了版本号，另外我们还执行了创建数据库的操作，数据库名称叫做 spiders，默认编码为 utf8mb4，由于该语句不是查询语句，所以直接执行后我们就成功创建了一个数据库 spiders，接着我们再利用这个数据库进行后续的操作。
 
 ### 2. 创建表
 

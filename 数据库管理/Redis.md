@@ -1,6 +1,17 @@
 ## Redis
 
-### 1. 启动
+### 1. 设置密码(可选)
+
+```bash
+# 1.修改配置文件
+sudo vim /etc/redis.conf
+
+# 2.取消requirepass的注释, 后面加上密码
+
+# 3.重启redis
+```
+
+### 2. 启动
 
 ```bash
 # 后台
@@ -10,17 +21,6 @@ sudo -u redis redis-server /etc/redis.conf
 
 # 客户端
 redis-cli
-```
-
-### 2. 设置密码
-
-```bash
-# 1.修改配置文件
-sudo vim /etc/redis.conf
-
-# 2.取消requirepass的注释, 后面加上密码
-
-# 3.重启redis
 ```
 
 ### 3. 命令
@@ -38,7 +38,7 @@ keys *
 # 获取key的数量
 dbsize
 
-# 保存所有数据到磁盘
+# 立即保存所有数据到磁盘
 save
 
 # 字符串
