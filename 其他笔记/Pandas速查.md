@@ -215,6 +215,7 @@ df.dropna()  # 删除所有包含空值的行
 df.dropna(axis=1)  # 删除所有包含空值的列
 df.groupby(['nj', 'bj'])  # 分组功能
 df.set_index(['state', 'city']).sort_index()  # 设置多索引, 并排序索引
+df.applymap(func)  # 把相关函数作用在所有df成员上
 
 """添加和删除"""
 df['cj'] = s  # 假设cj列本来不存在, 这样会在列尾添加新的一列cj, 值为s(Series对象), 原地
@@ -256,6 +257,7 @@ pd.to_datetime(s)
 # 生成一个时间列表, periods决定数量, freq决定单位, 比如这里'D'是指天
 # 成员是Timestamp类型, 可以使用相关方法
 pd.date_range('2017-7-27', periods=15, freq='D') 
-# 判断NAN, 返回一个bool类型的df
+# 判断某个值是否为NAN
+# 也可判断df, 返回一个bool类型的df
 pd.isna(df)
 ```
