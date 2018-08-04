@@ -158,6 +158,9 @@ sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 
 # 设置密码
 mysqladmin -u root password "newpass"
+
+# 安装GUI管理工具
+sudo pacman -S dbeaver
 ```
 
 ### AUR
