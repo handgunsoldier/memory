@@ -80,6 +80,17 @@ describe <表名>;
 #   G : Generated column  基于其他列的公式生成值的列
 ```
 
+### 6.几条值得参考的sql语句
+
+```mysql
+# 两条语句功能一样
+select biz, max(publish_time) from wechat.post_list GROUP by biz HAVING MAX(publish_time) < date("2018-01-01")
+select * from (select biz, max(publish_time) as publish_time from wechat.post_list GROUP by biz) as t1 where publish_time < date("2018-01-01");
+
+# 时间转换例子, 结果为今天零点的时间, datetime类型
+select from_unixtime(unix_timestamp(date(now())))
+```
+
 ## Pymysql
 
 ### 1. 连接数据库

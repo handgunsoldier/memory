@@ -28,6 +28,10 @@ sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-m
 
 ```bash
 sudo pacman -Syu # 同步源(y), 并更新系统(u)
+
+# 更新完, 可能会生成*.pacnew的新配置文件, 必须手动覆盖旧的, 
+# 可以用pacdiff工具, 搜索所有电脑中*.pacnew
+sudo pacdiff
 ```
 
 ### zsh
