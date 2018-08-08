@@ -6,7 +6,7 @@
 # 推荐使用这种方法更新本地分支
 git fetch origin <远程分支名> # 拉取指定远程分支到本地, 远程分支在本地名为origin/master
 git branch -a # 查看所有分支
-git merge orgin/<远程分支名> # 合并到当前分支
+git merge origin/<远程分支名> # 合并到当前分支
 
 # 推荐使用这种方法推送本地分支
 git push origin <远程分支名> # 推送当前分支到指定远程分支

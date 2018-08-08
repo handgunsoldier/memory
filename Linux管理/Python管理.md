@@ -22,33 +22,8 @@ pyenv uninstall <版本>
 ```shell
 # git fetch下来的是master版本, 不稳定, 需切换到指定标签
 cd .pyenv
-git fetch origin masterr
-git tag # 检查可用版本
-git checkout <tag名> # 切换
-```
-
-### 虚拟环境: pyenv-virtualenv
-
-- 命令
-
-```bash
-# 用当前环境创建虚拟容器
-pyenv virtualenv <name>
-# 查看已有容器, 注意多个s
-pyenv virtualenvs
-# 切换到容器
-pyenv activate <name>
-# 退出容器
-pyenv deactivate
-# 卸载容器
-pyenv uninstall <name>
-```
-
-- 更新
-
-```shell
-cd .pyenv/plugins/pyenv-virtualenv
-git fetch origin masterr
+git fetch origin master
+git merge origin/master
 git tag # 检查可用版本
 git checkout <tag名> # 切换
 ```

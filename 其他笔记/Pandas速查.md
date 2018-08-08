@@ -204,7 +204,8 @@ df.notnull()  # 检查df中空值, 非NaN为True, 否则False, 返回一个布�
 df = df[['xm','csrq']]  # 改变列顺序
 df.astype({'xh':'int', 'csrq':'datetime64[ns]'})  # 改变指定列元素类型, 非原地
 df.drop_duplicates(['xm', 'xh'])  # 根据xm和xh去重, 默认保留第一个数据, 非原地
-df.drop_duplicates()  # 不传入参数, 所有列相同才会去重, 默认保留第一个数据, 非原地
+df.drop_duplicates(keep='last')  # 不传入参数, 所有列相同才会去重, 保留最后一个数据, 非原地
+df.drop_duplicates(keep=False)  # 不保留重复项(求差集), 非原地
 df.sort_values(by='csrq')  # 根据csrq排序, 默认升序, 非原地
 df.sort_values(['col1', 'col2'], ascending=[True, False])  # ascending决定升序降序
 df.replace(1,'one')  # 用'one'代替所有等于1的值

@@ -2,21 +2,21 @@
 
 ## MongoDB
 
-### 1. 启动
+### 启动
 
 ```bash
 # 后台
 sudo systemctl start mongodb
 # 前台
 sudo -u mongodb mongod -f /etc/mongodb.conf
-
-# 客户端
-mongo
 ```
 
-### 2. 命令
+### 客户端命令
 
 ```bash
+# 启动客户端
+mongo
+
 # 获取帮助
 db.help()
 
@@ -55,7 +55,7 @@ mongodump -h 127.0.0.1 -d dbname -o ~/Documents/backup
 mongorestore -h 127.0.0.1 -d dbname .
 ```
 
-### 3. 配置文件/etc/mongodb.conf参数说明
+### 配置文件/etc/mongodb.conf参数说明
 
 ```bash
 # 数据库数据存放目录

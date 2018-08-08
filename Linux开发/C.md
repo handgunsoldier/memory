@@ -1,106 +1,140 @@
-### gcc
+## GCC
 
-- 编译工具链
+### 编译工具链
+
+头文件展开，宏替换，注释去掉（实际调用预处理器 cpp）：
 
 ```bash
-# 头文件展开, 宏替换, 注释去掉(实际调用预处理器cpp)
 gcc -E hello.c -o hello.i
-# c文件变成汇编文件(实际调用编译器gcc)
+```
+
+C 文件变成汇编文件（实际调用编译器 gcc）：
+
+```bash
 gcc -S hello.i -o hello.s
-# 汇编文件变成二进制文件(实际调用汇编器as)
+```
+
+汇编文件变成二进制文件（实际调用汇编器 as）：
+
+```bash
 gcc -c hello.s -o hello.o
-# 将函数库中相应代码组合到目标文件中(实际调用链接器ld)
+```
+
+将函数库中相应代码组合到目标文件中（实际调用链接器 ld）：
+
+```bash
 gcc hello.o -o hello
 ```
 
-- 常用参数
+### 常用参数
+
+|      参数      |                   意义                    |
+| :------------: | :---------------------------------------: |
+|      `-l`      |              指定头文件目录               |
+|      `-L`      |              指定动态库目录               |
+| `-l<动态库名>` |              链接指定动态库               |
+|      `-o`      |          后面加想要生成的文件名           |
+|      `-O`      | 后面紧跟数字 1~3，指定优化等级，默认 -O0  |
+|      `-g`      |         在生成程序中加入调试信息          |
+|    `-Wall`     |             输出所有警告信息              |
+|   `-D<宏名>`   | 相当于在 .c 文件中加了一句 #define <宏名> |
+
+### 两步查看带源代码的汇编代码
+
+生成带调试信息的 .o 文件：
 
 ```bash
--I # 指定头文件目录
--L # 指定动态库目录
--l<动态库名> # 链接指定动态库
--o # 后面加想要生成的文件名
--O # 后面紧跟数字1~3, 指定优化等级, 默认-O0
--g # 在生成程序中加入调试信息
--Wall # 输出所有警告信息
--D<宏名> # 相当于在.c文件中加了一句#define <宏名>
+gcc -c main.c -g
 ```
 
-- 两步查看带源代码的汇编代码
+查看汇编代码：
 
 ```bash
-gcc -c main.c -g # 生成带调试信息的.o文件
-objdump -S main.o # 查看汇编代码
+objdump -S main.o
 ```
 
-### 静态库
+## 静态库
 
-- 命名规则
+### 命名规则
 
-```
-lib + 库名 + .a; 如libtest.a, 库名就是test
-```
+  lib + 库名 + .a，如 `libtest.a`，库名就是 test 。
 
-- 制作步骤
+### 制作步骤
+
+生成对应的 .o 文件：
 
 ```bash
-# 生成对应的.o文件
 gcc -c test.c -o <生成文件名>
-# 将生成的.o文件打包
+```
+
+将生成的 .o 文件打包：
+
+```bash
 ar rcs <静态库名> <.o文件>
 ```
 
-- 查看静态库
+### 查看静态库
 
 ```bash
 nm <静态库名> 
 ```
 
-### 动态库
+## 动态库
 
-- 命名规则
+### 命名规则
+
+lib + 库名 + .so，如 `libtest.so`，库名就是 test 。
+
+### 制作步骤
+
+生成与位置无关的.o文件：
 
 ```bash
-lib + 库名 + .so; 如libtest.so, 库名就是test
+gcc -c test.c -o test.o -fPIC
 ```
 
-- 制作步骤
+将生成的.o文件打包：
 
 ```bash
-# 生成与位置无关的.o文件
-gcc -c test.c -o test.o -fPIC
-# 将生成的.o文件打包
 gcc -shared test.o -o libtest.so
 ```
 
-- 设置全局调用
+### 设置全局调用
+
+1. 设置用户头文件位置
+
+修改 `.bashrc`，添加下面一行：
 
 ```bash
-# 设置用户头文件位置
-# 修改.bashrc, 添加下面一行
 export C_INCLUDE_PATH=$HOME/Documents/share/include
-# 编译时可不指定头文件目录(-I<目录>)
-
-# 设置用户动态库位置
-# 修改.bashrc, 添加下面两行
-export LIBRARY_PATH=$HOME/Documents/share/mylib # gcc编译链接时查找路径
-export LD_LIBRARY_PATH=$HOME/Documents/share/mylib # 运行时查找路径
-# 编译时只需指定-l<动态库名>, 不需要指定-L<目录>
 ```
 
-- 查看程序使用了哪些动态库
+编译时可不指定头文件目录（`-I<目录>`）。
+
+2. 设置用户动态库位置
+
+修改 `.bashrc`，添加下面两行：
+
+```bash
+export LIBRARY_PATH=$HOME/Documents/share/mylib # gcc编译链接时查找路径
+export LD_LIBRARY_PATH=$HOME/Documents/share/mylib # 运行时查找路径
+```
+
+编译时只需指定 `-l<动态库名>`，不需要指定 `-L<目录>`。
+
+### 查看程序使用了哪些动态库
 
 ```bash
 ldd <程序名>
 ```
 
-### makefile
+## makefile
 
-```bash
-# makefile中必须用真正的tab, 可以在vim中`Ctrl+v tab`按出
-```
+### 注意
 
-- 例子
+`makefile` 中必须用真正的 `tab`，可以在 `vim` 中 `Ctrl` + `v`，再按 `tab` 按出。
+
+### 例子
 
 ```makefile
 CC=gcc # 指定编译器
@@ -123,9 +157,9 @@ clean:
 	rm src/*.o
 ```
 
-### gdb
+## gdb
 
-- 命令
+### 命令
 
 ```bash
 l # 查看源代码
@@ -159,7 +193,7 @@ x <内存地址>|$<寄存器名>|&<变量名> # 查看内存地址值
 q # 退出gdb
 ```
 
-- 调试动态库
+### 调试动态库
 
 ```bash
 # 1.生成带调试信息(gcc加-g参数)的.so文件
@@ -167,15 +201,15 @@ q # 退出gdb
 # 3.`run`会自动进入函数内部, 或者`start`, 再`s`进入函数内部
 ```
 
-- 追踪段错误
+### 追踪段错误
 
 ```bash
 run # 会自动追踪段错误
 ```
 
-### vim
+## vim
 
-- 实现函数跳转功能
+### 实现函数跳转功能
 
 ```bash
 # 1.安装.ctags
@@ -185,7 +219,7 @@ run # 会自动追踪段错误
 #	Ctrl+o: 跳回原来位置
 ```
 
-- 其他
+### 其他
 
 ```bash
 K # 大K查看指定函数man文档
