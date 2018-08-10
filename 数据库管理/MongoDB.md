@@ -1,22 +1,32 @@
 
 
-## MongoDB
+## 基本
 
 ### 启动
 
+后台启动：
+
 ```bash
-# 后台
 sudo systemctl start mongodb
-# 前台
+```
+
+前台启动：
+
+```bash
 sudo -u mongodb mongod -f /etc/mongodb.conf
 ```
 
-### 客户端命令
+### 命令行客户端
+
+启动客户端：
 
 ```bash
-# 启动客户端
 mongo
+```
 
+命令：
+
+```bash
 # 获取帮助
 db.help()
 
@@ -48,11 +58,20 @@ db.collection.remove({'title':'xxx'})
 db.collection.drop()
 # 删除当前数据库
 db.dropDatabase()
+```
 
-# 备份数据库, -d省略则备份所有
-mongodump -h 127.0.0.1 -d dbname -o ~/Documents/backup
-# 从当前目录读取(.), 恢复数据库
-mongorestore -h 127.0.0.1 -d dbname .
+### 备份还原
+
+备份数据库，`-d` 省略则备份所有：
+
+```bash
+mongodump -h 127.0.0.1 -d <dbname> -o ~/Documents/backup
+```
+
+恢复数据库，注意有个点（`.`）代表当前目录：
+
+```bash
+mongorestore -h 127.0.0.1 -d <dbname> .
 ```
 
 ### 配置文件/etc/mongodb.conf参数说明
@@ -80,9 +99,13 @@ journal=true
 quiet=true 
 ```
 
-## Pymongo
+## Python连接
 
-### 1. 连接MongoDB
+### 安装驱动
+
+    pip install pymongo
+
+### 连接MongoDB
 
 连接 MongoDB 我们需要使用 PyMongo 库里面的 MongoClient，一般来说传入 MongoDB 的 IP 及端口即可，第一个参数为地址 host，第二个参数为端口 port，端口如果不传默认是 27017。
 
@@ -101,7 +124,7 @@ client = MongoClient('mongodb://localhost:27017/')
 
 可以达到同样的连接效果。
 
-### 2. 指定数据库
+### 指定数据库
 
 MongoDB 中还分为一个个数据库，我们接下来的一步就是指定要操作哪个数据库，在这里我以 test 数据库为例进行说明，所以下一步我们需要在程序中指定要使用的数据库。
 
@@ -117,7 +140,7 @@ db = client['test']
 
 两种方式是等价的。
 
-### 3. 指定集合
+### 指定集合
 
 MongoDB 的每个数据库又包含了许多集合 Collection，也就类似与关系型数据库中的表，下一步我们需要指定要操作的集合，在这里我们指定一个集合名称为 students，学生集合，还是和指定数据库类似，指定集合也有两种方式：
 
@@ -131,7 +154,7 @@ collection = db['students']
 
 这样我们便声明了一个 Collection 对象。
 
-### 4. 插入数据
+### 插入数据
 
 接下来我们便可以进行数据插入了，对于 students 这个Collection，我们新建一条学生数据，以字典的形式表示：
 
@@ -239,7 +262,7 @@ insert_many() 方法返回的类型是 InsertManyResult，调用inserted_ids 属
 [ObjectId('5932abf415c2607083d3b2ac'), ObjectId('5932abf415c2607083d3b2ad')]
 ```
 
-### 5. 查询
+### 查询
 
 插入数据后我们可以利用 find_one() 或 find() 方法进行查询，find_one() 查询得到是单个结果，find() 则返回一个生成器对象。
 
@@ -336,7 +359,7 @@ results = collection.find({'name': {'$regex': '^M.*'}})
 
 这些操作的更详细用法在可以在 MongoDB 官方文档找到：<https://docs.mongodb.com/manual/reference/operator/query/>。
 
-### 6. 计数
+### 计数
 
 要统计查询结果有多少条数据，可以调用 count() 方法，如统计所有数据条数：
 
@@ -354,7 +377,7 @@ print(count)
 
 结果是一个数值，即符合条件的数据条数。
 
-### 7. 排序
+### 排序
 
 可以调用 sort() 方法，传入排序的字段及升降序标志即可，示例如下：
 
@@ -371,7 +394,7 @@ print([result['name'] for result in results])
 
 在这里我们调用了 pymongo.ASCENDING 指定升序，如果要降序排列可以传入 pymongo.DESCENDING。
 
-### 8. 偏移
+### 偏移
 
 在某些情况下我们可能想只取某几个元素，在这里可以利用skip() 方法偏移几个位置，比如偏移 2，就忽略前 2 个元素，得到第三个及以后的元素。
 
@@ -410,7 +433,7 @@ collection.find({'_id': {'$gt': ObjectId('593278c815c2602678bb2b8d')}})
 
 这时记录好上次查询的 _id。
 
-### 9. 更新
+### 更新
 
 对于数据更新可以使用 update() 方法，指定更新的条件和更新后的数据即可，例如：
 
@@ -498,7 +521,7 @@ print(result.matched_count, result.modified_count)
 
 可以看到这时所有匹配到的数据都会被更新。
 
-### 10. 删除
+### 删除
 
 删除操作比较简单，直接调用 remove() 方法指定删除的条件即可，符合条件的所有数据均会被删除，示例如下：
 
@@ -533,7 +556,7 @@ print(result.deleted_count)
 
 delete_one() 即删除第一条符合条件的数据，delete_many() 即删除所有符合条件的数据，返回结果是 DeleteResult 类型，可以调用 deleted_count 属性获取删除的数据条数。
 
-### 11. 更多
+### 更多
 
 另外 PyMongo 还提供了一些组合方法，如find_one_and_delete()、find_one_and_replace()、find_one_and_update()，就是查找后删除、替换、更新操作，用法与上述方法基本一致。
 

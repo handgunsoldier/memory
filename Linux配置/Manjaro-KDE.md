@@ -213,7 +213,7 @@ pip install mitmproxy # 交互式命令行http抓包工具
 # 数据库
 pip install pymongo # mongodb
 pip install redis # redis
-pip install psycopg2 # postgresql
+pip install psycopg2-binary # postgresql
 pip install pymysql # mysql
 ```
 
