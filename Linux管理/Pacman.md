@@ -1,13 +1,13 @@
- ### pacman
+### pacman
 
-- 生成可用中国镜像站列表:
+- 生成可用中国镜像站列表
 
 ```bash
 sudo pacman-mirrors -i -c China -m rank
 # 会弹出选项框, 选清华大学源
 ```
 
-- 刷新缓存:
+- 刷新缓存
 
 ```bash
 sudo pacman -Syy # 两个yy代表强制刷新

@@ -2,17 +2,17 @@
 
 ### 服务配置文件
 
-- 把配置文件放在`/usr/lib/systemd/system/ `目录
+- 把配置文件放在 `/usr/lib/systemd/system/ ` 目录。
 
-- Systemd 默认从目录`/etc/systemd/system/`读取配置文件
+- Systemd 默认从目录 `/etc/systemd/system/` 读取配置文件。
 
-- 执行`systemctl enable <服务名>`后, 相当于在上面两个目录之间，建立符号链接
+- 执行 `systemctl enable <服务名>` 后，相当于在上面两个目录之间，建立符号链接。
 
-- 此时就会自动开机启动服务
+- 此时就会自动开机启动服务。
 
 ### 配置文件的区块
 
-- `[Unit]`区块通常是配置文件的第一个区块，用来定义 Unit 的元数据，以及配置与其他 Unit 的关系。它的主要字段如下:
+- `[Unit]`区块通常是配置文件的第一个区块，用来定义 Unit 的元数据，以及配置与其他 Unit 的关系。它的主要字段如下：
 
 ```bash
 Description # 简短描述
@@ -27,7 +27,7 @@ Condition... # 当前 Unit 运行必须满足的条件，否则不会运行
 Assert... # 当前 Unit 运行必须满足的条件，否则会报启动失败
 ```
 
-- `[Service]`区块用来 Service 的配置，只有 Service 类型的 Unit 才有这个区块。它的主要字段如下:
+- `[Service]`区块用来 Service 的配置，只有 Service 类型的 Unit 才有这个区块。它的主要字段如下：
 
 ```bash
 Type=simple # 默认值, systemd认为该服务将立即启动。服务进程不会fork。如果该服务要启动其他服务，不要使用此类型启动，除非该服务是socket激活型。
@@ -58,7 +58,7 @@ KillMode=none # 没有进程会被杀掉，只是执行服务的 stop 命令
 PrivateTmp=True # 表示给服务分配独立的临时空间, nginx和gunicorn配合使用时, 不要开启
 ```
 
-- `[Install]`通常是配置文件的最后一个区块，用来定义如何启动，以及是否开机启动。它的主要字段如下:
+- `[Install]`通常是配置文件的最后一个区块，用来定义如何启动，以及是否开机启动。它的主要字段如下：
 
 ```bash
 WantedBy # 常用的 Target 有两个：一个是multi-user.target，表示多用户命令行状态；另一个是graphical.target，表示图形用户状态，它依赖于multi-user.target
