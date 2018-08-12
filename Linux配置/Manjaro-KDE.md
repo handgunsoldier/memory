@@ -1,36 +1,38 @@
-# Manjaro KDE版安装后配置
+# Manjaro KDE 版安装后配置
 
-### pacman换源
+### pacman 换源
 
-- 生成可用中国镜像站列表:
+生成可用中国镜像站列表，会弹出选项框, 选清华大学源：
 
 ```bash
 sudo pacman-mirrors -i -c China -m rank
-# 会弹出选项框, 选清华大学源
 ```
 
-- 刷新缓存:
+刷新缓存，两个 y 代表强制刷新，即使已经是最新的：
 
 ```bash
-sudo pacman -Syy # 两个yy代表强制刷新, 即使已经是最新的
+sudo pacman -Syy
 ```
 
 ### 卸载不需要软件
 
+删除指定软件包，及所有没有被其他已安装软件包使用的依赖关系（s），及配置文件（n），仅供参考：
+
 ```bash
-# 仅供参考
-# 删除指定软件包，及所有没有被其他已安装软件包使用的依赖关系(s)，及配置文件(n)
 sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en konversation thunderbird kget cantata vlc bluedevil pulseaudio-bluetooth kwalletmanager kwallet-pam user-manager
-# vlc用mpv代替
 ```
+
+vlc用mpv代替。
 
 ### 更新系统
 
 ```bash
 sudo pacman -Syu # 同步源(y), 并更新系统(u)
+```
 
-# 更新完, 可能会生成*.pacnew的新配置文件, 必须手动覆盖旧的, 
-# 可以用pacdiff工具, 搜索所有电脑中*.pacnew
+更新完，可能会生成 `*.pacnew` 的新配置文件，必须手动覆盖旧的，可以用 pacdiff 工具，搜索所有电脑中` *.pacnew`：
+
+```bash
 sudo pacdiff
 ```
 
@@ -219,11 +221,14 @@ pip install pymysql # mysql
 
 ### jupyter的配置
 
-- 先生成配置文件
+先生成配置文件：
+
 ```bash
 jupyter notebook --generate-config
 ```
-- 配置修改(别忘去掉注释)
+
+配置修改（别忘去掉注释）：
+
 ```python
 # 修改初始目录
 修改c.NotebookApp.notebook_dir = '/home/zzzzer/Documents/code/jupyter'
@@ -233,14 +238,14 @@ c.NotebookApp.open_browser = False
 
 ### 其他
 
-- 选择bash下默认编辑器
+选择bash下默认编辑器：
 
 ```bash
 # 在.zshrc下添加如下一行
 EDITOR="/usr/bin/vim"
 ```
 
-- 安装Windows字体
+安装Windows字体：
 
 ```bash
 # 先将windows字体放入该目录

@@ -74,7 +74,7 @@ mongodump -h 127.0.0.1 -d <dbname> -o ~/Documents/backup
 mongorestore -h 127.0.0.1 -d <dbname> .
 ```
 
-### 配置文件/etc/mongodb.conf参数说明
+### 配置文件 /etc/mongodb.conf 参数说明
 
 ```bash
 # 数据库数据存放目录

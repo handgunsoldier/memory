@@ -1,4 +1,4 @@
-# Numpy速查手册
+## Numpy速查手册
 
 - 官方api: [numpy](https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html#array-attributes)
 - `import numpy as np`, 是numpy库约定的导入方式.
