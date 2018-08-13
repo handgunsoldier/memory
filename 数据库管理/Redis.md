@@ -4,9 +4,9 @@
 
 1. 修改配置文件：
 
-```bash
-sudo vim /etc/redis.conf
-```
+   ```bash
+   sudo vim /etc/redis.conf
+   ```
 
 2. 取消 requirepass 的注释, 后面加上密码。
 
