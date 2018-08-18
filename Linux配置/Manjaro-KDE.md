@@ -171,46 +171,39 @@ sudo pacman -S dbeaver
 
 ### AUR
 
-- 安装
+安装包管理工具：
 
 ```bash
-sudo pacman -S yaourt
+sudo pacman -S trizen
 ```
 
-- 换源
+推荐安装软件：
 
 ```bash
-# 修改 /etc/yaourtrc，去掉 # AURURL 的注释，修改为
-AURURL="https://aur.tuna.tsinghua.edu.cn"
+trizen -S typora # 很好用的 markdown 编辑器，支持导出 PDF
+trizen -S visual-studio-code-bin # vscode
+trizen -S robo3t-bin # mongodb gui 工具
+trizen -S genymotion # 安卓模拟器
+
+trizen -S wps-office ttf-wps-fonts # wps
 ```
 
-- 必装
-
-```bash
-yaourt -S typora # 很好用的markdown编辑器, 支持导出PDF
-yaourt -S visual-studio-code-bin # vscode
-yaourt -S wps-office ttf-wps-fonts # wps
-yaourt -S robo3t-bin # mongodb gui工具
-yaourt -S genymotion # 安卓模拟器
-```
-
-- **注意**: 命令台用yaourt安装时不需加sudo, 否则报错
-- 出现`one or more PGP signatures could not be verified!` , 则检查`PKGBUILD` 中的key, 导入key, `gpg --recv-keys <KEYID - See validpgpkeys array in PKGBUILD>`
+若出现 `one or more PGP signatures could not be verified!` ，则检查 `PKGBUILD` 中的 key，导入 key，`gpg --recv-keys <KEYID - See validpgpkeys array in PKGBUILD>`
 
 ### pip必装
 
 ```bash
 pip install ipython
 pip install jupyter # jupyter notebook
-pip install requests requests[socks] # http请求
-pip install bs4 lxml # html解析
+pip install requests requests[socks] # http 请求
+pip install bs4 lxml # html 解析
 pip install numpy pandas matplotlib scipy # 科学计算
 pip install pillow # 图像处理
 pip install pipenv # 包虚拟环境
 pip install aiohttp # 异步网络框架
-pip install aiodns # 异步解析DNS
+pip install aiodns # 异步解析 DNS
 pip install cchardet # 更快的编码探测
-pip install mitmproxy # 交互式命令行http抓包工具
+pip install mitmproxy # 交互式命令行 http 抓包工具
 
 # 数据库
 pip install pymongo # mongodb

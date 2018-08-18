@@ -40,7 +40,7 @@ sudo firewall-cmd --zone=public --list-ports # 查看开放的端口.
 sudo systemctl restart firewalld # 重启防火墙
 ```
 
-### ssh
+### SSH
 
 - 提高ssh连接速度
 
@@ -84,7 +84,7 @@ sudo shutdown -r now # 重启
 uname -r # 查看是否安装成功
 ```
 
-### vps网络优化
+### VPS 网络优化
 
 - `sudo modprobe tcp_hybla` 开启hybla算法, 适用高延迟的网络
 
@@ -169,7 +169,7 @@ net.core.default_qdisc=fq
 
 - 然后重启服务器执行`ulimit -n`，查询返回65536即可
 
-### git
+### Git
 
 ```bash
 # 安装
@@ -181,7 +181,7 @@ git config --global user.email "zzzzer91@gmail.com"
 ssh-keygen -t rsa -C "zzzzer91@gmail.com"
 ```
 
-## pyenv
+## Pyenv
 
 ``` bash
 # 安装
@@ -199,7 +199,7 @@ cd $(pyenv root)
 git pull
 ```
 
-### shadowsock
+### Shadowsock
 
 ```shell
 # 任何增加端口的行为都别忘记修改防火墙!!!
@@ -243,7 +243,7 @@ vi /etc/rc.d/rc.local # 添加你想要开机运行的程序, 如:`/home/zzzzer/
 sudo less /var/log/shadowsocks.log 
 ```
 
-### vim配置
+### Vim 配置
 
 ```shell
 set nu  # 使显示行号
