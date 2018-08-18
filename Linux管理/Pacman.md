@@ -1,4 +1,4 @@
-### pacman
+### Pacman
 
 - 生成可用中国镜像站列表
 
@@ -42,6 +42,6 @@ pacman -Sc
 pacman -Scc
 ```
 
-### yaourt
+### Trizen
 
-- 命令与pacman基本一致
+- 命令与 pacman 基本一致
