@@ -22,7 +22,6 @@ sudo systemctl start postgresql
 
 ```bash
 psql 
-
 ```
 
 命令：
@@ -34,8 +33,8 @@ psql
 
 ### 注意点
 
-1. PostgreSQL 中插入的数据必须用**单引号**引起来，而不能使用双引号，MySQL 中可以。
-2. 创建约束（Constraints）也会自动创建索引（Index），所以不必特意创建索引了。
+- PostgreSQL 中插入的数据必须用**单引号**引起来，而不能使用双引号，MySQL 中可以。
+- 创建约束（Constraints）也会自动创建索引（Index），所以不必特意创建索引了。
 
 ### 字符串操作函数
 

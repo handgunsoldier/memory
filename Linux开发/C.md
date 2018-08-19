@@ -118,8 +118,8 @@ export C_INCLUDE_PATH=$HOME/Documents/share/include
 修改 `.bashrc`，添加下面两行：
 
 ```bash
-export LIBRARY_PATH=$HOME/Documents/share/mylib # gcc编译链接时查找路径
-export LD_LIBRARY_PATH=$HOME/Documents/share/mylib # 运行时查找路径
+export LIBRARY_PATH=$HOME/Documents/share/mylib  # gcc 编译链接时查找路径
+export LD_LIBRARY_PATH=$HOME/Documents/share/mylib  # 运行时查找路径
 ```
 
 编译时只需指定 `-l<动态库名>`，不需要指定 `-L<目录>`。
