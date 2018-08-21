@@ -56,10 +56,6 @@ ssh-keygen -t rsa -C "zzzzer91@gmail.com"
 # 4.在github上更新密钥
 # 5.设置, 防止`git status`中文乱码
 git config –global core.quotepath false 
-
-# 可选, 设置使用socks5代理
-git config --global http.proxy 'socks5://127.0.0.1:1080'
-git config --global https.proxy 'socks5://127.0.0.1:1080'
 ```
 
 ### vim

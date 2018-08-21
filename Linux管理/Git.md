@@ -123,3 +123,14 @@ git remote -v
 git remote rm origin
 ```
 
+- 使用代理
+
+```bash
+# 先要开启
+setproxy
+
+# 使用socks5代理
+git config --global http.proxy 'socks5://127.0.0.1:1080'
+git config --global https.proxy 'socks5://127.0.0.1:1080'
+```
+

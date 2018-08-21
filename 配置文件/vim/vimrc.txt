@@ -13,7 +13,12 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+
 Plugin 'vim-airline/vim-airline'
+
+" rust 代码补全
+Plugin 'racer-rust/vim-racer'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -29,13 +34,24 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-set nu
-set expandtab
-set ts=4
-set softtabstop=4
-set shiftwidth=4
-set laststatus=2
+
+" 打开语法高亮
 syntax on
+
+" 显示行号
+set nu
+
+" 以下三个配置配合使用，设置tab和缩进空格数
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+" 总是显示状态行
+" set laststatus=2
+
+" 按下 Ctrl+p 时的背景色
+hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
+hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 
 " airline config
 let g:airline_powerline_fonts = 1
@@ -43,4 +59,12 @@ let g:airline_powerline_fonts = 1
 "let g:airline_section_x = ''
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
+
+" rust
+" 手动补全和定义跳转
+set hidden
+" 这一行指的是你编译出来的racer所在的路径
+let g:racer_cmd = "/usr/bin/racer"
+" rust 源码位置
+let $RUST_SRC_PATH="/usr/lib/rustlib/src/rust/src"
 
