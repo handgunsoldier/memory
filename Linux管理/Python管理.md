@@ -1,6 +1,8 @@
-### 版本管理: pyenv
+## Python 管理
 
-- 命令
+### 版本管理：Pyenv
+
+命令：
 
 ```shell
 # 显示可下载内容
@@ -17,20 +19,20 @@ pyenv rehash
 pyenv uninstall <版本>
 ```
 
-- 更新
+更新：
 
 ```shell
-# git fetch下来的是master版本, 不稳定, 需切换到指定标签
 cd .pyenv
+# git fetch下来的是master版本, 不稳定, 需切换到指定标签版本
 git fetch origin master
 git merge origin/master
 git tag # 检查可用版本
 git checkout <tag名> # 切换
 ```
 
-### 包管理: pip
+### 包管理: Pip
 
-- 命令
+命令：
 
 ```shell
 # 列出所有库
@@ -57,9 +59,9 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple <PACKAGE_NAME>
 pip uninstall <PACKAGE_NAME> 
 ```
 
-### pipenv
+### Pipenv
 
-- 命令
+命令：
 
 ```shell
 # pipenv有两个条目: 普通和dev, 根据开发需求选择包安装条目

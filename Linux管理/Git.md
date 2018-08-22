@@ -1,29 +1,43 @@
-### git
+## Git
 
--  建议
+### 建议
+
+推荐使用这种方法更新本地分支:
 
 ```bash
-# 推荐使用这种方法更新本地分支
-git fetch origin <远程分支名> # 拉取指定远程分支到本地, 远程分支在本地名为origin/master
-git branch -a # 查看所有分支
-git merge origin/<远程分支名> # 合并到当前分支
-
-# 推荐使用这种方法推送本地分支
-git push origin <远程分支名> # 推送当前分支到指定远程分支
+# 拉取指定远程分支到本地, 远程分支在本地名为origin/master
+git fetch origin <远程分支名>
+# 查看所有分支
+git branch -a
+# 合并指定分支到当前分支
+git merge origin/<远程分支名>
 ```
 
--  初始准备
+推荐使用这种方法推送本地分支:
 
 ```bash
-# 设置所有git仓库的提交者和邮箱, 必须
+# 推送当前分支到指定远程分支
+git push origin <远程分支名>
+```
+
+如果 `git push` 后什么都不写，会推送所有分支。
+
+### 初始准备
+
+设置所有git仓库的提交者和邮箱，必须:
+
+```bash
 git config --global user.name "zzzzer"
 git config --global user.email "zzzzer91@gmail.com"
+```
 
-# 生成密钥, 把.ssh中的id_rsa.pub的内容添加到github, 就可以上传了
+生成密钥, 把 .ssh 中的 id_rsa.pub 的内容添加到 github，就可以上传了：
+
+```bash
 ssh-keygen -t rsa -C "zzzzer91@gmail.com"
 ```
 
-- 基本命令
+### 基本命令
 
 ```bash
 # 把当前文件夹变为git可以管理的仓库
@@ -63,7 +77,7 @@ git show <tag_name>
 git tag -d <tag_name>
 ```
 
-- 分支命令
+### 分支命令
 
 ```bash
 # 如当前分支有修改, 还没提交, 要把当前现场状态储存起来, 这样才能切换分支
@@ -91,7 +105,7 @@ git branch -D dev
 git merge dev
 ```
 
-- 远程仓库
+### 远程仓库
 
 ```bash
 # 从目标克隆所有分支到本地, 除了HEAD分支, 其他分支以origin/<分支名>形式命名
@@ -123,13 +137,11 @@ git remote -v
 git remote rm origin
 ```
 
-- 使用代理
+### 代理
+
+使用socks5代理:
 
 ```bash
-# 先要开启
-setproxy
-
-# 使用socks5代理
 git config --global http.proxy 'socks5://127.0.0.1:1080'
 git config --global https.proxy 'socks5://127.0.0.1:1080'
 ```

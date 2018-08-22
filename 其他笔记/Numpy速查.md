@@ -1,12 +1,12 @@
-## Numpy速查手册
+## Numpy 速查手册
 
-- 官方api: [numpy](https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html#array-attributes)
-- `import numpy as np`, 是numpy库约定的导入方式.
-- `ndarray`类型是numpy最主要的类型.
-- `ndarray`对象的元素具有相同的类型, 并且一般是numpy自定义的一些类型, 有许多种, 详见官方文档.
-- `ndarray`对象的元素的类型也可以不相同, 但这会降低性能.
-- 如果创建`ndarray`对象时, 不指定元素的类型, 那么会自动判断.
-- `ndarray`对象的创建方式:
+- 官方API：[Numpy](https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html#array-attributes)
+- `import numpy as np`，是 Numpy 库约定的导入方式。
+- `ndarray` 类型是 Numpy 最主要的类型。
+- `ndarray` 对象的元素具有相同的类型，并且一般是 Numpy 自定义的一些类型，有许多种，详见官方文档。
+- `ndarray` 对象的元素的类型也可以不相同，但这会降低性能。
+- 如果创建 `ndarray` 对象时，不指定元素的类型，那么会自动判断。
+- `ndarray` 对象的创建方式：
 
 ```python
 """1.用列表, 元组等创建"""
