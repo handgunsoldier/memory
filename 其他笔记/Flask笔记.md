@@ -1,5 +1,12 @@
 ## 基本概念
 
+### 启动
+
+```bash
+export FLASK_ENV=development
+flask run
+```
+
 ### 视图
 
 - 缺省情况下，一个路由只回应 `GET` 请求。
@@ -13,4 +20,3 @@
 |  `path`  |   类似 `string` ，但可以包含斜杠    |
 |  `uuid`  |          接受 UUID 字符串           |
 
-### 

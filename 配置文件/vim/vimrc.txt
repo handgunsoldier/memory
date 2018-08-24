@@ -19,6 +19,8 @@ Plugin 'vim-airline/vim-airline'
 " rust 代码补全
 Plugin 'racer-rust/vim-racer'
 
+" 树状目录
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -42,9 +44,9 @@ syntax on
 set nu
 
 " 以下三个配置配合使用，设置tab和缩进空格数
-set expandtab
-set tabstop=4
-set shiftwidth=4
+set expandtab  " 转换tab为空格
+set shiftwidth=4  " 设置空格数
+set softtabstop=4 " 按一次退格键会删除4个空格，只对tab按出来的有效
 
 " 总是显示状态行
 " set laststatus=2
@@ -67,4 +69,8 @@ set hidden
 let g:racer_cmd = "/usr/bin/racer"
 " rust 源码位置
 let $RUST_SRC_PATH="/usr/lib/rustlib/src/rust/src"
+
+" 树状目录快捷键
+map <F2> :NERDTreeMirror<CR>
+map <F2> :NERDTreeToggle<CR>
 
