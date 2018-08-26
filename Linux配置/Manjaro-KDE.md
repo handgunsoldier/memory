@@ -1,8 +1,8 @@
 # Manjaro KDE 版安装后配置
 
-### pacman 换源
+### Pacman 换源
 
-生成可用中国镜像站列表，会弹出选项框, 选清华大学源：
+生成可用中国镜像站列表，会弹出选项框，选清华大学源：
 
 ```bash
 sudo pacman-mirrors -i -c China -m rank
@@ -22,7 +22,7 @@ sudo pacman -Syy
 sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en konversation thunderbird kget cantata vlc bluedevil pulseaudio-bluetooth kwalletmanager kwallet-pam user-manager
 ```
 
-vlc用mpv代替。
+vlc 用 mpv 代替。
 
 ### 更新系统
 
@@ -36,85 +36,133 @@ sudo pacman -Syu # 同步源(y), 并更新系统(u)
 sudo pacdiff
 ```
 
-### zsh
+### Zsh
 
 ```bash
 # 它的配置文件为~/.zshrc
 sudo pacman -S zsh manjaro-zsh-config
 ```
 
-### git
+### Git
 
-```bash
-# 1.安装
-sudo pacman -S git
-# 2.配置
-git config --global user.name "zzzzer"
-git config --global user.email "zzzzer91@gmail.com"
-# 3.生成ssh密钥
-ssh-keygen -t rsa -C "zzzzer91@gmail.com"
-# 4.在github上更新密钥
-# 5.设置, 防止`git status`中文乱码
-git config –global core.quotepath false 
-```
+1. 安装：
 
-### vim
+   ```bash
+   sudo pacman -S git
+   ```
 
-```bash
-# 1.安装
-sudo pacman -S vim 
-# 2.先把已经配置好的.vimrc放到家目录下
-# 3.下载vim插件管理器
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-# 4.进入vim后, 执行PluginInstall安装相关插件
-# 5.起别名, `vim ~/.zshrc`, 添加:
-alias vi='vim' 
-```
+2. 配置个人信息：
 
-### pyenv
+   ```bash
+   git config --global user.name "zzzzer"
+   git config --global user.email "zzzzer91@gmail.com"
+   ```
 
-``` bash
-# 1.安装
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-# 2.切换到最新版本(git clone下来的是master版本, 不稳定)
-cd .pyenv
-git tag # 检查可用版本
-git checkout <tag名> # 切换
-# 3.配置(自动补全功能等)
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
-# 4.下载指定版本python
-pyenv install <版本>
-# 5.切换环境
-pyenv global <版本>
-```
+3. 生成ssh密钥：
 
-### shadowsocks
+   ```bash
+   ssh-keygen -t rsa -C "zzzzer91@gmail.com"
+   ```
 
-```bash
-# 1.安装
-pip install git+https://github.com/shadowsocks/shadowsocks.git@master
-# 2.在 .zshrc 中设置命令, 方便使用
-alias sss="ss-local -c /etc/shadowsocks.json"
-alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
-alias unsetproxy="unset ALL_PROXY"
-```
+4. 在 Github 上更新密钥。
+
+5. 做一些设置，让 `git status` 中的中文不乱码：
+
+   ```bash
+   git config –global core.quotepath false 
+   ```
+
+### VIM
+
+1. 安装：
+
+   ```bash
+   sudo pacman -S vim 
+   ```
+
+2. 先把已经配置好的 .vimrc 放到家目录下。
+
+3. 下载 vim 插件管理器：
+
+   ```bash
+   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+   ```
+
+4. 进入 vim 后, 执行 PlugInstall 安装相关插件。
+
+### Pyenv
+
+1. 安装：
+
+   ```bash
+   git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+   ```
+
+2. 切换到最新稳定版本（git clone下来的是 master 版本, 不稳定）：
+
+   ```bash
+   cd ～/.pyenv
+   git tag # 检查可用版本
+   git checkout <tag名> # 切换
+   ```
+
+3. 配置（自动补全功能等）：
+
+   ```bash
+   echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+   echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+   echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+   ```
+
+4. 下载指定版本 Python：
+
+   ```bash
+   pyenv install <版本>
+   ```
+
+5. 切换环境：
+
+   ```bash
+   pyenv global <版本>
+   ```
+
+### Shadowsocks
+
+1. 安装：
+
+   ```bash
+   pip install git+https://github.com/shadowsocks/shadowsocks.git@master
+   ```
+
+2. 在 .zshrc 中设置命令，方便使用：
+
+   ```bash
+   alias sss="sslocal -c /etc/shadowsocks.json"
+   alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
+   alias unsetproxy="unset ALL_PROXY"
+   ```
 
 ### 中文输入法
 
-```bash
-# 1.安装fcitx
-sudo pacman -S fcitx-im # 选择全部安装
-sudo pacman -S fcitx-configtool # 图形化配置工具
-# 2.修改~/.xprofile, 添加:
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS="@im=fcitx"
-# 3.在fcitx输入法选项中添加pinyin
-```
+1. 安装 fcitx：
 
-### chromium
+   ```bash
+   sudo pacman -S fcitx-im # 选择全部安装
+   sudo pacman -S fcitx-configtool # 图形化配置工具
+   ```
+
+2. 修改 ~/.xprofile，添加：
+
+   ```bash
+   export GTK_IM_MODULE=fcitx
+   export QT_IM_MODULE=fcitx
+   export XMODIFIERS="@im=fcitx"
+   ```
+
+3. 在 fcitx 输入法选项中添加 pinyin。
+
+### Chromium
 
 ```bash
 sudo pacman -S chromium
@@ -129,28 +177,28 @@ sudo pacman -S dnsutils # nslookup
 
 ### 数据库
 
-- mongodb
+MongoDB：
 
 ```bash
 sudo pacman -S mongod
 ```
 
-- redis
+Redis：
 
 ```bash
 sudo pacman -S redis
 ```
 
-- postgresql
+PostgreSQL：
 
 ```bash
 sudo pacman -S postgresql
 
-# 初始化数据库, 第一次使用必须
+# 初始化数据库，第一次使用必须
 sudo -u postgres initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'
 ```
 
-- mysql(arch下用mariadb代替)
+MySQL（Arch 下用 MariaDB 代替）：
 
 ```bash
 sudo pacman -S mariadb
@@ -160,8 +208,11 @@ sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 
 # 设置密码
 mysqladmin -u root password "newpass"
+```
 
-# 安装GUI管理工具
+安装 GUI 管理工具，支持 PostgreSQL 和 MySQL：
+
+```bash
 sudo pacman -S dbeaver
 ```
 
@@ -176,15 +227,15 @@ sudo pacman -S trizen
 推荐安装软件：
 
 ```bash
-trizen -S typora # 很好用的 markdown 编辑器，支持导出 PDF
-trizen -S visual-studio-code-bin # vscode
-trizen -S robo3t-bin # mongodb gui 工具
+trizen -S typora # 很好用的 Markdown 编辑器，支持导出 PDF
+trizen -S visual-studio-code-bin # VSCode
+trizen -S robo3t-bin # MongoDB GUI 工具
 trizen -S genymotion # 安卓模拟器
 
-trizen -S wps-office ttf-wps-fonts # wps
+trizen -S wps-office ttf-wps-fonts # WPS，在 Manjaro 下有些问题
 ```
 
-若出现 `one or more PGP signatures could not be verified!` ，则检查 `PKGBUILD` 中的 key，导入 key，`gpg --recv-keys <KEYID - See validpgpkeys array in PKGBUILD>`
+若出现 `one or more PGP signatures could not be verified!` ，则检查 `PKGBUILD` 中的 key，使用 `gpg --recv-keys <KEYID>` 命令导入 key。
 
 ### pip必装
 
@@ -202,10 +253,10 @@ pip install cchardet # 更快的编码探测
 pip install mitmproxy # 交互式命令行 http 抓包工具
 
 # 数据库
-pip install pymongo # mongodb
-pip install redis # redis
-pip install psycopg2-binary # postgresql
-pip install pymysql # mysql
+pip install pymongo # MongoDB
+pip install redis # Redis
+pip install psycopg2-binary # PostgreSQL
+pip install pymysql # MySQL
 ```
 
 ### jupyter的配置
