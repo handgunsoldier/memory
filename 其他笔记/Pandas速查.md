@@ -298,9 +298,11 @@ df.fillna(x)  # 用x替换df中所有的空值, 非原地
 df.fillna({'xh':0})  # 用x替换df的xh列中所有的空值
 df.dropna()  # 删除所有包含空值的行
 df.dropna(axis=1)  # 删除所有包含空值的列
+df.dropna(subset=['nj'])  # 删除某列含有空值的行
 df.groupby(['nj', 'bj'])  # 分组功能
 df.set_index(['state', 'city']).sort_index()  # 设置多索引, 并排序索引
 df.applymap(func)  # 把相关函数作用在所有df成员上
+df.apply(lambda x: func(x['sell sku'], x['shape']), axis = 1)  # 根据其他列处理某列
 ```
 
 添加和删除：
@@ -326,7 +328,7 @@ df['age'] += 1  # age列所有元素加1, 原地
 
 ### 数据存取相关
 
-对 sqlite3 存取：
+sqlite3 存取：
 
 ```python
 db = sqlite3.connect('data.sqlite')  # 先要连接当前目录下的sqlite3数据库, 不存在则创建
@@ -334,21 +336,21 @@ df.to_sql('table_name', index=False, con=db)  # 导出数据到数据库指定�
 pd.read_sql('select * from table_name', con=db)  # 从数据库指定表导入指定列数据
 ```
 
-对 csv 存取：
+csv 存取：
 
 ```python
 df.to_csv('example.csv', index=False)  # 导出数据到csv文件, 不包含索引
 pd.read_csv('example.csv')  # 从csv文件导入数据
 ```
 
-对 excel 存取：
+Excel 存取：
 
 ```python
 df.to_excel('example.xlsx', engine='xlsxwriter')  # 导出数据到excel文件
 pd.read_excel('example.xlsx')  # 从excel文件导入数据
 ```
 
-存 excel 的高级用法，可以指定 sheet：
+存 Excel 的高级用法，可以指定 sheet：
 
 ```python
 writer = pd.ExcelWriter(
@@ -359,6 +361,15 @@ writer = pd.ExcelWriter(
 df.to_excel(writer, sheet_name='Sheet1')
 df2.to_excel(writer, sheet_name='Sheet2')
 writer.save()
+```
+
+存入 MonogDB：
+
+```python
+# 先生成以 column 为 key 的字典组成的列表
+records = df.to_dict(orient='records')
+# 存入 MonogDB
+collection.insert_many(records)
 ```
 
 ### pandas常用函数
