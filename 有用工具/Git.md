@@ -31,7 +31,7 @@ git config --global user.name "zzzzer"
 git config --global user.email "zzzzer91@gmail.com"
 ```
 
-生成密钥, 把 .ssh 中的 id_rsa.pub 的内容添加到 github，就可以上传了：
+生成密钥, 把 .ssh 文件夹中的 id_rsa.pub 的内容添加到 github，就可以上传了：
 
 ```bash
 ssh-keygen -t rsa -C "zzzzer91@gmail.com"
@@ -139,7 +139,7 @@ git remote rm origin
 
 ### 代理
 
-使用socks5代理:
+使用 socks5 代理：
 
 ```bash
 git config --global http.proxy 'socks5://127.0.0.1:1080'

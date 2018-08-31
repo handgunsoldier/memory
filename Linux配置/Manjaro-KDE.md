@@ -22,7 +22,7 @@ sudo pacman -Syy
 sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en konversation thunderbird kget cantata vlc bluedevil pulseaudio-bluetooth kwalletmanager kwallet-pam user-manager
 ```
 
-vlc 用 mpv 代替。
+VLC 用 mpv 代替。
 
 ### 更新系统
 
