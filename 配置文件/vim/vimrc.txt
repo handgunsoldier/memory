@@ -15,10 +15,10 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ludovicchabant/vim-gutentags'
 
 " 静态检查
-Plug 'w0rp/ale', { 'for': ['c', 'cpp', 'h'] }
+Plug 'w0rp/ale' , { 'for': ['c', 'rust'] }
 
 " rust 代码补全
-" Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 
 " Initialize plugin system
 call plug#end()
@@ -29,7 +29,7 @@ syntax on
 
 
 " 设置补全
-set complete=i
+set complete=t
 set completeopt =menu,preview,noselect
 " 按下 Ctrl+p 时的背景色
 hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
@@ -40,14 +40,15 @@ hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 set nu
 
 
+" 总是显示状态行
+set laststatus=2
+
+
 " 以下三个配置配合使用，设置tab和缩进空格数
 set expandtab  " 转换tab为空格
 set shiftwidth=4  " 设置空格数
 set softtabstop=4 " 按一次退格键会删除4个空格，只对tab按出来的有效
 
-
-" 总是显示状态行
-"set laststatus=2
 
 " airline config
 set noshowmode  " 不显示模式
@@ -57,7 +58,7 @@ let g:airline_section_warning = ''
 let g:airline_section_error = ''
 
 
-" 树状目录快捷键
+" 树状目录快捷键 Alt+1
 map 1 :NERDTreeMirror<CR>
 map 1 :NERDTreeToggle<CR>
 
@@ -72,7 +73,6 @@ let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
 " 配置 ctags 的参数
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 " 检测 ~/.cache/tags 不存在就新建
 if !isdirectory(s:vim_tags)
@@ -92,17 +92,17 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {
-\   'c++': ['gcc'],
 \   'c': ['gcc'],
+\   'rust': ['cargo'],
 \}
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_gcc_options = '-Wall -O2 -std=gnu99'
+let g:ale_rust_cargo_use_check = 1
 
 " rust
 " 手动补全和定义跳转
-"set hidden
+set hidden
 " 这一行指的是你编译出来的racer所在的路径
-"let g:racer_cmd = '/usr/bin/racer'
+let g:racer_cmd = '/usr/bin/racer'
 " rust 源码位置
-"let $RUST_SRC_PATH = '/usr/lib/rustlib/src/rust/src'
+let $RUST_SRC_PATH = '/usr/lib/rustlib/src/rust/src'
 

@@ -1,5 +1,6 @@
 {
     "update.channel": "none",
+    "update.enableWindowsBackgroundUpdates": false,
     "workbench.colorTheme": "Monokai",
     "workbench.statusBar.feedback.visible": false,
     "telemetry.enableTelemetry": false,
@@ -12,11 +13,9 @@
     "files.eol": "\n",
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "none",
-    "editor.fontSize": 20,
-    "terminal.integrated.fontSize": 20,
-    "markdown.preview.fontSize": 18,
+    "editor.fontSize": 19,
+    "terminal.integrated.fontSize": 19,
+    "markdown.preview.fontSize": 19,
     "python.linting.pylintEnabled": false,
     "python.pythonPath": "python3",
-    "C_Cpp.errorSquiggles": "Disabled",
-    "C_Cpp.formatting": "Disabled",
 }
