@@ -81,6 +81,9 @@ pipenv --venv
 # 启用虚拟环境
 pipenv shell
 
+# 直接运行虚拟环境中某个命令
+pipenv run <命令>
+
 # 删除环境
 pipenv uninstall --all-dev # 卸载dev条目所有包, 注意虚拟环境还在
 pipenv uninstall --all # 卸载所有包, 注意虚拟环境还在
