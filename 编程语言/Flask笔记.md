@@ -7,6 +7,18 @@ export FLASK_ENV=development
 flask run
 ```
 
+可以写一个 shell 脚本 方便使用：
+
+```bash
+#!/bin/bash
+
+
+export FLASK_APP=app
+export FLASK_ENV=development
+
+pipenv run flask run
+```
+
 ### 视图
 
 - 缺省情况下，一个路由只回应 `GET` 请求。
