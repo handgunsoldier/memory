@@ -241,12 +241,12 @@ trizen -S wps-office ttf-wps-fonts # WPS，在 Manjaro 下有些问题
 
 ```bash
 pip install ipython
+pip install --user pipenv
 pip install jupyter # jupyter notebook
 pip install requests requests[socks] # http 请求
 pip install bs4 lxml # html 解析
 pip install numpy pandas matplotlib scipy # 科学计算
 pip install pillow # 图像处理
-pip install pipenv # 包虚拟环境
 pip install aiohttp # 异步网络框架
 pip install aiodns # 异步解析 DNS
 pip install cchardet # 更快的编码探测
