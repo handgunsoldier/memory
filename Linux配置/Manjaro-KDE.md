@@ -39,9 +39,10 @@ sudo pacdiff
 ### Zsh
 
 ```bash
-# 它的配置文件为~/.zshrc
 sudo pacman -S zsh manjaro-zsh-config
 ```
+
+zsh 的配置文件为 *~/.zshrc* 。
 
 ### Git
 
@@ -89,7 +90,7 @@ sudo pacman -S zsh manjaro-zsh-config
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
    ```
 
-4. 进入 vim 后, 执行 PlugInstall 安装相关插件。
+4. 进入 vim 后, 执行 `PlugInstall` 安装相关插件。
 
 ### Pyenv
 
@@ -160,7 +161,7 @@ sudo pacman -S zsh manjaro-zsh-config
    export XMODIFIERS="@im=fcitx"
    ```
 
-3. 在 fcitx 输入法选项中添加 pinyin。
+3. 在 fcitx 输入法选项中添加 pinyin 。
 
 ### Chromium
 
@@ -171,8 +172,8 @@ sudo pacman -S chromium
 ### 网络工具包
 
 ```bash
-sudo pacman -S net-tools # ifconfig
-sudo pacman -S dnsutils # nslookup
+sudo pacman -S net-tools  # ifconfig
+sudo pacman -S dnsutils  # nslookup
 ```
 
 ### 数据库
@@ -227,17 +228,24 @@ sudo pacman -S trizen
 推荐安装软件：
 
 ```bash
-trizen -S typora # 很好用的 Markdown 编辑器，支持导出 PDF
-trizen -S visual-studio-code-bin # VSCode
-trizen -S robo3t-bin # MongoDB GUI 工具
-trizen -S genymotion # 安卓模拟器
+trizen -S typora  # 很好用的 Markdown 编辑器，支持导出 PDF
+trizen -S visual-studio-code-bin  # VSCode
+trizen -S robo3t-bin  # MongoDB GUI 工具
+trizen -S genymotion  # 安卓模拟器
 
-trizen -S wps-office ttf-wps-fonts # WPS，在 Manjaro 下有些问题
+trizen -S wps-office ttf-wps-fonts  # WPS，在 Manjaro 下有些问题
+
+trizen -S intellij-idea-ultimate-edition
+trizen -S pycharm-professional
 ```
 
 若出现 `one or more PGP signatures could not be verified!` ，则检查 `PKGBUILD` 中的 key，使用 `gpg --recv-keys <KEYID>` 命令导入 key。
 
-### pip必装
+### Intellij 配置
+
+Intellij 要查看 Java 源码，需要额外安装 `sudo pacman -S openjdk8-src`，然后在 Project Structure 的 SDKs 中的 Sourcepath 中，添加下载下来的 *src.zip*，不需要解压。
+
+### pip 必装
 
 ```bash
 pip install ipython
@@ -259,7 +267,7 @@ pip install psycopg2-binary # PostgreSQL
 pip install pymysql # MySQL
 ```
 
-### jupyter的配置
+### Jupyter 的配置
 
 先生成配置文件：
 
@@ -281,14 +289,14 @@ c.NotebookApp.open_browser = False
 选择bash下默认编辑器：
 
 ```bash
-# 在.zshrc下添加如下一行
+# 在 .zshrc 下添加如下一行
 EDITOR="/usr/bin/vim"
 ```
 
 安装Windows字体：
 
 ```bash
-# 先将windows字体放入该目录
+# 先将 Windows 字体放入该目录
 cd /usr/share/fonts/winfonts
 # 在该目录执行如下命令
 sudo mkfontscale

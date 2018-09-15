@@ -95,7 +95,7 @@ let g:ale_linters = {
 \   'c': ['gcc'],
 \   'rust': ['cargo'],
 \}
-let g:ale_c_gcc_options = '-Wall -O2 -std=gnu99'
+let g:ale_c_gcc_options = '-Wall'
 let g:ale_rust_cargo_use_check = 1
 
 " rust

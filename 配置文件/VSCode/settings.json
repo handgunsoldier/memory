@@ -1,7 +1,8 @@
 {
     "update.channel": "none",
     "update.enableWindowsBackgroundUpdates": false,
-    "workbench.colorTheme": "Monokai",
+    "workbench.colorTheme": "Atom One Dark",
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.statusBar.feedback.visible": false,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
@@ -16,6 +17,5 @@
     "editor.fontSize": 19,
     "terminal.integrated.fontSize": 19,
     "markdown.preview.fontSize": 19,
-    "python.linting.pylintEnabled": false,
     "python.pythonPath": "python3",
 }
