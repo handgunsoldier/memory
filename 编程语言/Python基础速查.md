@@ -1,6 +1,6 @@
 ### 基本数据类型方法
 
-- list(列表)
+`list`（列表）：
 
 ```python
 """
@@ -32,7 +32,7 @@ lst.sort(key=None, reverse=False)
 lst.copy()
 ```
 
-- dict(字典)
+`dict`（字典）：
 
 ```python
 """
@@ -47,7 +47,7 @@ d.keys()
 d.values()
 # 返回指定键的值, 不存在则返回default的值
 d.get(key, default=None)
-# 返回指定键的值, 不存在则添加键, 值为default
+# 返回指定键的值, 不存在则添加键, 并返回，值为 default
 d.setdefault(key, default=None)
 # 将iterable中的元素做键, 值都为default, 会覆盖已有的键
 d.fromkeys(iterbale, default=None)
@@ -64,7 +64,7 @@ d.clear()
 d.copy()
 ```
 
-- str(字符串)
+`str`（字符串）：
 
 ```python
 """
@@ -159,7 +159,7 @@ s.isprintable()
 s.encode(encoding='utf-8', errors='strict')
 ```
 
-- set(集合)
+`set`（集合）：
 
 ```python
 """
@@ -245,7 +245,7 @@ locals()
 
 ### 类与对象
 
-- 内置属性
+内置属性：
 
 ```python
 """"
@@ -268,7 +268,7 @@ __module__
 __doc__
 ```
 
-- 常用魔法方法
+常用魔法方法：
 
 ```python
 # 使用str()和print()会调用这个方法
