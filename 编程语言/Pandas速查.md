@@ -14,16 +14,16 @@
 
 - Pandas 数据类型：
 
-  |        类型        |                  含义                  |
-  | :----------------: | :------------------------------------: |
-  |       float        |                                        |
-  |        int         |                                        |
-  |        bool        |                                        |
-  |       object       | python 的类型，如str，可以使用相关方法 |
-  |   datetime64[ns]   |                                        |
-  | datetime64[ns, tz] |   时间类型，带时区（tz，time zone）    |
-  |   timedelta[ns]    |                                        |
-  |      category      |                                        |
+  |        类型        |                  含义                   |
+  | :----------------: | :-------------------------------------: |
+  |       float        |                                         |
+  |        int         |                                         |
+  |        bool        |                                         |
+  |       object       | python 的类型，如 str，可以使用相关方法 |
+  |   datetime64[ns]   |                                         |
+  | datetime64[ns, tz] |    时间类型，带时区（tz，time zone）    |
+  |   timedelta[ns]    |                                         |
+  |      category      |                                         |
 
 ## 相关操作
 
@@ -372,7 +372,7 @@ records = df.to_dict(orient='records')
 collection.insert_many(records)
 ```
 
-### pandas常用函数
+### Pandas 常用函数
 
 ```python
 # 将Series对象转换成时间类型, 可以用相关方法

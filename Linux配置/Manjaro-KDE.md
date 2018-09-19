@@ -169,13 +169,6 @@ zsh 的配置文件为 *~/.zshrc* 。
 sudo pacman -S chromium
 ```
 
-### 网络工具包
-
-```bash
-sudo pacman -S net-tools  # ifconfig
-sudo pacman -S dnsutils  # nslookup
-```
-
 ### 数据库
 
 MongoDB：
@@ -215,6 +208,21 @@ mysqladmin -u root password "newpass"
 
 ```bash
 sudo pacman -S dbeaver
+```
+
+### 网络工具包
+
+```bash
+sudo pacman -S net-tools  # ifconfig
+sudo pacman -S dnsutils  # nslookup
+```
+
+### 美化
+
+图标：
+
+```bash
+sudo pacman -S papirus-icon-theme
 ```
 
 ### AUR
