@@ -15,7 +15,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ludovicchabant/vim-gutentags'
 
 " 静态检查
-Plug 'w0rp/ale' , { 'for': ['c', 'rust'] }
+Plug 'w0rp/ale' , { 'for': ['c', 'cpp', 'rust'] }
 
 " rust 代码补全
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
@@ -29,7 +29,7 @@ syntax on
 
 
 " 设置补全
-set complete=t
+set complete=i
 set completeopt =menu,preview,noselect
 " 按下 Ctrl+p 时的背景色
 hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
@@ -39,15 +39,28 @@ hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " 显示行号
 set nu
 
+" 根据文件类型缩进
+filetype indent on
+
+" 设置行宽
+set textwidth=80
+" 设置折行
+set wrap
+" 只有遇到指定的符号（比如空格、连词号和其他标点符号），才发生折行
+" set linebreak
+" 指定折行处与编辑窗口的右边缘之间空出的字符数
+" set wrapmargin=2
 
 " 总是显示状态行
 set laststatus=2
 
+" 启用256色
+set t_Co=256
 
 " 以下三个配置配合使用，设置tab和缩进空格数
 set expandtab  " 转换tab为空格
-set shiftwidth=4  " 设置空格数
-set softtabstop=4 " 按一次退格键会删除4个空格，只对tab按出来的有效
+set softtabstop=4 " Tab 转为多少个空格
+set shiftwidth=4  " 在文本上按下>>（增加一级缩进）、<<（取消一级缩进）或者==（取消全部缩进）时，每一级的字符数
 
 
 " airline config
@@ -73,6 +86,7 @@ let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
 " 配置 ctags 的参数
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 " 检测 ~/.cache/tags 不存在就新建
 if !isdirectory(s:vim_tags)
@@ -93,9 +107,11 @@ let g:ale_lint_on_insert_leave = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {
 \   'c': ['gcc'],
+\   'cpp': ['gcc'],
 \   'rust': ['cargo'],
 \}
 let g:ale_c_gcc_options = '-Wall'
+let g:ale_cpp_gcc_options = '-Wall -O2'
 let g:ale_rust_cargo_use_check = 1
 
 " rust
