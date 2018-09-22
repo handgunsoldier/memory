@@ -128,6 +128,20 @@ zsh 的配置文件为 *~/.zshrc* 。
    pyenv global <版本>
    ```
 
+### Pipenv 全局安装
+
+1. 安装：
+
+   ```bash
+   pip install --user pipenv
+   ```
+
+2. 配置：
+
+   ```bash
+   echo 'export PATH="$PATH:/home/zzzzer/.local/bin"' >> ~/zshrc
+   ```
+
 ### Shadowsocks
 
 1. 安装：
@@ -210,6 +224,42 @@ mysqladmin -u root password "newpass"
 sudo pacman -S dbeaver
 ```
 
+### Nvm
+
+1. 安装：
+
+   ```bash
+   git clone https://github.com/creationix/nvm.git ～/.nvm
+   ```
+
+2. 切换到最新稳定版本：
+
+   ```bash
+   cd .nvm
+   git tag  # 检查可用版本
+   git checkout v0.x.x
+   ```
+
+3. 配置，修改 *~/.zshrc*：
+
+   ```bash
+   export NVM_DIR="$HOME/.nvm"
+   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+   ```
+
+4. 下载指定版本 Node.js
+
+   ```bash
+   nvm install --lts  # 下载长期支持版本
+   ```
+
+5. 切换 Node.js 版本
+
+   ```bash
+   nvm use --lts
+   ```
+
 ### 网络工具包
 
 ```bash
@@ -257,7 +307,6 @@ Intellij 要查看 Java 源码，需要额外安装 `sudo pacman -S openjdk8-src
 
 ```bash
 pip install ipython
-pip install --user pipenv
 pip install jupyter # jupyter notebook
 pip install requests requests[socks] # http 请求
 pip install bs4 lxml # html 解析

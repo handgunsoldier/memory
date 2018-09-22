@@ -22,12 +22,12 @@ pyenv uninstall <版本>
 更新：
 
 ```shell
-cd .pyenv
 # git fetch下来的是master版本, 不稳定, 需切换到指定标签版本
-git fetch origin master
-git merge origin/master
-git tag # 检查可用版本
-git checkout <tag名> # 切换
+git fetch origin master  # 更新 origin/master 分支内容
+git checkout master  # 切换到主分支
+git merge origin/master  # 合并 origin/master 分支到 master 分支
+git tag  # 检查可用版本
+git checkout <tag名>  # 切换
 ```
 
 ### 包管理: Pip
