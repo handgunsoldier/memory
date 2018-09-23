@@ -160,14 +160,14 @@ item = {
     'time': 'time'
 }
 
-insert_query_temp = 'INSERT INTO %s ({}) VALUES ({})' % MYSQL_TABLE
-query = insert_query_temp.format(
+insert_sql_temp = 'INSERT INTO %s ({}) VALUES ({})' % MYSQL_TABLE
+sql = insert_sql_temp.format(
     ', '.join(item),
     ', '.join(f'%({k})s' for k in item)
 )
-print(query)
+print(sql)
 
-cursor.execute(query, item)
+cursor.execute(sql, item)
 ```
 
 结果：
@@ -191,14 +191,14 @@ item = {
 }
 user_id = 'user_id'
 
-update_query_temp = 'UPDATE %s SET {} WHERE {}' % MYSQL_TABLE
-query = update_query_temp.format(
+update_sql_temp = 'UPDATE %s SET {} WHERE {}' % MYSQL_TABLE
+sql = update_sql_temp.format(
     ', '.join(f'{k} = %({k})s' for k in item),
     'user_id = \'{}\''
 )
-print(query.format(user_id))
+print(sql.format(user_id))
 
-cursor.execute(query.format(user_id), item)
+cursor.execute(sql.format(user_id), item)
 ```
 
 结果：
