@@ -38,11 +38,17 @@ sudo pacdiff
 
 ### Zsh
 
-```bash
-sudo pacman -S zsh manjaro-zsh-config
-```
+1. 安装：
 
-zsh 的配置文件为 *~/.zshrc* 。
+   ```bash
+   sudo pacman -S zsh manjaro-zsh-config
+   ```
+
+   zsh 的配置文件为 *~/.zshrc* 。
+
+2. 配置
+
+   在 Konsole 中，将默认启动 shell 改为 */bin/zsh*（**注意：**这样只在 Konsole 中作为默认 shell，其他程序中默认还是 bash，所以设置环境变量时，*~/.bashrc* 和 *~/.zshrc* 都要修改。
 
 ### Git
 
@@ -70,7 +76,7 @@ zsh 的配置文件为 *~/.zshrc* 。
 5. 做一些设置，让 `git status` 中的中文不乱码：
 
    ```bash
-   git config –global core.quotepath false 
+   git config --global core.quotepath false 
    ```
 
 ### VIM
@@ -111,9 +117,9 @@ zsh 的配置文件为 *~/.zshrc* 。
 3. 配置（自动补全功能等）：
 
    ```bash
-   echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-   echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-   echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+   echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc >> ~/.zshrc
+   echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc >> ~/.zshrc
+   echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc >> ~/.zshrc
    ```
 
 4. 下载指定版本 Python：
@@ -139,7 +145,7 @@ zsh 的配置文件为 *~/.zshrc* 。
 2. 配置：
 
    ```bash
-   echo 'export PATH="$PATH:/home/zzzzer/.local/bin"' >> ~/zshrc
+   echo 'export PATH="$PATH:/home/zzzzer/.local/bin"' >> ~/.bashrc >> ~/zshrc
    ```
 
 ### Shadowsocks
@@ -150,7 +156,7 @@ zsh 的配置文件为 *~/.zshrc* 。
    pip install git+https://github.com/shadowsocks/shadowsocks.git@master
    ```
 
-2. 在 .zshrc 中设置命令，方便使用：
+2. 在 *.zshrc* 中设置命令，方便使用：
 
    ```bash
    alias sss="sslocal -c /etc/shadowsocks.json"
@@ -179,9 +185,11 @@ zsh 的配置文件为 *~/.zshrc* 。
 
 ### Chromium
 
-```bash
-sudo pacman -S chromium
-```
+1. 安装：
+
+   ```bash
+   sudo pacman -S chromium
+   ```
 
 ### 数据库
 
@@ -240,7 +248,7 @@ sudo pacman -S dbeaver
    git checkout v0.x.x
    ```
 
-3. 配置，修改 *~/.zshrc*：
+3. 配置，修改 *~/.bashrc* 和 *~/.zshrc*：
 
    ```bash
    export NVM_DIR="$HOME/.nvm"
@@ -301,7 +309,7 @@ trizen -S pycharm-professional
 
 ### Intellij 配置
 
-Intellij 要查看 Java 源码，需要额外安装 `sudo pacman -S openjdk8-src`，然后在 Project Structure 的 SDKs 中的 Sourcepath 中，添加下载下来的 *src.zip*，不需要解压。
+Intellij 要查看 Java 源码，需要额外安装 `sudo pacman -S openjdk8-src`，然后在 Project Structure 的 SDKs 中的 Sourcepath 中，添加安装的 *src.zip*，不需要解压。
 
 ### pip 必装
 
@@ -343,14 +351,14 @@ c.NotebookApp.open_browser = False
 
 ### 其他
 
-选择bash下默认编辑器：
+选择 zsh 下默认编辑器：
 
 ```bash
 # 在 .zshrc 下添加如下一行
 EDITOR="/usr/bin/vim"
 ```
 
-安装Windows字体：
+安装 Windows 字体：
 
 ```bash
 # 先将 Windows 字体放入该目录
