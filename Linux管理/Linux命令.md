@@ -120,7 +120,7 @@ cat /etc/resolv.conf
 nslookup <URL|IP>
 # 测试网络, -c指定ping次数
 ping -c4 <URL> 
-# 路由追踪, 代替tracepath
+# 路由追踪
 tracepath 
 # 查看出站入站流量
 nload 
@@ -130,6 +130,8 @@ nethogs
 curl <URL>
 # 下载内容
 wget <URL>
+# 取得域名 dns 信息
+dig <domain>
 ```
 
 ### 进程管理
