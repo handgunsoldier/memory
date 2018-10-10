@@ -79,7 +79,7 @@ sudo pacdiff
    git config --global core.quotepath false 
    ```
 
-### VIM
+### Vim
 
 1. 安装：
 
@@ -87,7 +87,7 @@ sudo pacdiff
    sudo pacman -S vim 
    ```
 
-2. 先把已经配置好的 .vimrc 放到家目录下。
+2. 先把已经配置好的 .vimrc 放到 home 目录下。
 
 3. 下载 vim 插件管理器：
 
@@ -307,10 +307,6 @@ trizen -S pycharm-professional
 
 若出现 `one or more PGP signatures could not be verified!` ，则检查 `PKGBUILD` 中的 key，使用 `gpg --recv-keys <KEYID>` 命令导入 key。
 
-### Intellij 配置
-
-Intellij 要查看 Java 源码，需要额外安装 `sudo pacman -S openjdk8-src`，然后在 Project Structure 的 SDKs 中的 Sourcepath 中，添加安装的 *src.zip*，不需要解压。
-
 ### pip 必装
 
 ```bash
@@ -348,6 +344,10 @@ jupyter notebook --generate-config
 # 不自动打开浏览器
 c.NotebookApp.open_browser = False
 ```
+
+### Intellij 配置
+
+Intellij 要查看 Java 源码，需要额外安装 `sudo pacman -S openjdk8-src`，然后在 Project Structure 的 SDKs 中的 Sourcepath 中，添加安装的 *src.zip*，不需要解压。
 
 ### 其他
 

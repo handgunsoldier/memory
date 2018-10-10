@@ -15,7 +15,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ludovicchabant/vim-gutentags'
 
 " 静态检查
-Plug 'w0rp/ale', { 'for': ['c', 'cpp', 'rust', 'python'] }
+Plug 'w0rp/ale', { 'for': ['c', 'cpp', 'rust'] }
 
 " rust 代码补全
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
