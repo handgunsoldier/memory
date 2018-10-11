@@ -28,7 +28,7 @@
 
 - **User-Agent**：客户端系统，浏览器等信息，可以用于区分 PC 端、移动端、和爬虫
 
-## requests
+## Requests
 
 - get方法常用参数：
 ```python
@@ -71,7 +71,7 @@ r.raise_for_status() # 如果返回的http状态码在400和500或500和600之�
 
 ## lxml
 
-- 使用 xpath：
+### Python 使用 xpath
 
 ```python
 from lxml import etree
@@ -81,11 +81,13 @@ container = selector.xpath('./div')  # 使用xpath, 返回一个列表
 element = container[0]  # 获取一个标签
 ```
 
-## 选取节点
+### xpath 语法
+
+- 选取节点：
 
 XPath 使用路径表达式在 XML 文档中选取节点。节点是通过沿着路径或者 step 来选取的。
 
-### 下面列出了最有用的路径表达式：
+下面列出了最有用的路径表达式：
 
 | 表达式   | 描述                                                       |
 | -------- | ---------------------------------------------------------- |
@@ -95,8 +97,6 @@ XPath 使用路径表达式在 XML 文档中选取节点。节点是通过沿着
 | .        | 选取当前节点。                                             |
 | ..       | 选取当前节点的父节点。                                     |
 | @        | 选取属性。                                                 |
-
-### 实例
 
 在下面的表格中，我们已列出了一些路径表达式以及表达式的结果：
 
@@ -109,13 +109,11 @@ XPath 使用路径表达式在 XML 文档中选取节点。节点是通过沿着
 | bookstore//book | 选择属于 bookstore 元素的后代的所有 book 元素，而不管它们位于 bookstore 之下的什么位置。 |
 | //@lang         | 选取名为 lang 的所有属性。                                   |
 
-## 谓语（Predicates）
+- 谓语（Predicates）：
 
 谓语用来查找某个特定的节点或者包含某个指定的值的节点。
 
 谓语被嵌在方括号中。
-
-### 实例
 
 在下面的表格中，我们列出了带有谓语的一些路径表达式，以及表达式的结果：
 
@@ -130,7 +128,7 @@ XPath 使用路径表达式在 XML 文档中选取节点。节点是通过沿着
 | /bookstore/book[price>35.00]       | 选取 bookstore 元素的所有 book 元素，且其中的 price 元素的值须大于 35.00。 |
 | /bookstore/book[price>35.00]/title | 选取 bookstore 元素中的 book 元素的所有 title 元素，且其中的 price 元素的值须大于 35.00。 |
 
-## 选取未知节点
+- 选取未知节点：
 
 XPath 通配符可用来选取未知的 XML 元素。
 
@@ -140,8 +138,6 @@ XPath 通配符可用来选取未知的 XML 元素。
 | @*     | 匹配任何属性节点。   |
 | node() | 匹配任何类型的节点。 |
 
-### 实例
-
 在下面的表格中，我们列出了一些路径表达式，以及这些表达式的结果：
 
 | 路径表达式   | 结果                              |
@@ -150,11 +146,9 @@ XPath 通配符可用来选取未知的 XML 元素。
 | //*          | 选取文档中的所有元素。            |
 | //title[@*]  | 选取所有带有属性的 title 元素。   |
 
-## 选取若干路径
+- 选取若干路径：
 
 通过在路径表达式中使用“|”运算符，您可以选取若干个路径。
-
-### 实例
 
 在下面的表格中，我们列出了一些路径表达式，以及这些表达式的结果：
 
@@ -164,9 +158,9 @@ XPath 通配符可用来选取未知的 XML 元素。
 | //title \| //price               | 选取文档中的所有 title 和 price 元素。                       |
 | /bookstore/book/title \| //price | 选取属于 bookstore 元素的 book 元素的所有 title 元素，以及文档中所有的 price 元素。 |
 
-## bs4
+## BeautifulSoup4
 
-- 令`soup = BeautifulSoup(html, 'lxml')`, 下面是`BeautifulSoup`对象的常用属性和方法：
+- 令 `soup = BeautifulSoup(html, 'lxml')`，下面是 `BeautifulSoup` 对象的常用属性和方法：
 ```python
 soup.prettify() # 格式化html
 soup.title # 直接打印标签，查找的是在所有内容中的第⼀个符合要求的标签

@@ -311,7 +311,7 @@ trizen -S pycharm-professional
 
 ```bash
 pip install ipython
-pip install jupyter # jupyter notebook
+pip install jupyterlab # jupyter
 pip install requests requests[socks] # http 请求
 pip install bs4 lxml # html 解析
 pip install numpy pandas matplotlib scipy # 科学计算
@@ -333,7 +333,7 @@ pip install pymysql # MySQL
 先生成配置文件：
 
 ```bash
-jupyter notebook --generate-config
+jupyter lab --generate-config
 ```
 
 配置修改（别忘去掉注释）：
@@ -343,6 +343,10 @@ jupyter notebook --generate-config
 修改c.NotebookApp.notebook_dir = '/home/zzzzer/Documents/code/jupyter'
 # 不自动打开浏览器
 c.NotebookApp.open_browser = False
+# 设置密码
+# 先要在 ipython 中 `from notebook.auth import passwd; passwd()`
+# 输入密码，生成 sha1，然后复制到下面
+c.NotebookApp.password = 'xxx'
 ```
 
 ### Intellij 配置
