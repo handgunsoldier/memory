@@ -1,6 +1,6 @@
-## Git
+# Git
 
-### 建议
+## 建议
 
 推荐使用这种方法更新本地分支:
 
@@ -22,7 +22,7 @@ git push origin <远程分支名>
 
 如果 `git push` 后什么都不写，会推送所有分支。
 
-### 初始准备
+## 初始准备
 
 设置所有git仓库的提交者和邮箱，必须:
 
@@ -37,7 +37,7 @@ git config --global user.email "zzzzer91@gmail.com"
 ssh-keygen -t rsa -C "zzzzer91@gmail.com"
 ```
 
-### 基本命令
+## 基本命令
 
 ```bash
 # 把当前文件夹变为git可以管理的仓库
@@ -77,7 +77,7 @@ git show <tag_name>
 git tag -d <tag_name>
 ```
 
-### 分支命令
+## 分支命令
 
 ```bash
 # 如当前分支有修改, 还没提交, 要把当前现场状态储存起来, 这样才能切换分支
@@ -105,7 +105,7 @@ git branch -D dev
 git merge dev
 ```
 
-### 远程仓库
+## 远程仓库
 
 ```bash
 # 从目标克隆所有分支到本地, 除了HEAD分支, 其他分支以origin/<分支名>形式命名
@@ -137,7 +137,7 @@ git remote -v
 git remote rm origin
 ```
 
-### 代理
+## 代理
 
 使用 socks5 代理：
 
