@@ -1,125 +1,130 @@
-### 基本数据类型方法
+# Python 基础速查
 
-`list`（列表）：
+## 基本数据类型
+
+### list（列表）
 
 ```python
 """
-对列表的任何修改操作都是原地的.
+对列表的任何修改操作都是原地的。
 """
 
-# 将元素x添加到列表lst尾部
+# 将元素 x 添加到列表 lst 尾部
 lst.append(x)
-# 在下标index处添加元素x, 原来该位置元素及之后元素后移
+# 在下标 index 处添加元素 x，原来该位置元素及之后元素后移
 lst.insert(index, x)
-# 将列表L中元素添加到列表lst末尾, 原地
+# 将列表 L 中元素添加到列表 lst 末尾，原地
 lst.extend(L)
-# 删除并返回下标为index(默认-1)到元素
+# 删除并返回下标为 index（默认 -1）到元素
 lst.pop(index)
-# 删除列表中第一个值为x的元素, 其之后的元素前移
+# 删除列表中第一个值为 x 的元素，其之后的元素前移
 lst.remove(x)
-# 清空列表, 但保留列表对象
+# 清空列表，但保留列表对象
 lst.clear()
-# 返回第一个值为x的元素下标, 不存在则抛出异常
+# 返回第一个值为 x 的元素下标，不存在则抛出异常
 lst.index(x)
-# 返回元素x在列表中出现的次数
+# 返回元素 x 在列表中出现的次数
 lst.count(x)
-# 逆转列表, 原地
+# 逆转列表，原地
 lst.reverse()
-# 根据key排序, 可打开逆序开关, 原地
+# 根据 key 排序，可打开逆序开关，原地
 lst.sort(key=None, reverse=False)
 # 返回列表的浅拷贝
-# 浅拷贝指, 列表对象不同, 但成员指向同一块内存
+# 浅拷贝指，列表对象不同，但成员指向同一块内存
 lst.copy()
 ```
 
-`dict`（字典）：
+### dict（字典）
 
 ```python
 """
-对字典的任何修改操作都是原地的.
+对字典的任何修改操作都是原地的。
 """
 
-# 返回一个元组(键, 值)构成的列表
-d.items()
 # 返回字典的键构成的列表
 d.keys()
 # 返回字典的值构成的列表
 d.values()
-# 返回指定键的值, 不存在则返回default的值
+# 返回一个元组（键，值）构成的列表
+d.items()
+# 返回指定键的值，不存在则返回 default 的值
 d.get(key, default=None)
-# 返回指定键的值, 不存在则添加键, 并返回，值为 default
+# 返回指定键的值，不存在则添加值为 default 的键，再返回
 d.setdefault(key, default=None)
-# 将iterable中的元素做键, 值都为default, 会覆盖已有的键
+# 将 iterable 中的元素做键，值都为 default，会覆盖已有的键
 d.fromkeys(iterbale, default=None)
-# 把字典dict2中的键值更新到字典d中, 会覆盖已有的键
+# 把字典 dict2 中的键值更新到字典 d 中，会覆盖已有的键
 d.update(dict2)
-# 弹出指定元素, 并返回值, 若不存在, 则抛出KeyError
-# 若指定d参数, 则不存在返回d
+# 弹出指定元素，并返回值，若不存在，则抛出 KeyError
+# 若指定 d 参数，则不存在返回 d
 d.pop(k, d)
-# 弹出字典末尾元素, 返回一个二元组
+# 弹出字典末尾元素，返回一个二元组
 d.popitem()
-# 清空字典, 但会保留字典对象
+# 清空字典，但会保留字典对象
 d.clear()
 # 返回一个字典的浅拷贝
 d.copy()
 ```
 
-`str`（字符串）：
+### str（字符串）
 
 ```python
 """
-对字符串的任何修改操作都是非原地的,
-因为字符串是不可变对象.
+对字符串的任何修改操作都是非原地的，
+因为字符串是不可变对象。
 """
 
 """查找"""
-# 返回子串sub在s中出现的次数, 可指定范围
+# 返回子串 sub 在 s 中出现的次数，可指定范围
 s.count(sub, start=None, end=None)
-# 返回子串sub的索引, 找不到返回-1
+# 返回子串 sub 的索引，找不到返回 -1
 s.find(sub, start=None, end=None)
 # 从右侧开始查找
 s.rfind(sub, start=None, end=None)
-# 与find一样, 只不过找不到会抛出异常
+# 与 find 一样，只不过找不到会抛出异常
 s.index(sub, start=None, end=None)
 # 从右侧开始查找
 s.rindex(sub, start=None, end=None)
 
 """替换"""
-# 从左到右替换, count指定最大次数, 非原地
+# 从左到右替换，count 指定最大次数，非原地
 s.replace(old, new, count=None)
-# 把字符串中的制表符转换为指定长度(默认8)的空格
+# 把字符串中的制表符转换为指定长度（默认 8）的空格
 s.expandtabs(tabsize=8)
 
 """删减"""
-# 去除字符串两边的空白字符(空白字符由string.whitespace常量定义), 或删除指定字符
+# 默认去除字符串两边的空白字符，
+# 空白字符由 string.whitespace 常量定义，
+# 或删除两边指定字符
 s.strip()
-# 只删左边
+# 同上，但只删左边
 s.lstrip()
-# 只删右边
+# 同上，但只删右边
 s.rstrip()
 
 """填充"""
-# 居中对齐, width指定长度, fillchar指定填充字符, 不指定默认空白字符
+# 居中对齐，width 指定长度，fillchar 指定填充字符，不指定默认空白字符
 s.center(width, fillchar)
 # 左对齐
 s.ljust(width, fillchar)
 # 右对齐
 s.rjust(width, fillchar)
-# 右对齐, 前面用零填充
+# 右对齐，前面用零填充
 s.zfill(width)
 
 """分切"""
-# 根据sep切割字符串, maxsplit指定最大次数, 返回列表. 默认切割空格
+# 根据 sep 切割字符串，maxsplit 指定最大次数，返回列表，
+# 默认切割空白字符，并且字符串两边的空白字符会被忽略
 s.split(sep, maxsplit)
-# 根据行分割, keepends决定是否保留换行符
+# 根据行分割，keepends 决定是否保留换行符
 s.splitlines(keepends)
-# 将字符串s切割成三部分: sep前, sep, sep后
+# 将字符串 s 切割成三部分：sep 前，sep，sep 后
 s.partition(sep)
 # 从右往左分割
 s.rpartition(sep)
 
 """连接"""
-# 将可迭代对象(成员必须都是字符串, int也不行)连接成字符串, 成员之间填入s
+# 将可迭代对象（成员必须都是字符串，int 也不行）连接成字符串，成员之间填入 s
 s.join(iterable)
 
 """变形"""
@@ -127,9 +132,9 @@ s.join(iterable)
 s.lower()
 # 把字符串中所有字母转大写
 s.upper()
-# 字符串首字母转大写, 必须是第一个字符
+# 字符串首字母转大写，必须是第一个字符
 s.capitalize()
-# 把字符串中所有字母大写转小写, 小写转大写
+# 把字符串中所有字母大写转小写，小写转大写
 s.swapcase()
 # 每个单词的第一个字母转换成大写
 s.title()
@@ -141,84 +146,86 @@ s.isalnum()
 s.isalpha()
 # 是否都是数字
 s.isdigit()
-# 如果包含字母, 是否都是小写
+# 如果包含字母，是否都是小写
 s.islower()
-# 如果包含字母, 是否都是大写
+# 如果包含字母，是否都是大写
 s.isupper()
 # 是否只包含空格
 s.isspace()
-# 是否是标题化的(首字母大小, 其他小写)
+# 是否是标题化的（首字母大小，其他小写）
 s.istitle()
 # 字符串是否可以作为变量名
 s.isidentifer()
-# 字符串是否全部可打印, 包含不可打印字符(如转义字符), 返回False
+# 字符串是否全部可打印，包含不可打印字符（如转义字符） 返回 False
 s.isprintable()
 
 """编码"""
-# 编码成bytes
+# 编码成 bytes
 s.encode(encoding='utf-8', errors='strict')
 ```
 
-`set`（集合）：
+### set（集合）
 
 ```python
 """
-对集合的任何修改操作都是原地的.
+对集合的任何修改操作都是原地的。
 """
 
-# 添加成员, 自动去重
+# 添加成员，自动去重
 s.add(k)
-# 添加一个对象到当前集合, 自动去重
+# 添加一个对象到当前集合，自动去重
 s.update([1, 2, 3])
-# 弹出一个随机key
+# 弹出一个随机 key
 s.pop()
-# 弹出一个指定key
+# 弹出一个指定 key
 s.remove(k)
 # 清空集合
 s.clear()
 # 返回集合的浅拷贝
 s.copy()
 
-# 集合 差, 并, 交 操作
+# 集合的差，并，交操作
 # 在 a 中的成员, 但不在 b 中
 a - b
 # 在 a 或 b 中的成员
 a | b
 # 在 a 和 b 中都有的成员
 a & b
-# 在 a 或 b 中的成员, 但不同时在 a 和 b 中
+# 在 a 或 b 中的成员，但不同时在 a 和 b 中
 a ^ b
 ```
 
-### 内置函数
+## 内置函数
 
 ```python
-# 返回数字x的绝对值或复数x的模
+# 返回数字 x 的绝对值或复数 x 的模
 abs(x)
+# 判断真假
+bool(x)
 # 返回复数
 complex([real[, imag]])
-# 返回x除y的商和余数
+# 返回 x 除 y 的商和余数
 divmod(x, y)
-# 返回x的y次方, 等价于x**y或(x**y)%z
+# 返回 x 的 y 次方, 等价于 `x**y` 或 `(x**y)%z`
 pow(x, y, z=None)
-# 对x四舍五入, 若不指定小数位数, 则返回整数
+# 对 x 四舍五入，若不指定小数位数，则返回整数
 round(x[, 小数位数])
 
-# 把整数x转换成二进制
+# 把整数 x 转换成二进制
 bin(x)
-# 把整数x转换成八进制
+# 把整数 x 转换成八进制
 oct(x)
-# 把整数x转换成十六进制
+# 把整数 x 转换成十六进制
 hex(x)
 
-# 返回字符c的Unicode编码
+# 返回字符 c 的 Unicode 编码
 ord(c)
-# 返回Unicode编码为i的字符
+# 返回 Unicode 编码为 i 的字符
 chr(i)
 
-# 如果iterable的每个元素是真值, 返回True; all([])返回True
+# 如果 iterable 的每个元素是真值，返回 True；`all([])` 返回 True
 all(iterable)
-# 只要iterable中有元素是真值, 就返回True; any([])返回False
+# 只要 iterable 中有元素是真值，就返回True；`any([])`返回 False
 any(iterable)
 
 max(iterable)
@@ -228,11 +235,12 @@ sum(iterable)
 sorted(iterable)
 reversed(iterable)
 
-# 下面3个函数, 既可用于类, 又可用于模块
+# 下面 3 个函数，既可用于类，又可用于模块
 hasattr(obj)
 getattr(obj, name[, default])
 delattr(obj, name)
 
+# 类型判断
 type(obj)
 isinstance(obj, classinfo)
 issubclass(obj, classinfo)
@@ -243,68 +251,6 @@ globals()
 locals()
 ```
 
-### 类与对象
 
-内置属性：
-
-```python
-""""
-注意有些属性是类独有的,
-存放在 __dict__ 属性中,
-类的 __dict__ 中存放的是类属性,
-对象的 __dict__ 中存放的是对象属性.
-当对象的 __dict__ 中找不到某个属性时,
-会试图从类的 __dict__ 中找.
-"""
-
-# 获取所有属性
-__dict__
-# 获取类和对象的类
-# 这里有点绕, 类也是有"类"的， 是元类
-__class__
-# 获取所在的模块
-__module__
-# 获取文档信息
-__doc__
-```
-
-常用魔法方法：
-
-```python
-# 使用str()和print()会调用这个方法
-__str__(self)
-# 使用repr()会调用这个方法, 或交互环境显示
-__repr__(self)
-# 让类实例支持len()函数
-__len__(self)
-# 析构方法, 当对象在内存中被释放时, 自动触发此方法
-__del__(self)
-# 使类实例能像函数一样被调用
-__call__(self, *args, **kwargs)
-# `a = 标识符[]`, 执行__getitem__方法
-__getitem__(self, key)
-# `标识符[] = a`, 执行__setitem__方法
-__setitem__(self, key, value)
-# `del 标识符[]`, 执行__delitem__方法
-__delitem__(self, key)
-# 在`self.name=value`时被调用
-__setattr__(self, name, value)
-# 限制实例的属性, 如不能指定name, age属性
-__slots__ = ('name', 'age') 
-
-"""运算符重载"""
-# 加运算
-__add__(self,other)
-# 减运算
-__sub__(self,other)
-# 乘运算
-__mul__(self,other)
-# 除运算
-__div__(self,other)
-# 求余运算
-__mod__(self,other)
-# 幂运算
-__pow__(self,other)
-```
 
 
