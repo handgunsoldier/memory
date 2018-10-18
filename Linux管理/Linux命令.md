@@ -43,6 +43,8 @@ locale
 last -10 
 # 查看关机记录
 last -x | grep shutdown 
+# 查看最近10条失败的登录记录
+lastb -10
 ```
 
 ### 查看文件
@@ -321,5 +323,7 @@ shutdown -h now
 shutdown -h 10 
 # 10分钟后重启
 shutdown -r 10 
+# 踢掉指定用户终端
+pkill -t <tty>
 ```
 

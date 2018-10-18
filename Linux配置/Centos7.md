@@ -1,31 +1,50 @@
-# VPS上centos7安装后配置
+# VPS 上 Centos7 安装后配置
+
+### 修改 root 用户的密码
+
+```bash
+passwd root
+```
 
 ### 更换编码和时区
 
-```bash
-# 修改为utf-8编码, 一般已经配置好
-sudo vi /etc/locale.conf # 添加`LANG="en_US.UTF-8"`
+1. 修改为 utf-8 编码，一般已经配置好：
 
-# 更换为Asia/Shanghai时区, timedatectl查看效果
-sudo timedatectl set-timezone Asia/Shanghai
-```
+   ```bash
+   vi /etc/locale.conf  # 添加 LANG="en_US.UTF-8"
+   ```
 
-### 用户管理
+2. 更换为 Asia/Shanghai 时区，`timedatectl` 查看效果：
 
-```shell
-passwd <用户> # 修改指定用户密码
-useradd <用户> -m # 创建用户, -m自动创建家目录, 不加不自动创建.
+   ```bash
+   timedatectl set-timezone Asia/Shanghai
+   ```
 
-# 给创建的用户添加root权限: 修改 `/etc/sudoers` 文件，找到`root ALL=(ALL) ALL`，在下面添加一行: `zzzzer ALL=(ALL) ALL`.
-```
+### 创建新用户
+
+1. 创建用户，-m 自动创建家目录：
+
+   ```bash
+   useradd <用户> -m
+   ```
+
+2. 设置刚创建用户的密码：
+
+   ```bash
+   passwd <用户>
+   ```
+
+3. 给创建的用户添加root权限：
+
+   修改 `/etc/sudoers` 文件，找到 `root ALL=(ALL) ALL`，在下面添加一行：`zzzzer ALL=(ALL) ALL`
 
 
 ### 安全措施
 
-- 关闭sestatus
+- 关闭 sestatus
 
 ```shell
-vi /etc/selinux/config # 相关内容设为disabled，关闭selinux
+vim /etc/selinux/config # 相关内容设为disabled，关闭selinux
 sestatus # 查看selinux状态
 ```
 
@@ -33,16 +52,16 @@ sestatus # 查看selinux状态
 
 ```shell
 systemctl status firewalld # 查看防火墙状态
-sudo firewall-cmd --get-active-zones # 查看已被激活的 Zone 信息
-sudo firewall-cmd --zone=public --add-port=<port>/tcp --permanent # 开放指定端口, --permanent永久生效, 不然重启失效
-sudo firewall-cmd --zone=public --remove-port=<port>/tcp --permanent # 关闭指定端口
-sudo firewall-cmd --zone=public --list-ports # 查看开放的端口.
-sudo systemctl restart firewalld # 重启防火墙
+firewall-cmd --get-active-zones # 查看已被激活的 Zone 信息
+firewall-cmd --zone=public --add-port=<port>/tcp --permanent # 开放指定端口, --permanent永久生效, 不然重启失效
+firewall-cmd --zone=public --remove-port=<port>/tcp --permanent # 关闭指定端口
+systemctl restart firewalld # 重启防火墙生效
+firewall-cmd --zone=public --list-ports # 查看开放的端口.
 ```
 
 ### SSH
 
-- 提高ssh连接速度
+- 提高ssh连接速度（不确定）
 
 ```shell
 vi /etc/ssh/sshd_config # 设置`UseDNS`和`GSSAPIAuthentication`为no
@@ -62,13 +81,127 @@ sudo systemctl restart sshd.service # 重启ssh
 sudo yum upgrade
 ```
 
-### 必备依赖
+### 安装所需依赖
+
+Python3 依赖：
 
 ```shell
-# python3依赖
-sudo yum install perl gcc gcc-c++ automake make openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel libffi-devel
-# git依赖
+sudo yum install perl gcc gcc-c++ automake make openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel libffi-devel libsodium
+```
+
+Git 依赖：
+
+```bash
 sudo yum install perl-ExtUtils-MakeMaker libcurl-devel
+```
+
+### Vim
+
+安装：
+
+```bash
+sudo yum install vim
+```
+
+配置：
+
+```shell
+set nu  # 使显示行号
+set autoindent  # 自动缩进
+set expandtab  # 将tab转化成空格
+set ts=4  # 设置tab宽度
+set softtabstop=4  # 按一次退格键会删除4个空格，只对tab按出来的有效
+```
+
+### Git
+
+```bash
+# 安装
+sudo yum install git
+# 配置git
+git config --global user.name "zzzzer"
+git config --global user.email "zzzzer91@gmail.com"
+# 生成ssh密钥
+ssh-keygen -t rsa -C "zzzzer91@gmail.com"
+```
+
+## Pyenv
+
+``` bash
+# 安装
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+# 配置
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
+# 下载python
+pyenv install 3.x.x
+# 启动环境
+pyenv global 3.x.x
+# 更新pyenv
+cd $(pyenv root)
+git pull
+```
+
+### Docker
+
+安装：
+
+```bash
+# 1
+sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+ 
+# 2
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+
+# 3
+sudo yum install docker-ce
+```
+
+### Shadowsock
+
+```shell
+# 任何增加端口的行为都别忘记修改防火墙!!!
+
+# 安装
+pip install git+https://github.com/shadowsocks/shadowsocks.git@master
+
+# 直接运行
+ssserver -p 443 -k password -m aes-256-cfb # 前台
+sudo ssserver -p 443 -k password -m aes-256-cfb --user nobody -d start # 后台
+sudo ssserver -d stop # 后台终止
+
+# 配置
+echo 3 > /proc/sys/net/ipv4/tcp_fastopen # centos7开启fastopen功能
+# 配置文件设置, `sudo vim /etc/shadowsocks.json`
+{
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": true,
+    "port_password":{
+        "7788":"password0",
+    }
+}
+
+# 读取配置文件
+ssserver -c shadowsocks.json # 前台
+sudo ssserver -c shadowsocks.json -d start # 后台
+ssserver -d stop # 后台终止
+
+# sudo出现command not found解决方法: 使用绝对路径
+
+# 开机自启(要保证程序首先能运行!)
+chmod +x /etc/rc.d/rc.local # 必须确保`/etc/rc.d/rc.local`可执行!!!
+vi /etc/rc.d/rc.local # 添加你想要开机运行的程序, 如:`/home/zzzzer/.local/share/virtualenvs/ss-mYnvOCO8/bin/ssserver -c /home/zzzzer/Documents/code/python/ss/shadowsocks.json -d start`
+
+# 检查日志
+sudo less /var/log/shadowsocks.log 
 ```
 
 ### 更换内核
@@ -87,13 +220,9 @@ uname -r # 查看是否安装成功
 ### VPS 网络优化
 
 - `sudo modprobe tcp_hybla` 开启hybla算法, 适用高延迟的网络
-
 - `sudo modprobe tcp_htcp` 开启htcp算法, 适用低延迟的网络(如日本，香港等)
-
 - `sudo modprobe tcp_bbr` 开启bbr算法, bbr目的是要尽量跑满带宽
-
 - `sysctl net.ipv4.tcp_available_congestion_control`查看开启的tcp拥塞算法
-
 - 编辑`vi /etc/sysctl.conf`, 添加内容:
 
 ```bash
@@ -168,90 +297,6 @@ net.core.default_qdisc=fq
 ```
 
 - 然后重启服务器执行`ulimit -n`，查询返回65536即可
-
-### Git
-
-```bash
-# 安装
-sudo yum install git
-# 配置git
-git config --global user.name "zzzzer"
-git config --global user.email "zzzzer91@gmail.com"
-# 生成ssh密钥
-ssh-keygen -t rsa -C "zzzzer91@gmail.com"
-```
-
-## Pyenv
-
-``` bash
-# 安装
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-# 配置
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
-# 下载python
-pyenv install 3.x.x
-# 启动环境
-pyenv global 3.x.x
-# 更新pyenv
-cd $(pyenv root)
-git pull
-```
-
-### Shadowsock
-
-```shell
-# 任何增加端口的行为都别忘记修改防火墙!!!
-
-# 安装
-pip install git+https://github.com/shadowsocks/shadowsocks.git@master
-
-# 直接运行
-ssserver -p 443 -k password -m aes-256-cfb # 前台
-sudo ssserver -p 443 -k password -m aes-256-cfb --user nobody -d start # 后台
-sudo ssserver -d stop # 后台终止
-
-# 配置
-echo 3 > /proc/sys/net/ipv4/tcp_fastopen # centos7开启fastopen功能
-# 配置文件设置, `vi shadowsocks.json`
-{
-     "local_address": "127.0.0.1",
-     "local_port":1080,
-     "timeout":300,
-     "method":"aes-256-cfb",
-     "fast_open": true,
-     "port_password":{
-		"7788":"password0",
-		"7789":"password1",
-		"7790":"password2"
-	}
-}
-
-# 读取配置文件
-ssserver -c shadowsocks.json # 前台
-sudo ssserver -c shadowsocks.json -d start # 后台
-ssserver -d stop # 后台终止
-
-# sudo出现command not found解决方法: 使用绝对路径
-
-# 开机自启(要保证程序首先能运行!)
-chmod +x /etc/rc.d/rc.local # 必须确保`/etc/rc.d/rc.local`可执行!!!
-vi /etc/rc.d/rc.local # 添加你想要开机运行的程序, 如:`/home/zzzzer/.local/share/virtualenvs/ss-mYnvOCO8/bin/ssserver -c /home/zzzzer/Documents/code/python/ss/shadowsocks.json -d start`
-
-# 检查日志
-sudo less /var/log/shadowsocks.log 
-```
-
-### Vim 配置
-
-```shell
-set nu  # 使显示行号
-set autoindent  # 自动缩进
-set expandtab  # 将tab转化成空格
-set ts=4  # 设置tab宽度
-set softtabstop=4  # 按一次退格键会删除4个空格，只对tab按出来的有效
-```
 
 ### 字体安装
 
