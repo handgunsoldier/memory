@@ -18,4 +18,11 @@
     "terminal.integrated.fontSize": 19,
     "markdown.preview.fontSize": 19,
     "python.pythonPath": "python3",
+    //"javascript.validate.enable": false,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "vue",
+    ],
+    //"vetur.validation.template": false,
 }

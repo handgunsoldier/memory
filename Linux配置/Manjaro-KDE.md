@@ -134,20 +134,6 @@ sudo pacdiff
    pyenv global <版本>
    ```
 
-### Pipenv 全局安装
-
-1. 安装：
-
-   ```bash
-   pip install --user pipenv
-   ```
-
-2. 配置：
-
-   ```bash
-   echo 'export PATH="$PATH:/home/zzzzer/.local/bin"' >> ~/.bashrc >> ~/zshrc
-   ```
-
 ### Shadowsocks
 
 1. 安装：
@@ -319,6 +305,8 @@ pip install aiohttp  # 异步网络框架
 pip install aiodns  # 异步解析 DNS
 pip install cchardet  # 更快的编码探测
 pip install mitmproxy  # 交互式命令行 http 抓包工具
+pip install flask  # web 微框架
+pip install pycryptodome  # 加密库
 
 # 数据分析
 pip install numpy pandas matplotlib scipy
