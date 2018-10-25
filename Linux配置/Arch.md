@@ -1,6 +1,6 @@
-# Arch安装配置(BIOS版, 未完工, 勿参考)
+# Arch 安装配置（BIOS 版，未完工，勿参考）
 
-- 验证是BIOS还是UEFI
+- 验证是 BIOS 还是 UEFI
 
 ```bash
 ls /sys/firmware/efi/efivars # 找不到则为BIOS

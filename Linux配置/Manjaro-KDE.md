@@ -14,7 +14,7 @@ sudo pacman-mirrors -i -c China -m rank
 sudo pacman -Syy
 ```
 
-## 卸载不需要软件
+## 卸载软件
 
 删除指定软件包，及所有没有被其他已安装软件包使用的依赖关系（s），及配置文件（n），仅供参考：
 
@@ -36,148 +36,148 @@ sudo pacman -Syu # 同步源(y), 并更新系统(u)
 sudo pacdiff
 ```
 
-## 软件安装
+## 安装软件
 
 ### Zsh
 
-1. 安装：
+1.安装：
 
-   ```bash
-   sudo pacman -S zsh manjaro-zsh-config
-   ```
+```bash
+sudo pacman -S zsh manjaro-zsh-config
+```
 
-   zsh 的配置文件为 *~/.zshrc* 。
+zsh 的配置文件为 *~/.zshrc* 。
 
-2. 配置：
+2.配置：
 
-   在 Konsole 中，将默认启动 shell 改为 */bin/zsh*（**注意：**这样只在 Konsole 中作为默认 shell，其他程序中默认还是 bash，所以设置环境变量时，*~/.bashrc* 和 *~/.zshrc* 都要修改。
+在 Konsole 中，将默认启动 shell 改为 */bin/zsh*（**注意：**这样只在 Konsole 中作为默认 shell，其他程序中默认还是 bash，所以设置环境变量时，*~/.bashrc* 和 *~/.zshrc* 都要修改。
 
 ### Git
 
-1. 安装：
+1.安装：
 
-   ```bash
-   sudo pacman -S git
-   ```
+```bash
+sudo pacman -S git
+```
 
-2. 配置个人信息：
+2.配置个人信息：
 
-   ```bash
-   git config --global user.name "zzzzer"
-   git config --global user.email "zzzzer91@gmail.com"
-   ```
+```bash
+git config --global user.name "zzzzer"
+git config --global user.email "zzzzer91@gmail.com"
+```
 
-3. 生成ssh密钥：
+3.生成ssh密钥：
 
-   ```bash
-   ssh-keygen -t rsa -C "zzzzer91@gmail.com"
-   ```
+```bash
+ssh-keygen -t rsa -C "zzzzer91@gmail.com"
+```
 
-4. 在 Github 上更新密钥。
+4.在 Github 上更新密钥。
 
-5. 做一些设置，让 `git status` 中的中文不乱码：
+5.做一些设置，让 `git status` 中的中文不乱码：
 
-   ```bash
-   git config --global core.quotepath false 
-   ```
+```bash
+git config --global core.quotepath false 
+```
 
 ### Vim
 
-1. 安装：
+1.安装：
 
-   ```bash
-   sudo pacman -S vim 
-   ```
+```bash
+sudo pacman -S vim 
+```
 
-2. 先把已经配置好的 .vimrc 放到 home 目录下。
+2.把已经配置好的 .vimrc 放到 home 目录下。
 
-3. 下载 vim 插件管理器：
+3.下载 vim 插件管理器：
 
-   ```bash
-   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-   ```
+```bash
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
 
-4. 进入 vim 后, 执行 `PlugInstall` 安装相关插件。
+4.进入 vim 后，执行 `PlugInstall` 安装相关插件。
 
 ### Pyenv
 
-1. 安装：
+1.安装：
 
-   ```bash
-   git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-   ```
+```bash
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+```
 
-2. 切换到最新稳定版本（git clone下来的是 master 版本, 不稳定）：
+2.切换到最新稳定版本（git clone下来的是 master 版本，不稳定）：
 
-   ```bash
-   cd ～/.pyenv
-   git tag # 检查可用版本
-   git checkout <tag名> # 切换
-   ```
+```bash
+cd ～/.pyenv
+git tag # 检查可用版本
+git checkout <tag名> # 切换
+```
 
-3. 配置（自动补全功能等）：
+3.配置（自动补全功能等）：
 
-   ```bash
-   echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc >> ~/.zshrc
-   echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc >> ~/.zshrc
-   echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc >> ~/.zshrc
-   ```
+```bash
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc >> ~/.zshrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc >> ~/.zshrc
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc >> ~/.zshrc
+```
 
-4. 下载指定版本 Python：
+4.下载指定版本 Python：
 
-   ```bash
-   pyenv install <版本>
-   ```
+```bash
+pyenv install <版本>
+```
 
-5. 切换环境：
+5.切换 Python 环境：
 
-   ```bash
-   pyenv global <版本>
-   ```
+```bash
+pyenv global <版本>
+```
 
 ### Shadowsocks
 
-1. 安装：
+1.安装：
 
-   ```bash
-   pip install git+https://github.com/shadowsocks/shadowsocks.git@master
-   ```
+```bash
+pip install git+https://github.com/shadowsocks/shadowsocks.git@master
+```
 
-2. 在 *.zshrc* 中设置命令，方便使用：
+2.在 *~/.zshrc* 和 *~/.bashrc* 中设置命令，方便使用：
 
-   ```bash
-   alias sss="sslocal -c /etc/shadowsocks.json"
-   alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
-   alias unsetproxy="unset ALL_PROXY"
-   ```
+```bash
+alias sss="sslocal -c /etc/shadowsocks.json"
+alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
+alias unsetproxy="unset ALL_PROXY"
+```
 
 ### 中文输入法
 
-1. 安装 fcitx：
+1.安装 fcitx：
 
-   ```bash
-   sudo pacman -S fcitx-im # 选择全部安装
-   sudo pacman -S fcitx-configtool # 图形化配置工具
-   ```
+```bash
+sudo pacman -S fcitx-im  # 选择全部安装
+sudo pacman -S fcitx-configtool  # 图形化配置工具
+```
 
-2. 修改 ~/.xprofile，添加：
+2.修改 *~/.xprofile*，添加：
 
-   ```bash
-   export GTK_IM_MODULE=fcitx
-   export QT_IM_MODULE=fcitx
-   export XMODIFIERS="@im=fcitx"
-   ```
+```bash
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+```
 
-3. 在 fcitx 输入法选项中添加 pinyin 。
+3.在 fcitx 输入法选项中添加 pinyin 。
 
 ### Chromium
 
-1. 安装：
+安装：
 
-   ```bash
-   sudo pacman -S chromium
-   ```
+```bash
+sudo pacman -S chromium
+```
 
 ### 数据库
 
@@ -222,39 +222,39 @@ sudo pacman -S dbeaver
 
 ### Nvm
 
-1. 安装：
+1.安装：
 
-   ```bash
-   git clone https://github.com/creationix/nvm.git ～/.nvm
-   ```
+```bash
+git clone https://github.com/creationix/nvm.git ～/.nvm
+```
 
-2. 切换到最新稳定版本：
+2.切换到最新稳定版本：
 
-   ```bash
-   cd .nvm
-   git tag  # 检查可用版本
-   git checkout v0.x.x
-   ```
+```bash
+cd .nvm
+git tag  # 检查可用版本
+git checkout v0.x.x
+```
 
-3. 配置，修改 *~/.bashrc* 和 *~/.zshrc*：
+3.配置，修改 *~/.bashrc* 和 *~/.zshrc*：
 
-   ```bash
-   export NVM_DIR="$HOME/.nvm"
-   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-   ```
+```bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
 
-4. 下载指定版本 Node.js
+4.下载指定版本 Node.js
 
-   ```bash
-   nvm install --lts  # 下载长期支持版本
-   ```
+```bash
+nvm install --lts  # 下载长期支持版本
+```
 
-5. 切换 Node.js 版本
+5.切换 Node.js 版本
 
-   ```bash
-   nvm use --lts
-   ```
+```bash
+nvm use --lts
+```
 
 ### 网络工具包
 
