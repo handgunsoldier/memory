@@ -2,78 +2,13 @@
 
 ## 基本数据类型
 
-### list（列表）
-
-```python
-"""
-对列表的任何修改操作都是原地的。
-"""
-
-# 将元素 x 添加到列表 lst 尾部
-lst.append(x)
-# 在下标 index 处添加元素 x，原来该位置元素及之后元素后移
-lst.insert(index, x)
-# 将列表 L 中元素添加到列表 lst 末尾，原地
-lst.extend(L)
-# 删除并返回下标为 index（默认 -1）到元素
-lst.pop(index)
-# 删除列表中第一个值为 x 的元素，其之后的元素前移
-lst.remove(x)
-# 清空列表，但保留列表对象
-lst.clear()
-# 返回第一个值为 x 的元素下标，不存在则抛出异常
-lst.index(x)
-# 返回元素 x 在列表中出现的次数
-lst.count(x)
-# 逆转列表，原地
-lst.reverse()
-# 根据 key 排序，可打开逆序开关，原地
-lst.sort(key=None, reverse=False)
-# 返回列表的浅拷贝
-# 浅拷贝指，列表对象不同，但成员指向同一块内存
-lst.copy()
-```
-
-### dict（字典）
-
-```python
-"""
-对字典的任何修改操作都是原地的。
-"""
-
-# 返回字典的键构成的列表
-d.keys()
-# 返回字典的值构成的列表
-d.values()
-# 返回一个元组（键，值）构成的列表
-d.items()
-# 返回指定键的值，不存在则返回 default 的值
-d.get(key, default=None)
-# 返回指定键的值，不存在则添加值为 default 的键，再返回
-d.setdefault(key, default=None)
-# 将 iterable 中的元素做键，值都为 default，会覆盖已有的键
-d.fromkeys(iterbale, default=None)
-# 把字典 dict2 中的键值更新到字典 d 中，会覆盖已有的键
-d.update(dict2)
-# 弹出指定元素，并返回值，若不存在，则抛出 KeyError
-# 若指定 d 参数，则不存在返回 d
-d.pop(k, d)
-# 弹出字典末尾元素，返回一个二元组
-d.popitem()
-# 清空字典，但会保留字典对象
-d.clear()
-# 返回一个字典的浅拷贝
-d.copy()
-```
-
 ### str（字符串）
 
-```python
-"""
-对字符串的任何修改操作都是非原地的，
-因为字符串是不可变对象。
-"""
+对字符串的任何修改操作都是非原地的，因为字符串是不可变对象。
 
+常用方法：
+
+```python
 """查找"""
 # 返回子串 sub 在 s 中出现的次数，可指定范围
 s.count(sub, start=None, end=None)
@@ -164,13 +99,77 @@ s.isprintable()
 s.encode(encoding='utf-8', errors='strict')
 ```
 
-### set（集合）
+### list（列表）
+
+对列表的任何修改操作都是原地的。
+
+常用方法：
 
 ```python
-"""
-对集合的任何修改操作都是原地的。
-"""
+# 将元素 x 添加到列表 lst 尾部
+lst.append(x)
+# 在下标 index 处添加元素 x，原来该位置元素及之后元素后移
+lst.insert(index, x)
+# 将列表 L 中元素添加到列表 lst 末尾，原地
+lst.extend(L)
+# 删除并返回下标为 index（默认 -1）到元素
+lst.pop(index)
+# 删除列表中第一个值为 x 的元素，其之后的元素前移
+lst.remove(x)
+# 清空列表，但保留列表对象
+lst.clear()
+# 返回第一个值为 x 的元素下标，不存在则抛出异常
+lst.index(x)
+# 返回元素 x 在列表中出现的次数
+lst.count(x)
+# 逆转列表，原地
+lst.reverse()
+# 根据 key 排序，可打开逆序开关，原地
+lst.sort(key=None, reverse=False)
+# 返回列表的浅拷贝
+# 浅拷贝指，列表对象不同，但成员指向同一块内存
+lst.copy()
+```
 
+### dict（字典）
+
+对字典的任何修改操作都是原地的。
+
+常用方法：
+
+```python
+# 返回字典的键构成的列表
+d.keys()
+# 返回字典的值构成的列表
+d.values()
+# 返回一个元组（键，值）构成的列表
+d.items()
+# 返回指定键的值，不存在则返回 default 的值
+d.get(key, default=None)
+# 返回指定键的值，不存在则添加值为 default 的键，再返回
+d.setdefault(key, default=None)
+# 将 iterable 中的元素做键，值都为 default，会覆盖已有的键
+d.fromkeys(iterbale, default=None)
+# 把字典 dict2 中的键值更新到字典 d 中，会覆盖已有的键
+d.update(dict2)
+# 弹出指定元素，并返回值，若不存在，则抛出 KeyError
+# 若指定 d 参数，则不存在返回 d
+d.pop(k, d)
+# 弹出字典末尾元素，返回一个二元组
+d.popitem()
+# 清空字典，但会保留字典对象
+d.clear()
+# 返回一个字典的浅拷贝
+d.copy()
+```
+
+### set（集合）
+
+对集合的任何修改操作都是原地的。
+
+常用方法：
+
+```python
 # 添加成员，自动去重
 s.add(k)
 # 添加一个对象到当前集合，自动去重
@@ -183,8 +182,11 @@ s.remove(k)
 s.clear()
 # 返回集合的浅拷贝
 s.copy()
+```
 
-# 集合的差，并，交操作
+集合的差，并，交操作：
+
+```python
 # 在 a 中的成员, 但不在 b 中
 a - b
 # 在 a 或 b 中的成员

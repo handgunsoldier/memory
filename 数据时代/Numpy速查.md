@@ -1,33 +1,49 @@
 # Numpy 速查手册
 
+## 相关链接
+
 - 官方API：[Numpy](https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html#array-attributes)
+
+## 基本概念
+
 - `import numpy as np`，是 Numpy 库约定的导入方式。
 - `ndarray` 类型是 Numpy 最主要的类型。
 - `ndarray` 对象的元素具有相同的类型，并且一般是 Numpy 自定义的一些类型，有许多种，详见官方文档。
 - `ndarray` 对象的元素的类型也可以不相同，但这会降低性能。
 - 如果创建 `ndarray` 对象时，不指定元素的类型，那么会自动判断。
-- `ndarray` 对象的创建方式：
 
-```python
-"""1.用列表, 元组等创建"""
-np.array([1, 2, 3, 4])  # 根据传入的类型, 自动判断dtype
-np.array([[1,2], [3,4], (0.5,0.6)])  # 支持列表, 元组混合
+## 相关操作
 
-"""2.用numpy中的函数创建"""
-np.arange(10)  # 类似range, 但返回ndarray类型
-np.ones((3, 6), dtype=np.int32)  # 根据shape生成全为1的数组, 这里指定了数据类型
-np.zeros(3)  # 根据shape生成全为0的数组
-np.full((3,3,3), 10)  # 根据shape生成全为10的数组
-np.eye(5)  # 创建一个5*5的单位矩阵, 对角线为1, 其余为0
-np.linspace(1, 10, 4)  # 1到10之间(包括10), 均匀选取4个数据
-np.linspace(1, 10, 4, endpoint=False)  # 此时不包括10
-np.concatenate((a, b))  # 合并a, b两个数组, 返回一个新数组
-np.ones_like(x)  # 生成和x相同shape的全1数组
-np.zeros_like(x)  # 生成和x相同shape的全0数组
-np.full_like(x, 3)  # 生成和x相同shape的全3数组
-```
+### 创建基本对象
 
-- `ndarray`对象的选取方式(选取后也能修改):
+`ndarray` 对象的几种创建方式：
+
+1. 用列表，元组等创建：
+
+    ```bash
+    np.array([1, 2, 3, 4])  # 根据传入的类型, 自动判断dtype
+    np.array([[1,2], [3,4], (0.5,0.6)])  # 支持列表, 元组混合
+    ```
+
+2. 用 Numpy 中的函数创建：
+
+    ```bash
+    np.arange(10)  # 类似range, 但返回ndarray类型
+    np.ones((3, 6), dtype=np.int32)  # 根据shape生成全为1的数组, 这里指定了数据类型
+    np.zeros(3)  # 根据shape生成全为0的数组
+    np.full((3,3,3), 10)  # 根据shape生成全为10的数组
+    np.eye(5)  # 创建一个5*5的单位矩阵, 对角线为1, 其余为0
+    np.linspace(1, 10, 4)  # 1到10之间(包括10), 均匀选取4个数据
+    np.linspace(1, 10, 4, endpoint=False)  # 此时不包括10
+    np.concatenate((a, b))  # 合并a, b两个数组, 返回一个新数组
+    np.ones_like(x)  # 生成和x相同shape的全1数组
+    np.zeros_like(x)  # 生成和x相同shape的全0数组
+    np.full_like(x, 3)  # 生成和x相同shape的全3数组
+    ```
+
+### `ndarray` 对象的选取方式
+
+对象在选取后也可进行修改。
 
 ```python
 """假设a是一维的"""
@@ -52,7 +68,7 @@ a[(a>10)&(a<20)]  # 选取所有大于10小于20的数据
 a[(a<=10)|(a>=20)]  # 选取所有小于等于10或大于等于20的数据
 
 """用方法选取元素"""
-a.item(10)  #选取第10个元素
+a.item(10)  # 选取第10个元素
 a.item((1,2,3))  # 选取3维第2号, 2维第3号, 3维第4号元素
 """
 那么该方法与索引选取的区别是什么呢?
@@ -63,7 +79,7 @@ item选取出来的类型会转换成python原生类型,
 """
 ```
 
-- `ndarray`对象的使用实例:
+### `ndarray` 对象的使用实例
 
 ```python
 """重要属性"""
@@ -93,7 +109,7 @@ a.view()  # 返回一个新数组, 与a共用数据
 a.copy()  # 返回数组的深拷贝
 ```
 
-- 文件存取相关:
+### 数据存取相关
 
 ```python
 """csv文件只能存储一维和二维数据"""
@@ -106,13 +122,13 @@ np.fromfile('b.dat', dtype=np.int, sep=',').reshape(5, 10, 2)  # 需用reshape�
 b.tofile('b.dat', format='%d')  # 不指定sep会生成二进制文件
 np.fromfile('b.dat', dtype=np.int).reshape(5, 10, 2)  # 需用reshape还原
 
-"""numpy便捷文件存取, 会保存维度, 元素类型信息"""
+"""Numpy 便捷文件存取, 会保存维度, 元素类型信息"""
 np.save('b', b)  # 正常存储,默认.npy格式
 np.savez('b', b)  # 压缩存储, 默认.npz格式
 np.load('b.npy')
 ```
 
-- numpy中的重要统计函数:
+### Numpy 中的重要统计函数
 
 ```python
 np.gradient(a)  # 返回a中元素的梯度
@@ -133,7 +149,7 @@ np.diag(a)  # 以一维数组的形式返回矩阵的对角线元素
 np.trace(a)  # 计算对角线元素的和
 ```
 
-- numpy中的重要运算函数:
+### Numpy 中的重要运算函数
 
 ```python
 """一元运算"""
@@ -165,7 +181,7 @@ np.mod(a, b)  # 两个数组各元素进行求模运算
 np.copysign(a, b)  # 将b中各元素的符号赋值给a中各元素
 ```
 
-- numpy中的重要随机函数:
+### Numpy 中的重要随机函数
 
 ```python
 # 生成0到1之间随机浮点数, shape为(3, 4, 5) 
@@ -190,14 +206,14 @@ np.random.normal(loc, scale, size)
 np.random.poisson(lam, size)
 ```
 
-- numpy中其他重要函数:
+### Numpy 中其他重要函数
 
 ```python
 # 当condtiion为真时返回true_value, 否则返回false_value, 返回一个新数组
 np.where(condition, true_value, false_value)
 ```
 
-- numpy与线性代数:
+### Numpy 与线性代数
 
 ```python
 np.linalg.det(A)  # 计算行列式

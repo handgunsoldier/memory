@@ -1,6 +1,6 @@
 # Manjaro KDE 版安装后配置
 
-### Pacman 换源
+## Pacman 换源
 
 生成可用中国镜像站列表，会弹出选项框，选清华大学源：
 
@@ -14,7 +14,7 @@ sudo pacman-mirrors -i -c China -m rank
 sudo pacman -Syy
 ```
 
-### 卸载不需要软件
+## 卸载不需要软件
 
 删除指定软件包，及所有没有被其他已安装软件包使用的依赖关系（s），及配置文件（n），仅供参考：
 
@@ -24,7 +24,7 @@ sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-m
 
 VLC 用 mpv 代替。
 
-### 更新系统
+## 更新系统
 
 ```bash
 sudo pacman -Syu # 同步源(y), 并更新系统(u)
@@ -36,6 +36,8 @@ sudo pacman -Syu # 同步源(y), 并更新系统(u)
 sudo pacdiff
 ```
 
+## 软件安装
+
 ### Zsh
 
 1. 安装：
@@ -46,7 +48,7 @@ sudo pacdiff
 
    zsh 的配置文件为 *~/.zshrc* 。
 
-2. 配置
+2. 配置：
 
    在 Konsole 中，将默认启动 shell 改为 */bin/zsh*（**注意：**这样只在 Konsole 中作为默认 shell，其他程序中默认还是 bash，所以设置环境变量时，*~/.bashrc* 和 *~/.zshrc* 都要修改。
 
@@ -285,9 +287,12 @@ trizen -S visual-studio-code-bin  # VSCode
 trizen -S robo3t-bin  # MongoDB GUI 工具
 trizen -S genymotion  # 安卓模拟器
 
-trizen -S wps-office ttf-wps-fonts  # WPS，在 Manjaro 下有些问题
+# WPS，在 Manjaro 下有些问题
+trizen -S wps-office ttf-wps-fonts
 
-trizen -S intellij-idea-ultimate-edition
+# JetBrains 全家桶
+trizen -S intellij-idea-ultimate-edition intellij-idea-ultimate-edition-jre
+trizen -S goland goland-jre
 trizen -S pycharm-professional
 ```
 
@@ -317,6 +322,8 @@ pip install redis  # Redis
 pip install psycopg2-binary  # PostgreSQL
 pip install pymysql  # MySQL
 ```
+
+## 一些配置
 
 ### Jupyter 的配置
 

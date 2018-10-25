@@ -41,3 +41,9 @@ git checkout <tag名>  # 切换
 
 ### 包管理：Npm
 
+命令：
+
+```bash
+npm i <包名> -g  # 全局安装包
+```
+

@@ -20,7 +20,7 @@
   |        int         |                                         |
   |        bool        |                                         |
   |       object       | python 的类型，如 str，可以使用相关方法 |
-  |   datetime64[ns]   |                                         |
+  |   datetime64[ns]   |       时间类型，不带时区，即 UTC        |
   | datetime64[ns, tz] |    时间类型，带时区（tz，time zone）    |
   |   timedelta[ns]    |                                         |
   |      category      |                                         |
@@ -377,9 +377,11 @@ collection.insert_many(records)
 ```python
 # 将Series对象转换成时间类型, 可以用相关方法
 pd.to_datetime(s) 
+
 # 生成一个时间列表, periods决定数量, freq决定单位, 比如这里'D'是指天
 # 成员是Timestamp类型, 可以使用相关方法
 pd.date_range('2017-7-27', periods=15, freq='D') 
+
 # 判断某个值是否为NAN
 # 也可判断df, 返回一个bool类型的df
 pd.isna(df)
