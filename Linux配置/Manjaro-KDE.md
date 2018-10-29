@@ -256,6 +256,23 @@ nvm install --lts  # 下载长期支持版本
 nvm use --lts
 ```
 
+### Golang
+
+安装：
+
+```bash
+sudo pacman -S go
+```
+
+配置，修改 *~/.bashrc* 和 *~/.zshrc*：
+
+```bash
+export GOROOT="/usr/lib/go"
+export GOPATH="$HOME/.gopath"
+export GOBIN="$GOPATH/bin"
+export PATH="$PATH:$GOBIN"
+```
+
 ### 网络工具包
 
 ```bash
