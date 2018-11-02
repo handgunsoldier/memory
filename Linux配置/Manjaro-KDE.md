@@ -19,7 +19,7 @@ sudo pacman -Syy
 删除指定软件包，及所有没有被其他已安装软件包使用的依赖关系（s），及配置文件（n），仅供参考：
 
 ```bash
-sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en konversation thunderbird kget cantata vlc bluedevil pulseaudio-bluetooth kwalletmanager kwallet-pam user-manager
+sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en yakuake konversation thunderbird kget vlc kdeconnect skanlite kwalletmanager kwallet-pam user-manager
 ```
 
 VLC 用 mpv 代替。
@@ -288,6 +288,12 @@ sudo pacman -S dnsutils  # nslookup
 sudo pacman -S papirus-icon-theme
 ```
 
+字体：
+
+```bash
+sudo pacman -S ttf-dejavu
+```
+
 ### AUR
 
 安装包管理工具：
@@ -354,7 +360,7 @@ jupyter lab --generate-config
 
 ```python
 # 修改初始目录
-修改c.NotebookApp.notebook_dir = '/home/zzzzer/Documents/code/jupyter'
+c.NotebookApp.notebook_dir = '/home/zzzzer/Documents/code/jupyter'
 # 不自动打开浏览器
 c.NotebookApp.open_browser = False
 # 设置密码
