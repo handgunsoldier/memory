@@ -18,16 +18,16 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'w0rp/ale', { 'for': ['c', 'cpp', 'rust'] }
 
 " rust 代码补全
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+"Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 
 " 缩进线
 Plug 'Yggdroot/indentLine'
 
 " Python 代码补全
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+"Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
 " Python 括号缩进
-Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
+"Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 
 " Initialize plugin system

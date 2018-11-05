@@ -226,7 +226,7 @@ sudo pacman -S dbeaver
 1.安装：
 
 ```bash
-git clone https://github.com/creationix/nvm.git ～/.nvm
+git clone https://github.com/creationix/nvm.git ~/.nvm
 ```
 
 2.切换到最新稳定版本：
@@ -361,6 +361,16 @@ pip install psycopg2-binary  # PostgreSQL
 pip install pymysql  # MySQL
 ```
 
+### 安装 Windows 字体
+
+先将 Windows 字体放入 */usr/share/fonts/winfonts*，然后在该目录执行如下命令：
+
+```bash
+sudo mkfontscale
+sudo mkfontdir
+sudo fc-cache -fv
+```
+
 ## 一些配置
 
 ### Jupyter 的配置
@@ -390,22 +400,10 @@ Intellij 要查看 Java 源码，需要额外安装 `sudo pacman -S openjdk8-src
 
 ### 其他
 
-选择 zsh 下默认编辑器：
+选择 zsh 下默认编辑器，在 *.zshrc* 下添加如下一行：
 
 ```bash
-# 在 .zshrc 下添加如下一行
 EDITOR="/usr/bin/vim"
-```
-
-安装 Windows 字体：
-
-```bash
-# 先将 Windows 字体放入该目录
-cd /usr/share/fonts/winfonts
-# 在该目录执行如下命令
-sudo mkfontscale
-sudo mkfontdir
-sudo fc-cache -fv
 ```
 
 ## 错误处理
