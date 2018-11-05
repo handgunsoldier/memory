@@ -1,6 +1,6 @@
 ## Options section
 #setopt correct                                                  # Auto correct mistakes
-setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
+#setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
 setopt nocaseglob                                               # Case insensitive globbing
 setopt rcexpandparam                                            # Array expension with parameters
 setopt nocheckjobs                                              # Don't warn about running processes when exiting
@@ -212,7 +212,6 @@ esac
 
 
 # alias
-alias vi='vim'
 alias sss="sslocal -c /etc/shadowsocks.json"
 alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
 alias unsetproxy="unset ALL_PROXY"
@@ -231,12 +230,8 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-# .h 头文件位置
-export C_INCLUDE_PATH=./src
-export SSLKEYLOGFILE=/tmp/ssl.key
-
-# pipenv
-export PATH="$PATH:/home/zzzzer/.local/bin"
+# chromium ssl key
+#export SSLKEYLOGFILE=/tmp/ssl.key
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
@@ -246,4 +241,3 @@ export NVM_DIR="$HOME/.nvm"
 # go
 export GOROOT="/usr/lib/go"
 export GOPATH="$HOME/Documents/code/go"
- 

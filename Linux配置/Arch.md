@@ -3,7 +3,7 @@
 - 验证是 BIOS 还是 UEFI
 
 ```bash
-ls /sys/firmware/efi/efivars # 找不到则为BIOS
+ls /sys/firmware/efi/efivars  # 找不到则为BIOS
 ```
 
 - 联网
@@ -13,8 +13,8 @@ ls /sys/firmware/efi/efivars # 找不到则为BIOS
 wifi-menu
 
 # 或拨号
-pppoe-setup # 设置帐号密码
-systemctl start adsl # 连接
+pppoe-setup  # 设置帐号密码
+systemctl start adsl  # 连接
 ```
 - 同步时间
 
@@ -29,13 +29,13 @@ timedatectl set-ntp true
 fdisk -l
 
 # 创建新分区
-cfdisk /dev/sdX # sdX 为目标磁盘, 一般为sda
+cfdisk /dev/sdX  # sdX 为目标磁盘，一般为 sda
 
 # 列出刚创建的磁盘分区
 lsblk
 
 # 格式化分区
-mkfs.ext4 /dev/sdXY # Y指分区号
+mkfs.ext4 /dev/sdXY  # Y 指分区号
 
 # 挂载分区
 mount /dev/sdXY /mnt

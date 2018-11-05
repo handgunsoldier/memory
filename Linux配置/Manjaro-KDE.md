@@ -19,7 +19,7 @@ sudo pacman -Syy
 删除指定软件包，及所有没有被其他已安装软件包使用的依赖关系（s），及配置文件（n），仅供参考：
 
 ```bash
-sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en yakuake konversation thunderbird kget vlc kdeconnect skanlite kwalletmanager kwallet-pam user-manager
+sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en yakuake konversation thunderbird kget vlc kdeconnect skanlite
 ```
 
 VLC 用 mpv 代替。
@@ -184,7 +184,8 @@ sudo pacman -S chromium
 MongoDB：
 
 ```bash
-sudo pacman -S mongod
+sudo pacman -S mongodb
+sudo pacman -S mongodb-tools  # mongoimport, mongodump, mongotop, etc
 ```
 
 Redis：
@@ -272,6 +273,20 @@ export GOPATH="$HOME/.gopath"
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOBIN"
 ```
+
+### VirtualBox
+
+安装：
+
+```bash
+sudo pacman -S virtualbox linux419-virtualbox-host-modules
+
+# 注意 virtualbox-host-modules 必须和 linux 内核版本相同，这里是 4.19 版本
+```
+
+配置：
+
+必须在 BIOS 开启 Intel 虚拟化技术，否则只能用 32 位虚拟机。
 
 ### 网络工具包
 
@@ -393,3 +408,12 @@ sudo mkfontdir
 sudo fc-cache -fv
 ```
 
+## 错误处理
+
+### 启开机动过程出现 `error: resume: no device specified for hibernation`
+
+修改 */etc/default/grub* 的 `GRUB_CMDLINE_LINUX_DEFAULT`，添加 `resume=/dev/nvme0n1p3`，其中，nvmeon1p3 是交换分区名，可以用 `fdisk -l` 命令查看。
+
+### `sudo update-grub` 后出现 */usr/bin/grub-probe: warning: unknown device type nvme0n1.*
+
+原因貌似是 UEFI 不支持 memtest，删除 */etc/grub.d* 下的 *60_memtest86+*，再执行 `sudo update-grub` 即可，但一般没有必要，随他去吧。

@@ -45,6 +45,8 @@ last -10
 last -x | grep shutdown 
 # 查看最近10条失败的登录记录
 lastb -10
+# 查看 cpu 温度
+sensors
 ```
 
 ### 查看文件
