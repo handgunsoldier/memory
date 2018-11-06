@@ -354,6 +354,9 @@ pip install pycryptodome  # 加密库
 # 数据分析
 pip install numpy pandas matplotlib scipy
 
+# 机器学习
+pip install scikit-learn
+
 # 数据库
 pip install pymongo  # MongoDB
 pip install redis  # Redis
@@ -412,6 +415,6 @@ EDITOR="/usr/bin/vim"
 
 修改 */etc/default/grub* 的 `GRUB_CMDLINE_LINUX_DEFAULT`，添加 `resume=/dev/nvme0n1p3`，其中，nvmeon1p3 是交换分区名，可以用 `fdisk -l` 命令查看。
 
-### `sudo update-grub` 后出现 */usr/bin/grub-probe: warning: unknown device type nvme0n1.*
+### `sudo update-grub` 后出现 `/usr/bin/grub-probe: warning: unknown device type nvme0n1.`
 
 原因貌似是 UEFI 不支持 memtest，删除 */etc/grub.d* 下的 *60_memtest86+*，再执行 `sudo update-grub` 即可，但一般没有必要，随他去吧。

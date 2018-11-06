@@ -45,8 +45,12 @@ last -10
 last -x | grep shutdown 
 # 查看最近10条失败的登录记录
 lastb -10
-# 查看 cpu 温度
+# 查看 CPU 温度，配合 `watch` 可实时监控
 sensors
+# 实时监测 CPU 的频率
+watch grep \"cpu MHz\" /proc/cpuinfo
+# 查看 CPU 设置的频率信息
+cpupower frequency-info
 ```
 
 ### 查看文件
