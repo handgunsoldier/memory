@@ -244,8 +244,8 @@ delattr(obj, name)
 
 # 类型判断
 type(obj)
-isinstance(obj, classinfo)
-issubclass(obj, classinfo)
+isinstance(obj, classinfo)  # 判断是不是某个类
+issubclass(obj, classinfo)  # 判断是不是某个类的子类
 
 # 返回当前环境下的全局变量
 globals()

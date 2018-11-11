@@ -18,28 +18,28 @@
 
 `ndarray` 对象的几种创建方式：
 
-1. 用列表，元组等创建：
+1.用列表，元组等创建：
 
-    ```bash
-    np.array([1, 2, 3, 4])  # 根据传入的类型, 自动判断dtype
-    np.array([[1,2], [3,4], (0.5,0.6)])  # 支持列表, 元组混合
-    ```
+```bash
+np.array([1, 2, 3, 4])  # 根据传入的类型，自动判断 dtype
+np.array([[1,2], [3,4], (0.5,0.6)])  # 支持列表，元组混合
+```
 
-2. 用 Numpy 中的函数创建：
+2.用 Numpy 中的函数创建：
 
-    ```bash
-    np.arange(10)  # 类似range, 但返回ndarray类型
-    np.ones((3, 6), dtype=np.int32)  # 根据shape生成全为1的数组, 这里指定了数据类型
-    np.zeros(3)  # 根据shape生成全为0的数组
-    np.full((3,3,3), 10)  # 根据shape生成全为10的数组
-    np.eye(5)  # 创建一个5*5的单位矩阵, 对角线为1, 其余为0
-    np.linspace(1, 10, 4)  # 1到10之间(包括10), 均匀选取4个数据
-    np.linspace(1, 10, 4, endpoint=False)  # 此时不包括10
-    np.concatenate((a, b))  # 合并a, b两个数组, 返回一个新数组
-    np.ones_like(x)  # 生成和x相同shape的全1数组
-    np.zeros_like(x)  # 生成和x相同shape的全0数组
-    np.full_like(x, 3)  # 生成和x相同shape的全3数组
-    ```
+```bash
+np.arange(10)  # 类似 range，但返回 ndarray 类型
+np.ones((3, 6), dtype=np.int32)  # 根据 shape 生成全为 1 的数组，这里指定了数据类型
+np.zeros(3)  # 根据 shape 生成全为 0 的数组
+np.full((3,3,3), 10)  # 根据 shape 生成全为 10 的数组
+np.eye(5)  # 创建一个 5*5 的单位矩阵，对角线为 1，其余为 0
+np.linspace(1, 10, 4)  # 1到10之间(包括10), 均匀选取4个数据
+np.linspace(1, 10, 4, endpoint=False)  # 此时不包括10
+np.concatenate((a, b))  # 合并a, b两个数组, 返回一个新数组
+np.ones_like(x)  # 生成和x相同shape的全1数组
+np.zeros_like(x)  # 生成和x相同shape的全0数组
+np.full_like(x, 3)  # 生成和x相同shape的全3数组
+```
 
 ### `ndarray` 对象的选取方式
 
@@ -151,8 +151,9 @@ np.trace(a)  # 计算对角线元素的和
 
 ### Numpy 中的重要运算函数
 
+一元运算：
+
 ```python
-"""一元运算"""
 np.abs(x)  # 求数组各元素的绝对值
 np.fabs(x)  # 求数组各元素的绝对值
 np.sqrt(x)  # 求数组各元素的平方根
@@ -169,8 +170,11 @@ np.sin(x)  # 求数组各元素的sin值
 np.tan(x)  # 求数组各元素的tan值
 np.exp(x)  # 求数组各元素的e^n值
 np.sign(x)  # 求数组各元素的符号值, 1(+), 0, -1(-)
+```
 
-"""二元运算"""
+二元运算：
+
+```python
 + - * / **  # 两个数组各元素间加减乘除指数运算
 > < >= <= == !=  # 算数比较, 产生布尔型数组
 np.maximum(a, b)  # 两个数组各元素进行比较, 取大的那个, 返回数组

@@ -19,7 +19,7 @@ sudo pacman -Syy
 删除指定软件包，及所有没有被其他已安装软件包使用的依赖关系（s），及配置文件（n），仅供参考：
 
 ```bash
-sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en yakuake konversation thunderbird kget vlc kdeconnect skanlite
+sudo pacman -Rsn steam-manjaro ms-office-online hplip firefox manjaro-settings-manager-knotifier octopi-notifier-frameworks manjaro-hello manjaro-documentation-en manjaro-browser-settings yakuake konversation thunderbird kget vlc kdeconnect skanlite
 ```
 
 VLC 用 mpv 代替。
@@ -287,6 +287,14 @@ sudo pacman -S virtualbox linux419-virtualbox-host-modules
 配置：
 
 必须在 BIOS 开启 Intel 虚拟化技术，否则只能用 32 位虚拟机。
+
+### 远程连接 Windows
+
+安装：
+
+```bash
+sudo pacman -S krdc freerdp
+```
 
 ### 网络工具包
 
