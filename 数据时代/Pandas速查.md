@@ -10,7 +10,7 @@
 
 - Pandas 库的两种重要数据类型：`Series` 类型（对应一维）和 `DataFrame` 类型（对应二维）。
 
-- `DataFrame` 类型的每一列对应这一个 `Series` 类型。
+- `DataFrame` 类型的每一列对应着一个 `Series` 类型。
 
 - Pandas 数据类型：
 
@@ -35,11 +35,11 @@
 # 不指定索引，也会有默认的位置索引（0...n），从 0 开始
 pd.Series(range(5))
 # 加上自定义索引，会和默认索引共存
-pd.Series([9, 8, 7, 6], ['a', 'b', 'c', 'd']) 
+pd.Series([9, 8, 7, 6], ['a', 'b', 'c', 'd'])
 # 字典形式创建
-pd.Series({'a':1, 'b':2, 'c':3}) 
+pd.Series({'a':1, 'b':2, 'c':3})
 # 根据索引选择字典中的值，不存在返回 NaN
-pd.Series({'a':8, 'b':9, 'c':7}, ['c', 'b', 'd', 'a']) 
+pd.Series({'a':8, 'b':9, 'c':7}, ['c', 'b', 'd', 'a'])
 # 和 Numpy 完美兼容
 pd.Series(np.arange(3), ['one', 'two', 'three'])
 ```
@@ -170,7 +170,7 @@ df.loc[('state', 'city'), ['name']]
 
 ```python
 # 选取所有出生日期大于等于 1998 年的数据，这里是字符串比较
-df[df['csrq']>='1998'] 
+df[df['csrq']>='1998']
 # 选取所有出生日期大于等于 1997 年小于 1999 年的数据
 df[(df['csrq']>='1997')&(data['csrq']<'1999')]
 # 选取所有出生日期大于等于 1997 年小于 1999 年的数据
@@ -178,60 +178,84 @@ df[df['csrq'].between('1997', '1999')]
 # 选取所有出生日期大于等于 1997 年或者姓名为张三的数据
 df[(df['csrq']>='1997')|(data['xm']=='张三')]
 # 另一种选取方式（不推荐，实测效率比上面低）
-df[df.csrq>='1998'] 
+df[df.csrq>='1998']
 # 选择字段值为指定内容的数据
-df[df['xm'].isin(['张三','李四'])] 
+df[df['xm'].isin(['张三','李四'])]
 ```
 
-### `Series `对象的使用实例：
+### `Series` 对象的使用实例：
 
 重要属性：
 
 ```python
-s.values  # 所有元素的value, ndarray类型
-s.dtype  # 元素类型
-s.size  # 元素的数量
-s.itemsize  # 每个元素的大小, 字节为单位
-s.nbytes  # 所有数据占用的大小, 字节为单位, 等于s.size*s.itemsize
+# 所有元素的 value，ndarray 类型
+s.values
+# 元素类型
+s.dtype
+# 元素的数量
+s.size
+# 每个元素的大小，字节为单位
+s.itemsize
+# 所有数据占用的大小，字节为单位，等于 `s.size * s.itemsize`
+s.nbytes
 ```
 
 常用方法：
 
 ```python
-s.unique()  # 返回一个去重后的ndarray数组
-s.value_counts(dropna=False)  # 显示唯一值和计数, dropna=False代表不包含NaN
-s.drop(0)  # 删除第一行, 非原地
-s.append(s)  # 在行尾添加数据, s是Series对象
-s.apply(func)  # 将func作用在s所有值上
-s.sort_values()  # 根据s的value排序, 可传入ascending参数决定升序降序
-s.sort_index()  # 根据s的index排序, 可传入ascending参数决定升序降序
-s.astype()  # 改变类型, 非原地
+# 返回一个去重后的 ndarray 数组
+s.unique()
+# 显示唯一值和计数，dropna=False 代表不包含 NaN
+s.value_counts(dropna=False)
+# 删除第一行，非原地
+s.drop(0)
+# 在行尾添加数据，s 是 Series 对象
+s.append(s)
+# 将 func 作用在 s 所有值上
+s.apply(func)
+# 根据 s 的 value 排序，可传入 ascending 参数决定升序降序
+s.sort_values()
+# 根据 s 的 index 排序，可传入 ascending 参数决定升序降序
+s.sort_index()
+# 改变类型，非原地
+s.astype()
 ```
 
 `str` 系列方法：
 
 ```python
-s.str.xxx()  # 和python原生字符串操作基本一致, 只不过作用于所有元素
-s.str[1, -1]  # 支持切片, 同样作用于所有元素
+# 和 Python 原生字符串操作基本一致，只不过作用于所有元素
+s.str.xxx()
+# 支持切片，同样作用于所有元素
+s.str[1, -1]
 ```
 
 `dt` 系列方法， 先要用 `pd.to_datetime(s['time']) ` 或 `s.astype('datetime64[ns]')` 把 `Series` 对象元素类型转成 `datetime64[ns]` 类型：
 
 ```python
-s.dt.date()  # 取出年月日
-s.dt.time()  # 取出时间
-s.dt.year()  # 取出年
-s.dt.month()  # 取出月
-s.dt.day()  # 取出日
-s.dt.hour()  # 取出时
-s.dt.minute()  # 取出分
-s.dt.second()  # 取出秒
+# 取出年月日
+s.dt.date()
+# 取出时间
+s.dt.time()
+# 取出年
+s.dt.year()
+# 取出月
+s.dt.month()
+# 取出日
+s.dt.day()
+# 取出时
+s.dt.hour()
+# 取出分
+s.dt.minute()
+# 取出秒
+s.dt.second()
 ```
 
 相关运算：
 
 ```python
-s += 1  # 所有元素加1, 原地
+# 所有元素加 1，原地
+s += 1
 ```
 
 其他符号的运算与此类似。
@@ -243,111 +267,172 @@ s += 1  # 所有元素加1, 原地
 重要属性：
 
 ```python
-df.values  # 查看所有元素的value
-df.dtypes  # 查看所有元素的类型
-df.index  # 查看所有行名, 后加.tolist(), 可以返回列表
-df.index = ['总数', '不同', '最多', '频率']  # 重命名行名
-df.columns  # 查看所有列名, 后加.tolist(), 可以返回列表
-df.columns = ['班级', '姓名', '性别', '出生日期']  # 重命名列名
-df.T  # 转置后的df, 非原地
+# 查看所有元素的 value
+df.values
+# 查看所有元素的类型
+df.dtypes
+# 查看所有行名，后加 `.tolist()`，可以返回列表
+df.index
+# 重命名行名
+df.index = ['总数', '不同', '最多', '频率']
+# 查看所有列名，后加 `.tolist()`，可以返回列表
+df.columns
+# 重命名列名
+df.columns = ['班级', '姓名', '性别', '出生日期']
+# 转置后的 df，非原地
+df.T
 ```
 
 查看数据：
 
 ```python
-df.head(n)  # 查看df前n条数据, 默认5条
-df.tail(n)  # 查看df后n条数据, 默认5条
-df.shape()  # 查看行数和列数
-df.info()  # 查看索引, 数据类型和内存信息
+# 查看 df 前 n 条数据, 默认 5 条
+df.head(n)
+# 查看 df 后 n 条数据, 默认 5 条
+df.tail(n)
+# 查看行数和列数
+df.shape()
+# 查看索引，数据类型和内存信息
+df.info()
 ```
 
 数据统计：
 
 ```python
-df.describe()  # 查看数据值列的汇总统计, 是DataFrame类型
-df.count()  # 返回每一列中的非空值的个数
-df.sum()  # 返回每一列的和, 无法计算返回空, 下同
-df.sum(numeric_only=True)  # numeric_only=True代表只计算数字型元素, 下同
-df.max()  # 返回每一列的最大值
-df.min()  # 返回每一列的最小值
-df.argmax()  # 返回最大值所在的自动索引位置
-df.argmin()  # 返回最小值所在的自动索引位置
-df.idxmax()  # 返回最大值所在的自定义索引位置
-df.idxmin()  # 返回最小值所在的自定义索引位置
-df.mean()  # 返回每一列的均值
-df.median()  # 返回每一列的中位数
-df.var()  # 返回每一列的方差
-df.std()  # 返回每一列的标准差
-df.isnull()  # 检查df中空值, NaN为True, 否则False, 返回一个布尔数组
-df.notnull()  # 检查df中空值, 非NaN为True, 否则False, 返回一个布尔数组
+# 查看数据值列的汇总统计，是 DataFrame 类型
+df.describe()
+# 返回每一列中的非空值的个数
+df.count()
+# 返回每一列的和，无法计算返回空，下同
+df.sum()
+# `numeric_only=True` 代表只计算数字型元素，下同
+df.sum(numeric_only=True)
+# 返回每一列的最大值
+df.max()
+# 返回每一列的最小值
+df.min()
+# 返回最大值所在的自动索引位置
+df.argmax()
+# 返回最小值所在的自动索引位置
+df.argmin()
+# 返回最大值所在的自定义索引位置
+df.idxmax()
+# 返回最小值所在的自定义索引位置
+df.idxmin()
+# 返回每一列的均值
+df.mean()
+# 返回每一列的中位数
+df.median()
+# 返回每一列的方差
+df.var()
+# 返回每一列的标准差
+df.std()
+# 检查 df 中空值，NaN 为 True，否则 False，返回一个布尔数组
+df.isnull()
+# 检查 df 中空值，非 NaN 为 True，否则 False，返回一个布尔数组
+df.notnull()
 ```
 
 数据处理：
 
 ```python
-df = df[['xm','csrq']]  # 改变列顺序
-df.astype({'xh':'int', 'csrq':'datetime64[ns]'})  # 改变指定列元素类型, 非原地
-df.drop_duplicates(['xm', 'xh'])  # 根据xm和xh去重, 默认保留第一个数据, 非原地
-df.drop_duplicates(keep='last')  # 不传入参数, 所有列相同才会去重, 保留最后一个数据, 非原地
-df.drop_duplicates(keep=False)  # 不保留重复项(求差集), 非原地
-df.sort_values(by='csrq')  # 根据csrq排序, 默认升序, 非原地
-df.sort_values(['col1', 'col2'], ascending=[True, False])  # ascending决定升序降序
-df.replace(1,'one')  # 用'one'代替所有等于1的值
-df.replace([1,3], ['one','three'])  # 用'one'代替1，用'three'代替3
-df.fillna(x)  # 用x替换df中所有的空值, 非原地
-df.fillna({'xh':0})  # 用x替换df的xh列中所有的空值
-df.dropna()  # 删除所有包含空值的行
-df.dropna(axis=1)  # 删除所有包含空值的列
-df.dropna(subset=['nj'])  # 删除某列含有空值的行
-df.groupby(['nj', 'bj'])  # 分组功能
-df.set_index(['state', 'city']).sort_index()  # 设置多索引, 并排序索引
-df.applymap(func)  # 把相关函数作用在所有df成员上
-df.apply(lambda x: func(x['sell sku'], x['shape']), axis = 1)  # 根据其他列处理某列
+# 改变列顺序
+df = df[['xm','csrq']]
+# 改变指定列元素类型，非原地
+df.astype({'xh':'int', 'csrq':'datetime64[ns]'})
+# 根据 xm 和 xh 去重，默认保留第一个数据，非原地
+df.drop_duplicates(['xm', 'xh'])
+# 不传入参数，所有列相同才会去重，保留最后一个数据，非原地
+df.drop_duplicates(keep='last')
+# 不保留重复项（求差集），非原地
+df.drop_duplicates(keep=False)
+# 根据 csrq 排序，默认升序，非原地
+df.sort_values(by='csrq')
+# ascending 决定升序降序
+df.sort_values(['col1', 'col2'], ascending=[True, False])
+# 用 'one' 代替所有等于 1 的值
+df.replace(1,'one')
+# 用 'one' 代替 1，用 'three' 代替 3
+df.replace([1,3], ['one','three'])
+# 用 x 替换 df 中所有的空值，非原地
+df.fillna(x)
+# 用 x 替换 df 的 xh 列中所有的空值
+df.fillna({'xh':0})
+# 删除所有包含空值的行
+df.dropna()
+# 删除所有包含空值的列
+df.dropna(axis=1)
+# 删除某列含有空值的行
+df.dropna(subset=['nj'])
+# 分组功能
+df.groupby(['nj', 'bj'])
+# 设置多索引，并排序索引
+df.set_index(['state', 'city']).sort_index()
+# 把相关函数作用在所有 df 成员上
+df.applymap(func)
+# 根据其他列处理某列
+df.apply(lambda x: func(x['sell sku'], x['shape']), axis = 1)
 ```
 
 添加和删除：
 
 ```python
-df['cj'] = s  # 假设cj列本来不存在, 这样会在列尾添加新的一列cj, 值为s(Series对象), 原地
-df.iloc[0] = lst  # 添加或修改一个列表在指定行, 原地
-df.insert(0, 'dz', s)  # 在第1列位置插入一列dz(地址), 值为s, 原地
-df.join(df2)  # 在df中添加内容为df2(必须是DataFrame对象)的新列(添加列), 非原地
-df.append(df2)  # 将df2中的行添加到df的尾部(添加行), 非原地
-df.pop('xm')  # 删除单列, 并返回删除的列, 原地
-df.drop(1)  # 删除指定行, 非原地
-df.drop(['xm', 'xh'], axis=1)  # 删除指定列, axis=1指第2维(列), axis默认0(行), 非原地
+# 假设 cj 列本来不存在，这样会在列尾添加新的一列 cj，值为 s（Series 对象），原地
+df['cj'] = s
+# 添加或修改一个列表在指定行，原地
+df.iloc[0] = lst
+# 在第 1 列位置插入一列 dz（地址），值为 s，原地
+df.insert(0, 'dz', s)
+# 在 df 中添加内容为 df2 （必须是 DataFrame 对象）的新列（添加列），非原地
+df.join(df2)
+# 将 df2 中的行添加到 df 的尾部（添加行），非原地
+df.append(df2)
+# 删除单列，并返回删除的列，原地
+df.pop('xm')
+# 删除指定行，非原地
+df.drop(1)
+# 删除指定列，axis=1 指第 2 维（列），axis 默认 0（行），非原地
+df.drop(['xm', 'xh'], axis=1)
 ```
 
 相关运算：
 
 ```python
-df['age'] += 1  # age列所有元素加1, 原地
+# age 列所有元素加 1，原地
+df['age'] += 1
 ```
 
 其他符号运算与此类似。
 
 ### 数据存取相关
 
-sqlite3 存取：
+SQLite 存取：
 
 ```python
-db = sqlite3.connect('data.sqlite')  # 先要连接当前目录下的sqlite3数据库, 不存在则创建
-df.to_sql('table_name', index=False, con=db)  # 导出数据到数据库指定表, 不包含索引
-pd.read_sql('select * from table_name', con=db)  # 从数据库指定表导入指定列数据
+# 先要连接当前目录下的 sqlite3 数据库，不存在则创建
+db = sqlite3.connect('data.sqlite')
+# 导出数据到数据库指定表，不包含索引
+df.to_sql('table_name', index=False, con=db)
+# 从数据库指定表导入指定列数据
+pd.read_sql('select * from table_name', con=db)
 ```
 
-csv 存取：
+CSV 存取：
 
 ```python
-df.to_csv('example.csv', index=False)  # 导出数据到csv文件, 不包含索引
-pd.read_csv('example.csv')  # 从csv文件导入数据
+# 导出数据到 CSV 文件，不包含索引
+df.to_csv('example.csv', index=False)
+# 从 CSV 文件导入数据
+pd.read_csv('example.csv')
 ```
 
 Excel 存取：
 
 ```python
-df.to_excel('example.xlsx', engine='xlsxwriter')  # 导出数据到excel文件
-pd.read_excel('example.xlsx')  # 从excel文件导入数据
+# 导出数据到 Excel 文件
+df.to_excel('example.xlsx', engine='xlsxwriter')
+# 从 Excel 文件导入数据
+pd.read_excel('example.xlsx')
 ```
 
 存 Excel 的高级用法，可以指定 sheet：
@@ -356,7 +441,7 @@ pd.read_excel('example.xlsx')  # 从excel文件导入数据
 writer = pd.ExcelWriter(
     'example.xlsx',
     engine='xlsxwriter',
-    options={'strings_to_urls': False}  # 直接存 url 会有6w的上限，改成字符串形式
+    options={'strings_to_urls': False}  # 直接存 url 会有 6w 的上限，改成字符串形式
 )
 df.to_excel(writer, sheet_name='Sheet1')
 df2.to_excel(writer, sheet_name='Sheet2')
@@ -375,14 +460,14 @@ collection.insert_many(records)
 ### Pandas 常用函数
 
 ```python
-# 将Series对象转换成时间类型, 可以用相关方法
-pd.to_datetime(s) 
+# 将 Series 对象转换成时间类型，可以用相关方法
+pd.to_datetime(s)
 
-# 生成一个时间列表, periods决定数量, freq决定单位, 比如这里'D'是指天
-# 成员是Timestamp类型, 可以使用相关方法
-pd.date_range('2017-7-27', periods=15, freq='D') 
+# 生成一个时间列表，periods 决定数量，freq 决定单位，比如这里 'D' 是指天
+# 成员是 Timestamp 类型，可以使用相关方法
+pd.date_range('2017-7-27', periods=15, freq='D')
 
-# 判断某个值是否为NAN
-# 也可判断df, 返回一个bool类型的df
+# 判断某个值是否为 NAN
+# 也可判断 df, 返回一个 bool 类型的 df
 pd.isna(df)
 ```
