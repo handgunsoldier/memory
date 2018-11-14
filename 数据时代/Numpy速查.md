@@ -20,14 +20,14 @@
 
 1.用列表，元组等创建：
 
-```bash
+```python
 np.array([1, 2, 3, 4])  # 根据传入的类型，自动判断 dtype
 np.array([[1,2], [3,4], (0.5,0.6)])  # 支持列表，元组混合
 ```
 
 2.用 Numpy 中的函数创建：
 
-```bash
+```python
 np.arange(10)  # 类似 range，但返回 ndarray 类型
 np.ones((3, 6), dtype=np.int32)  # 根据 shape 生成全为 1 的数组，这里指定了数据类型
 np.zeros(3)  # 根据 shape 生成全为 0 的数组
