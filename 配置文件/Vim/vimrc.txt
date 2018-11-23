@@ -15,20 +15,16 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ludovicchabant/vim-gutentags'
 
 " 静态检查
-Plug 'w0rp/ale', { 'for': ['c', 'cpp', 'rust'] }
-
-" rust 代码补全
-"Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'w0rp/ale', { 'for': ['c', 'cpp'] }
 
 " 缩进线
 Plug 'Yggdroot/indentLine'
 
-" Python 代码补全
-"Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+" rust 代码补全
+"Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 
-" Python 括号缩进
-"Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
-
+" go
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Initialize plugin system
 call plug#end()
@@ -68,8 +64,9 @@ set laststatus=2
 set t_Co=256
 
 " 以下三个配置配合使用，设置tab和缩进空格数
-set expandtab  " 转换tab为空格
-set softtabstop=4 " Tab 转为多少个空格
+set tabstop=4  " tab 长度
+set expandtab  " 转换 tab 为空格
+set softtabstop=4 " tab 转为多少个空格
 set shiftwidth=4  " 在文本上按下>>（增加一级缩进）、<<（取消一级缩进）或者==（取消全部缩进）时，每一级的字符数
 
 " airline config
@@ -120,13 +117,14 @@ let g:ale_linters = {
 \   'c': ['gcc'],
 \   'cpp': ['gcc'],
 \   'rust': ['cargo'],
-\   'python': ['pylint', 'mypy'],
+\   'go': ['gofmt', 'gometalinter'],
+\   'python': ['pylint'],
 \}
 let g:ale_c_gcc_options = '-Wall'
 let g:ale_cpp_gcc_options = '-Wall -O2'
 let g:ale_rust_cargo_use_check = 1
 " 忽略部分 pylint 检查
-let g:ale_python_pylint_options = '--disable=trailing-newlines,missing-docstring,invalid-name,trailing-whitespace,wildcard-import,useless-super-delegation'
+"let g:ale_python_pylint_options = '--disable=trailing-newlines,missing-docstring,invalid-name,trailing-whitespace,wildcard-import,useless-super-delegation'
 "let g:ale_python_mypy_options = ''
 
 " rust
@@ -136,18 +134,15 @@ set hidden
 let g:racer_cmd = '/usr/bin/racer'
 " rust 源码位置
 let $RUST_SRC_PATH = '/usr/lib/rustlib/src/rust/src'
+" 显示完整函数定义
+let g:racer_experimental_completer = 1
+" 不弹出doc
+autocmd FileType rust setlocal completeopt-=preview
+" 按键映射
+au FileType rust nmap gd <Plug>(rust-def)
+"au FileType rust nmap gs <Plug>(rust-def-split)
+"au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 " 缩进线颜色
 let g:indentLine_color_term = 240
-
-" Python代码补全
-" 快捷键
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-p>"
-let g:jedi#rename_command = "<leader>r"
-" 不弹出docstring
-autocmd FileType python setlocal completeopt-=preview

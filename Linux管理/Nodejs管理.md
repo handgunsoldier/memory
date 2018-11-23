@@ -44,6 +44,12 @@ git checkout <tag名>  # 切换
 命令：
 
 ```bash
-npm i <包名> -g  # 全局安装包
+npm init  # 在此目录生成 package.json 文件
+
+npm install <package> [-g]  # 安装包，加 -g 为全局
+npm uninstall <package> [-g]  # 卸载包
+
+npm ls [-g] [--depth=0]  # 查看当前目录或全局的依赖包，可指定层级为 0（第一层）
+npm outdated [-g]  # 查看过期依赖
 ```
 

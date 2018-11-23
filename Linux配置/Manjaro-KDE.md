@@ -372,6 +372,13 @@ pip install psycopg2-binary  # PostgreSQL
 pip install pymysql  # MySQL
 ```
 
+### npm 必装
+
+```bash
+npm install eslint -g  # js 代码检查
+npm install @vue/cli -g  # Vue 快速构建工具
+```
+
 ### 安装 Windows 字体
 
 先将 Windows 字体放入 */usr/share/fonts/winfonts*，然后在该目录执行如下命令：

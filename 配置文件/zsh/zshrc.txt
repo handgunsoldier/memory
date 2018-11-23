@@ -209,19 +209,14 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
     ;;
 esac
 
-
-
-# alias
-alias sss="sslocal -c /etc/shadowsocks.json"
-alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
-alias unsetproxy="unset ALL_PROXY"
-alias mitmproxy="mitmproxy --set console_mouse=false"
-
 # color
 alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
+
+# chromium ssl key
+# export SSLKEYLOGFILE=/tmp/ssl.key
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -230,9 +225,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-# chromium ssl key
-#export SSLKEYLOGFILE=/tmp/ssl.key
-
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -240,4 +232,12 @@ export NVM_DIR="$HOME/.nvm"
 
 # go
 export GOROOT="/usr/lib/go"
-export GOPATH="$HOME/Documents/code/go"
+export GOPATH="$HOME/.gopath"
+export GOBIN="$GOPATH/bin"
+export PATH="$PATH:$GOBIN"
+
+# alias
+alias sss="sslocal -c /etc/shadowsocks.json"
+alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
+alias unsetproxy="unset ALL_PROXY"
+alias mitmproxy="mitmproxy --set console_mouse=false"

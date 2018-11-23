@@ -1,7 +1,7 @@
 {
     "update.channel": "none",
     "update.enableWindowsBackgroundUpdates": false,
-    "workbench.colorTheme": "Atom One Dark",
+    "workbench.colorTheme": "One Dark Pro",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.statusBar.feedback.visible": false,
     "telemetry.enableTelemetry": false,
@@ -23,6 +23,12 @@
         "javascript",
         "javascriptreact",
         "vue",
+    ],
+    "C_Cpp.autocomplete": "Disabled",
+    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.formatting": "Disabled",
+    "clang.cflags": [
+        "-std=gnu17"
     ],
     //"vetur.validation.template": false,
 }
