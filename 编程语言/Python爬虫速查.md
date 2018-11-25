@@ -74,9 +74,9 @@ r.raise_for_status()  # 如果返回的http状态码在400和500或500和600之�
 ### 注意点
 
 - 如果不传入 headers 参数，requests 会采用一个默认的 headers，为 `{'User-Agent': 'python-requests/x.x.x', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}` 。传入 headers 参数后，会在默认 headers 的基础上更新，即字典的 `update()` 方法。
-- `proxies`参数接受一个字典, 该字典一般有两个key, "http"和"https", 如果是https请求就会使用https对应的代理, 否则使用http对应的. 如果与协议对应的key不存在, 那么会不使用代理(即其实使用的是**你真实主机IP**), 这点很坑, 会让人误以为当前代理是可用的.
-- `s = requests.Session()`创建一个会话对象, 支持上下文管理器. 会话对象让你能够跨请求保持某些参数, 它也会在同一个Session实例发出的所有请求之间保持cookie, 所以如果你向同一主机发送多个请求, 底层的 TCP 连接将会被重用, 从而带来显著的性能提升.
-- `from requests.exceptions import RequestException`, 引入requests所有异常的基类, except该异常, 可以捕获所有requests的异常.
+- `proxies`参数接受一个字典，该字典一般有两个 key，"http" 和 "https"，如果是 https 请求就会使用 https 对应的代理, 否则使用 http 对应的。如果与协议对应的 key 不存在，那么会不使用代理（即其实使用的是**你真实主机IP**），这点很坑, 会让人误以为当前代理是可用的。
+- `s = requests.Session()` 创建一个会话对象, 支持上下文管理器. 会话对象让你能够跨请求保持某些参数, 它也会在同一个 `Session` 实例发出的所有请求之间保持 cookie，所以如果你向同一主机发送多个请求, 底层的 TCP 连接将会被重用，从而带来显著的性能提升。
+- `from requests.exceptions import RequestException`，引入 requests 所有异常的基类，except 该异常，可以捕获所有 requests 的异常。
 
 ## lxml
 

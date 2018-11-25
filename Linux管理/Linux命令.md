@@ -1,6 +1,6 @@
-## Linux 命令
+# Linux 命令
 
-### 系统监控
+## 系统监控
 
 ```bash
 # 查看进程
@@ -53,7 +53,7 @@ watch grep \"cpu MHz\" /proc/cpuinfo
 cpupower frequency-info
 ```
 
-### 查看文件
+## 查看文件
 
 ```bash
 # 查看文件详细信息
@@ -68,9 +68,9 @@ wc <文本文件>
 ldd <程序名> 
 ```
 
-### 网络相关
+## 网络相关
 
-- ip
+### ip 命令
 
 ```bash
 # 查看所有IP
@@ -87,7 +87,7 @@ ip -s link show up
 ip neighbour 
 ```
 
-- ss
+### ss 命令
 
 ```bash
 # 语法
@@ -116,7 +116,7 @@ ss -lntp # 查看监听的端口
 ss -antp # 查看所有建立的tcp连接
 ```
 
-- 其他
+### 其他命令
 
 ```bash
 # 查看网卡信息
@@ -143,9 +143,12 @@ curl <URL>
 wget <URL>
 # 取得域名 dns 信息
 dig <domain>
+# 拷贝远程主机文件到本机
+# 也可以拷贝本机文件到远程主机
+scp <远程用户名>@<IP>:<目录> <本地路径>
 ```
 
-### 进程管理
+## 进程管理
 
 ```bash
 # Ctrl+z会使当前进程挂起
@@ -159,7 +162,7 @@ nohup python3 fuck.py > /dev/null &
 kill [-signum] <pid> 
 ```
 
-### 服务管理
+## 服务管理
 
 ```bash
 # 查看所有服务单元
@@ -176,7 +179,7 @@ systemctl status <服务名>
 journalctl -f <服务名> 
 ```
 
-### 用户管理
+## 用户管理
 
 ```bash
 # 切换用户, 加上-会使shell环境也切换
@@ -214,7 +217,7 @@ chgrp <组名> <文件名>
 chmod 644 <文件名> 
 ```
 
-### 查找
+## 查找
 
 ```bash
 # 根据内容查找文件(r), 忽略大小写(i), 输出行号(n)
@@ -238,9 +241,9 @@ find <目录> -tye <类型>
 	# 管道: p
 ```
 
-### 压缩解压缩
+## 压缩解压缩
 
-- tar.gz格式
+- tar.gz 格式
 
 ```bash
 # 压缩
@@ -249,7 +252,7 @@ tar -zcvf <打包后文件名.tar.gz> <打包文件夹名>
 tar -zxvf <文件名.tar.gz>
 ```
 
-- tar.bz2格式
+- tar.bz2 格式
 
 ```bash
 # 压缩
@@ -258,25 +261,25 @@ tar -jcvf <打包后文件名.tar.bz2> <打包文件夹名>
 tar -jxvf <文件名.tar.bz2>
 ```
 
-- zip格式
+- zip 格式
 
 ```bash
 # 压缩
 zip  <打包后文件名.zip> <打包文件夹名>
-# 解压缩, 需安装unzip
+# 解压缩, 需安装 unzip
 unzip <文件名.zip>
 ```
 
-- rar格式
+- rar 格式
 
 ```bash
 # 压缩
-rar a <打包后文件名.rar> <打包文件夹名> # a指压缩
+rar a <打包后文件名.rar> <打包文件夹名> # a 指压缩
 # 解压缩
-rar x <文件名.rar> # x指解压
+rar x <文件名.rar> # x 指解压
 ```
 
-### 定时任务
+## 定时任务
 
 首先必须启动守护进程（进程名叫 crond）：
 
@@ -316,7 +319,7 @@ crontab -r
 3,15 8-11 */2 * * command
 ```
 
-### 其他命令
+## 其他命令
 
 ```bash
 # 查看命令所在目录
