@@ -125,7 +125,7 @@ git config --global user.email "zzzzer91@gmail.com"
 ssh-keygen -t rsa -C "zzzzer91@gmail.com"
 ```
 
-## Pyenv
+### Pyenv
 
 ``` bash
 # 安装

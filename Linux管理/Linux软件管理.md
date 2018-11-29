@@ -1,6 +1,6 @@
 # Linux 软件管理
 
-## 1. Arch 系
+## Arch 系
 
 ### pacman
 
@@ -50,13 +50,11 @@ pacman -Scc
 
 用于下载、更新 AUR 软件，命令与 pacman 基本一致。
 
-## 2. Debian 系
+## Debian 系
 
 ### apt
 
-
-
-## 3. Redhat 系
+## Redhat 系
 
 ### yum
 

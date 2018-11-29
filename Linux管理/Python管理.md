@@ -1,6 +1,6 @@
-## Python 管理
+# Python 管理
 
-### 版本管理：Pyenv
+## 版本管理：Pyenv
 
 命令：
 
@@ -30,7 +30,7 @@ git tag  # 检查可用版本
 git checkout <tag名>  # 切换
 ```
 
-### 包管理: Pip
+## 包管理: Pip
 
 命令：
 
@@ -59,7 +59,7 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple <PACKAGE_NAME>
 pip uninstall <PACKAGE_NAME> 
 ```
 
-### Pipenv
+## Pipenv
 
 命令：
 

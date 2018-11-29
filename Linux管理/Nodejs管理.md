@@ -1,6 +1,6 @@
-## Node.js 管理
+# Node.js 管理
 
-### 版本管理：Nvm
+## 版本管理：Nvm
 
 命令：
 
@@ -39,7 +39,7 @@ git tag  # 检查可用版本
 git checkout <tag名>  # 切换
 ```
 
-### 包管理：Npm
+## 包管理：Npm
 
 命令：
 
