@@ -262,7 +262,7 @@ s += 1
 
 ### `DataFrame` 对象的使用实例
 
-大部分也适用Series类型。
+大部分也适用 `Series` 类型。
 
 重要属性：
 
@@ -471,3 +471,4 @@ pd.date_range('2017-7-27', periods=15, freq='D')
 # 也可判断 df, 返回一个 bool 类型的 df
 pd.isna(df)
 ```
+

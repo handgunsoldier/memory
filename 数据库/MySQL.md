@@ -103,6 +103,10 @@ select * from (select biz, max(publish_time) as publish_time from wechat.post_li
 select from_unixtime(unix_timestamp(date(now())))
 ```
 
+## 其他
+
+Windows 下，可在 *my.ini* 中加一行 `skip-grant-tables`，然后重启 mysql 服务，可跳过所有密码验证。
+
 ## Python连接
 
 ### 安装驱动

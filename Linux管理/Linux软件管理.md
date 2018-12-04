@@ -22,6 +22,8 @@ sudo pacman -Syy # 两个 yy 代表强制刷新
 ```bash
 # 同步源，并检查更新
 sudo pacman -Syu
+# 强制刷新源，并强制更新（用于软件降级）
+sudo pacman -Syyuu
 # 安装指定包
 sudo pacman -S <package_name>
 # 显示信息后，安装指定包

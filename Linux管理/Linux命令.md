@@ -284,7 +284,7 @@ rar x <文件名.rar> # x 指解压
 首先必须启动守护进程（进程名叫 crond）：
 
 ```bash
-systemctl start cronie 
+systemctl start cronie  # centos7 下叫 crond
 ```
 
 几个命令：
@@ -317,6 +317,12 @@ crontab -r
 3,15 8-11 * * * command
 # 每隔两天的上午8点到11点的第3和第15分钟执行
 3,15 8-11 */2 * * command
+```
+
+查看输出：
+
+```bash
+systemctl status cronie 
 ```
 
 ## 其他命令

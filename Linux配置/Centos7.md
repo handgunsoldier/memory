@@ -81,6 +81,13 @@ sudo systemctl restart sshd.service # 重启ssh
 sudo yum upgrade
 ```
 
+更新后，若出现 *.rpmnew* 文件，则
+
+```bash
+sudo yum install rpmconf  # 安装这个工具
+sudo rpmconf -a  # 运行这个命令，自动覆盖
+```
+
 ### 安装所需依赖
 
 Python3 依赖：
