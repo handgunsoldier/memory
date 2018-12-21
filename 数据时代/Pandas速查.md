@@ -429,7 +429,8 @@ pd.read_csv('example.csv')
 Excel 存取：
 
 ```python
-# 导出数据到 Excel 文件
+# 导出数据到 Excel 文件，指定 Excel engine
+# 这个 engine 更快
 df.to_excel('example.xlsx', engine='xlsxwriter')
 # 从 Excel 文件导入数据
 pd.read_excel('example.xlsx')
