@@ -81,10 +81,10 @@ git tag -d <tag_name>
 
 ```bash
 # 如当前分支有修改, 还没提交, 要把当前现场状态储存起来, 这样才能切换分支
-git slash # 储存当前工作状态
-git slash list # 查看所有存储起来到状态
-git slash apply # 恢复之前状态, 但slash的内容不删除
-git slash pip # 恢复之前状态,slash的内容删除
+git stash # 储存当前工作状态
+git stash list # 查看所有存储起来到状态
+git stash apply # 恢复之前状态, 但slash的内容不删除
+git stash pop # 恢复之前状态,slash的内容删除
 
 # 创建并切换到dev分支, 相当于 git brach dev;git checkout dev
 git checkout -b dev

@@ -274,6 +274,25 @@ export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOBIN"
 ```
 
+### Rust
+
+安装：
+
+```bash
+curl https://sh.rustup.rs -sSf | sh
+```
+
+配置 vim 增强 rust 前置需求：
+
+```bash
+# 安装 racer
+rustup toolchain add nightly
+cargo +nightly install racer
+
+# 安装 rust 源码
+rustup component add rust-src
+```
+
 ### VirtualBox
 
 安装：

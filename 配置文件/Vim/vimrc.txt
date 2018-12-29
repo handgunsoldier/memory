@@ -15,13 +15,13 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ludovicchabant/vim-gutentags'
 
 " 静态检查
-Plug 'w0rp/ale', { 'for': ['c', 'cpp'] }
+Plug 'w0rp/ale', { 'for': ['c', 'cpp', 'rust'] }
 
 " 缩进线
 Plug 'Yggdroot/indentLine'
 
 " rust 代码补全
-"Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 
 " go
 "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -131,9 +131,9 @@ let g:ale_rust_cargo_use_check = 1
 " 手动补全和定义跳转
 set hidden
 " 这一行指的是你编译出来的racer所在的路径
-let g:racer_cmd = '/usr/bin/racer'
+let g:racer_cmd = '/home/zzzzer/.cargo/bin/racer'
 " rust 源码位置
-let $RUST_SRC_PATH = '/usr/lib/rustlib/src/rust/src'
+let $RUST_SRC_PATH = '/home/zzzzer/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 " 显示完整函数定义
 let g:racer_experimental_completer = 1
 " 不弹出doc
