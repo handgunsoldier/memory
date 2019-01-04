@@ -87,9 +87,9 @@ source /home/abc/abc.sql;
 
 - 「defalut characterse」就是 schema 或 table 用的字符集，建议使用 `utf8mb4` 。
 - 「default collation」影响字符串的排序规则，一般使用 `utf8mb4_general_ci` 。
-  - utf8mb4_unicode_ci 是基于标准的 Unicode 来排序和比较，能够在各种语言之间精确排序。
-  - utf8mb4_general_ci 没有实现 Unicode 排序规则，在遇到某些特殊语言或者字符集，排序结果可能不一致。
-  - ci 是 case insensitive，即 「大小写不敏感」, a 和 A 会在字符判断中会被当做一样的。
+    - utf8mb4_unicode_ci 是基于标准的 Unicode 来排序和比较，能够在各种语言之间精确排序。
+    - utf8mb4_general_ci 没有实现 Unicode 排序规则，在遇到某些特殊语言或者字符集，排序结果可能不一致。
+    - ci 是 case insensitive，即 「大小写不敏感」, a 和 A 会在字符判断中会被当做一样的。
 
 ## 几条值得参考的sql语句
 

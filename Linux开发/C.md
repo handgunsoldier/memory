@@ -59,7 +59,7 @@ objdump -S main.o
 
 ### 命名规则
 
-  lib + 库名 + .a，如 `libtest.a`，库名就是 test 。
+lib + 库名 + .a，如 `libtest.a`，库名就是 test 。
 
 ### 制作步骤
 
@@ -103,26 +103,26 @@ gcc -shared test.o -o libtest.so
 
 ### 设置全局调用
 
-1. 设置用户头文件位置
+1、设置用户头文件位置
 
-   修改 `.bashrc`，添加下面一行：
+修改 `.bashrc`，添加下面一行：
 
-   ```bash
-   export C_INCLUDE_PATH=$HOME/Documents/share/include
-   ```
+```bash
+export C_INCLUDE_PATH=$HOME/Documents/share/include
+```
 
-   这样编译时可不指定头文件目录（`-I<目录>`）。
+这样编译时可不指定头文件目录（`-I<目录>`）。
 
-2. 设置用户动态库位置
+2、设置用户动态库位置
 
-   修改 `.bashrc`，添加下面两行：
+修改 `.bashrc`，添加下面两行：
 
-   ```bash
-   export LIBRARY_PATH=$HOME/Documents/share/mylib  # gcc 编译链接时查找路径
-   export LD_LIBRARY_PATH=$HOME/Documents/share/mylib  # 运行时查找路径
-   ```
+```bash
+export LIBRARY_PATH=$HOME/Documents/share/mylib  # gcc 编译链接时查找路径
+export LD_LIBRARY_PATH=$HOME/Documents/share/mylib  # 运行时查找路径
+```
 
-   这样编译时只需指定 `-l<动态库名>`，不需要指定 `-L<目录>` 。
+这样编译时只需指定 `-l<动态库名>`，不需要指定 `-L<目录>` 。
 
 ### 查看程序使用了哪些动态库
 

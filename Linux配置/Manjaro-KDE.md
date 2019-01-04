@@ -447,7 +447,7 @@ EDITOR="/usr/bin/vim"
 
 ### 启开机动过程出现 `error: resume: no device specified for hibernation`
 
-修改 */etc/default/grub* 的 `GRUB_CMDLINE_LINUX_DEFAULT`，添加 `resume=/dev/nvme0n1p3`，其中，nvmeon1p3 是交换分区名，可以用 `fdisk -l` 命令查看。
+修改 */etc/default/grub* 的 `GRUB_CMDLINE_LINUX_DEFAULT`，添加 `resume=/dev/nvme0n1p3`，其中，nvme0n1p3 是交换分区名，可以用 `fdisk -l` 命令查看。
 
 ### `sudo update-grub` 后出现 `/usr/bin/grub-probe: warning: unknown device type nvme0n1.`
 

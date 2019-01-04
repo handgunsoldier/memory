@@ -4,15 +4,15 @@
 
 ### 设置密码(可选)
 
-1. 修改配置文件：
+1、修改配置文件：
 
-   ```bash
-   sudo vim /etc/redis.conf
-   ```
+```bash
+sudo vim /etc/redis.conf
+```
 
-2. 取消 requirepass 的注释, 后面加上密码。
+2、取消 requirepass 的注释, 后面加上密码。
 
-3. 重启 Redis 。
+3、重启 Redis 。
 
 ### 启动
 
@@ -21,7 +21,6 @@
 ```bash
 sudo systemctl start redis
 ```
-
 前台启动：
 
 ```bash
