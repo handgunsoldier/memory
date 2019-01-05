@@ -433,7 +433,7 @@ c.NotebookApp.password = 'xxx'
 
 ### Intellij 配置
 
-Intellij 要查看 Java 源码，需要额外安装 `sudo pacman -S openjdk8-src`，然后在 Project Structure 的 SDKs 中的 Sourcepath 中，添加安装的 *src.zip*，不需要解压。
+Intellij 要查看 Java 源码，需要额外安装 `sudo pacman -S openjdk-src`，然后在 Project Structure 的 SDKs 中的 Sourcepath 中，添加安装的 *src.zip*，不需要解压。
 
 ### 其他
 
