@@ -8,9 +8,9 @@
 cargo new hello_cargo --bin
 ```
 
-第一行命令新建了名为 *hello_cargo* 的二进制可执行程序。传递给 `cargo new` 的 `--bin` 参数生成一个可执行程序（通常就叫做 **二进制文件**，*binary*），而不是一个库。项目的名称被定为 `hello_cargo`，同时 Cargo 在一个同名目录中创建项目文件。
+第一行命令新建了名为 *hello_cargo* 的二进制可执行程序。传递给 `cargo new` 的 `--bin` 参数生成一个可执行程序（通常就叫做 **二进制文件**，*binary*），而不是一个库。项目的名称被定为 `hello_cargo`，同时 Cargo 在一个同名目录中创建项目文件。
 
-进入 *hello_cargo* 目录并列出文件。将会看到 Cargo 生成了两个文件和一个目录：一个 *Cargo.toml* 文件和一个 *src* 目录，*main.rs* 文件位于 *src* 目录中。它也在 *hello_cargo* 目录初始化了一个 git 仓库，以及一个 *.gitignore* 文件。
+进入 *hello_cargo* 目录并列出文件。将会看到 Cargo 生成了两个文件和一个目录：一个 *Cargo.toml* 文件和一个 *src* 目录，*main.rs* 文件位于 *src* 目录中。它也在 *hello_cargo* 目录初始化了一个 git 仓库，以及一个 *.gitignore* 文件。
 
 ### 构建并运行 Cargo 项目
 
@@ -20,7 +20,7 @@ $ cargo build
     Finished dev [unoptimized + debuginfo] target(s) in 2.85 secs
 ```
 
-这这个命令会创建 *target/debug/hello_cargo*可执行文件，而不是在目前目录。
+这这个命令会创建 *target/debug/hello_cargo*可执行文件，而不是在目前目录。
 
 可以通过这个命令运行可执行文件：
 
@@ -31,7 +31,7 @@ Hello, world!
 
 如果一切顺利，`Hello, world!` 应该打印在终端上。首次运行 `cargo build` 时也会使 Cargo 在项目根目录创建一个新文件：*Cargo.lock* 。这个文件记录项目依赖的实际版本。这个项目并没有依赖，所以其内容比较少。你自己永远也不需要碰这个文件，让 Cargo 处理它就行了。
 
-也可以使用 `cargo run` 在一个命令中同时编译并运行生成的可执行文件。Cargo 发现文件并没有被改变，就直接运行了二进制文件。如果修改了源文件的话，Cargo 会在运行之前重新构建项目。
+也可以使用 `cargo run` 在一个命令中同时编译并运行生成的可执行文件。Cargo 发现文件并没有被改变，就直接运行了二进制文件。如果修改了源文件的话，Cargo 会在运行之前重新构建项目。
 
 ```
 $ cargo run
@@ -40,7 +40,7 @@ $ cargo run
 Hello, world!
 ```
 
-Cargo 还提供了一个叫 `cargo check` 的命令。该命令快速检查代码确保其可以编译但并不产生可执行文件：
+Cargo 还提供了一个叫 `cargo check` 的命令。该命令快速检查代码确保其可以编译但并不产生可执行文件：
 
 ```bash
 $ cargo check
@@ -66,6 +66,18 @@ $ cargo build
 
 ### 快速查阅文档
 
-你不可能凭空就知道应该 use 哪个 trait 以及该从 crate 中调用哪个方法。crate 的使用说明位于其文档中。Cargo 有一个很棒的功能是：运行 `cargo doc --open` 命令来构建所有本地依赖提供的文档，并在浏览器中打开。例如，假设你对 `rand` crate 中的其他功能感兴趣，你可以运行 `cargo doc --open` 并点击左侧导航栏中的 `rand`。
+你不可能凭空就知道应该 use 哪个 trait 以及该从 crate 中调用哪个方法。crate 的使用说明位于其文档中。Cargo 有一个很棒的功能是：运行 `cargo doc --open` 命令来构建所有本地依赖提供的文档，并在浏览器中打开。例如，假设你对 `rand` crate 中的其他功能感兴趣，你可以运行 `cargo doc --open` 并点击左侧导航栏中的 `rand`。
 
 关于更多 Cargo 的信息，请查阅 [其文档](https://doc.rust-lang.org/cargo/)。
+
+## VIM 与 Rust
+
+在安装和配置好 vim-racer 后，可以在 vim 中补全代码和查看函数源码。
+
+### 补全代码
+
+按下 Ctrl+x，然后再按 Ctrl+o。
+
+### 跳转到函数源码
+
+按 gd 跳转到指定函数源码，Ctrl+o 跳回。

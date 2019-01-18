@@ -132,8 +132,6 @@ let g:ale_rust_cargo_use_check = 1
 set hidden
 " 这一行指的是你编译出来的racer所在的路径
 let g:racer_cmd = '/home/zzzzer/.cargo/bin/racer'
-" rust 源码位置
-let $RUST_SRC_PATH = '/home/zzzzer/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 " 显示完整函数定义
 let g:racer_experimental_completer = 1
 " 不弹出doc
