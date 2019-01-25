@@ -230,7 +230,7 @@ s.str.xxx()
 s.str[1, -1]
 ```
 
-`dt` 系列方法， 先要用 `pd.to_datetime(s['time']) ` 或 `s.astype('datetime64[ns]')` 把 `Series` 对象元素类型转成 `datetime64[ns]` 类型：
+`dt` 系列方法， 先要用 `pd.to_datetime(s['time'])` 或 `s.astype('datetime64[ns]')` 把 `Series` 对象元素类型转成 `datetime64[ns]` 类型：
 
 ```python
 # 取出年月日

@@ -148,78 +148,121 @@ a.copy()
 
 对象在选取后也可进行修改。
 
-```python
-"""假设a是一维的"""
-"""选取单个数据"""
-a[3]  # 选取第4个元素
-"""选取多个数据"""
-a[1:10:2]  # 完全支持切片操作
+假设a是一维的：
 
-"""假设a是三维的"""
+```python
+# 选取第4个元素
+a[3]  
+# 完全支持切片操作
+a[1:10:2]
+```
+
+假设a是三维的：
+
+```python
 """选取单个数据"""
-a[1, 2, 3]  # 选取3维第2号, 2维第3号, 3维第4号元素
-a[1][2][3]  # 另一种选取方式, 但不推荐, 实测比上面慢3倍左右
+a[1, 2, 3]  # 选取 3 维第 2 号，2 维第 3 号，3 维第 4 号元素
+a[1][2][3]  # 另一种选取方式，但不推荐，实测比上面慢 3 倍左右
 a[-1, -2, -3]  # 支持负索引
+
 """选取多个数据"""
 a[:, -1, 3]  # 支持多维切片
 a[:, 1:3, :]
 a[:, :, ::2]
-
-"""无论a是几维的"""
-a[a>10]  # 选取所有大于10的数据
-a[(a>10)&(a<20)]  # 选取所有大于10小于20的数据
-a[(a<=10)|(a>=20)]  # 选取所有小于等于10或大于等于20的数据
-
-"""用方法选取元素"""
-a.item(10)  # 选取第10个元素
-a.item((1,2,3))  # 选取3维第2号, 2维第3号, 3维第4号元素
-"""
-那么该方法与索引选取的区别是什么呢?
-索引选取出来的元素, 原先是什么类型就是什么类型,
-item选取出来的类型会转换成python原生类型,
-所以合理使用这两种选取方式, 能提高性能,
-如你需要与python的int类型做计算时, 你应该用item取元素.
-"""
 ```
+
+无论a是几维的：
+
+```python
+# 选取所有大于 10 的数据
+a[a>10]  
+# 选取所有大于 10 小于 20 的数据
+a[(a>10)&(a<20)]  
+# 选取所有小于等于 10 或大于等于 20 的数据
+a[(a<=10)|(a>=20)]  
+```
+
+用方法选取元素：
+
+```python
+# 选取第 10 个元素
+a.item(10)  
+# 选取 3 维第 2 号，2 维第 3 号，3 维第 4 号元素
+a.item((1,2,3))  
+```
+
+那么该方法选取与索引选取的区别是什么呢？索引选取出来的元素，原先是什么类型就是什么类型，item 选取出来的类型会转换成 Python 原生类型，所以合理使用这两种选取方式，能提高性能，如你需要与 Python 的 int 类型做计算时，你应该用 item 取元素。
 
 ### 数据存取相关
 
+csv 存取，只能存储一维和二维数据：
+
 ```python
-"""csv文件只能存储一维和二维数据"""
-np.savetxt('a.csv', a, fmt='%.1f', delimiter=',')  # 写入数据
-np.loadtxt('a.csv', dtype=np.float, delimiter=',')  # 读取数据, 默认float
+# 写入数据
+np.savetxt('a.csv', a, fmt='%.1f', delimiter=',')
+# 读取数据，默认 float
+np.loadtxt('a.csv', dtype=np.float, delimiter=',')  
+```
 
-"""另一种存储方式, 能存储多维数据"""
-b.tofile('b.dat', sep=',', format='%d')  # 这种存储方式会丢失维度信息
-np.fromfile('b.dat', dtype=np.int, sep=',').reshape(5, 10, 2)  # 需用reshape还原
-b.tofile('b.dat', format='%d')  # 不指定sep会生成二进制文件
-np.fromfile('b.dat', dtype=np.int).reshape(5, 10, 2)  # 需用reshape还原
+另一种存储方式, 能存储多维数据：
 
-"""Numpy 便捷文件存取, 会保存维度, 元素类型信息"""
-np.save('b', b)  # 正常存储,默认.npy格式
-np.savez('b', b)  # 压缩存储, 默认.npz格式
+```python
+# 这种存储方式会丢失维度信息
+b.tofile('b.dat', sep=',', format='%d')
+# 需用 reshape 还原
+np.fromfile('b.dat', dtype=np.int, sep=',').reshape(5, 10, 2)
+# 不指定 sep 会生成二进制文件
+b.tofile('b.dat', format='%d')  
+# 需用 reshape 还原
+np.fromfile('b.dat', dtype=np.int).reshape(5, 10, 2)  
+```
+
+Numpy 便捷文件存取, 会保存维度, 元素类型信息：
+
+```python
+# 正常存储，默认 .npy 格式
+np.save('b', b)
+# 压缩存储，默认 .npz 格式
+np.savez('b', b)
+# 读取
 np.load('b.npy')
 ```
 
 ### Numpy 中的重要统计函数
 
 ```python
-np.gradient(a)  # 返回a中元素的梯度
-np.max(a)  # 返回数组a最大值
-np.min(a)  # 返回数组a最小值
-np.argmax(a)  # 返回数组a最大值的降成一维后的坐标
-np.argmin(a)  # 返回数组a最小值的降成一维后的坐标
-np.unravel_index(index, shape)  # 根据shape将一维下标index转换成多维下标
-np.ptp(a)  # 返回a中最大值与最小值的差
-np.median(a)  # 返回a中元素的中位数
-np.unique(a)  # 返回a去重后的数组, 类似set()
-np.sum(a, axis)  # 根据给定轴axis计算相关元素之和, axis整数或元组
-np.mean(a, axis)  # 根据给定轴axis计算相关元素的期望, axis整数或元组
-np.average(a, axis, weights)  # 根据给定轴axis计算相关元素的加权平均值 axis整数或元组
-np.std(a, axis)  # 根据给定轴axis计算相关元素标准差, axis整数或元组
-np.var(a, axis)  # 根据给定轴axis计算相关元素方差, axis整数或元组
-np.diag(a)  # 以一维数组的形式返回矩阵的对角线元素
-np.trace(a)  # 计算对角线元素的和
+# 返回 a 中元素的梯度
+np.gradient(a)  
+# 返回数组 a 最大值
+np.max(a)  
+# 返回数组 a 最小值
+np.min(a)  
+# 返回数组 a 最大值的降成一维后的坐标
+np.argmax(a)  
+# 返回数组 a 最小值的降成一维后的坐标
+np.argmin(a)  
+# 根据 shape 将一维下标 index 转换成多维下标
+np.unravel_index(index, shape)  
+# 返回 a 中最大值与最小值的差
+np.ptp(a)  
+# 返回 a 中元素的中位数
+np.median(a)  
+# 返回 a 去重后的数组，类似 set()
+np.unique(a)  
+# 根据给定轴 axis 计算相关元素之和，axis 是整数或元组
+np.sum(a, axis)  
+# 根据给定轴 axis 计算相关元素的期望，axis 是整数或元组
+np.mean(a, axis)  
+# 根据给定轴 axis 计算相关元素的加权平均值，axis 是整数或元组
+np.average(a, axis, weights)  
+# 根据给定轴 axis 计算相关元素标准差，axis 是整数或元组
+np.std(a, axis)  
+# 根据给定轴 axis 计算相关元素方差，axis 是整数或元组
+np.var(a, axis)  
+# 以一维数组的形式返回矩阵的对角线元素
+np.diag(a)
+# 计算对角线元素的和
+np.trace(a)  
 ```
 
 ### Numpy 中的重要运算函数
@@ -227,35 +270,59 @@ np.trace(a)  # 计算对角线元素的和
 一元运算：
 
 ```python
-np.abs(x)  # 求数组各元素的绝对值
-np.fabs(x)  # 求数组各元素的绝对值
-np.sqrt(x)  # 求数组各元素的平方根
-np.square(x)  # 求数组各元素的平方
-np.log(x)  # 求数组各元素的自然对数
-np.log2(x)  # 求数组各元素的2底对数
-np.log10(x)  # 求数组各元素的10底对数
-np.ceil(x)  # 求数组各元素的ceiling值
-np.floor(x)  # 求数组各元素的floor值
-np.rint(x)  # 求数组各元素的四舍五入值
-np.modf(x)  # 将数组各元素的整数和小数部分以两个独立数组形式返回
-np.cos(x)  # 求数组各元素的cos值
-np.sin(x)  # 求数组各元素的sin值
-np.tan(x)  # 求数组各元素的tan值
-np.exp(x)  # 求数组各元素的e^n值
-np.sign(x)  # 求数组各元素的符号值, 1(+), 0, -1(-)
+# 求数组各元素的绝对值
+np.abs(x)  
+# 求数组各元素的绝对值
+np.fabs(x)  
+# 求数组各元素的平方根
+np.sqrt(x)  
+# 求数组各元素的平方
+np.square(x)  
+# 求数组各元素的自然对数
+np.log(x)  
+# 求数组各元素的 2 底对数
+np.log2(x)  
+# 求数组各元素的 10 底对数
+np.log10(x)  
+# 求数组各元素的 ceiling 值
+np.ceil(x)  
+# 求数组各元素的 floor 值
+np.floor(x)  
+# 求数组各元素的四舍五入值
+np.rint(x)  
+# 将数组各元素的整数和小数部分以两个独立数组形式返回
+np.modf(x)  
+# 求数组各元素的 cos 值
+np.cos(x)  
+# 求数组各元素的 sin 值
+np.sin(x)  
+# 求数组各元素的 tan 值
+np.tan(x)  
+# 求数组各元素的 e^n 值
+np.exp(x)  
+# 求数组各元素的符号值，1（+），0，-1（-）
+np.sign(x)  
 ```
 
 二元运算：
 
 ```python
-+ - * / **  # 两个数组各元素间加减乘除指数运算
-> < >= <= == !=  # 算数比较, 产生布尔型数组
-np.maximum(a, b)  # 两个数组各元素进行比较, 取大的那个, 返回数组
-np.fmax(a, b)  # 两个数组各元素进行比较, 取大的那个, 返回数组
-np.minimum(a, b)  # 两个数组各元素进行比较, 取小的那个, 返回数组
-np.fmin(a, b)  # 两个数组各元素进行比较, 取小的那个
-np.mod(a, b)  # 两个数组各元素进行求模运算
-np.copysign(a, b)  # 将b中各元素的符号赋值给a中各元素
+# 两个数组各元素间加减乘除指数运算
++ - * / **  
+# 算数比较，产生布尔型数组
+> < >= <= == !=  
+# 两个数组各元素进行比较，取大的那个，返回数组
+np.maximum(a, b)  
+# 两个数组各元素进行比较，取大的那个
+np.fmax(a, b)  
+# 两个数组各元素进行比较，取小的那个，返回数组
+np.minimum(a, b)  
+# 两个数组各元素进行比较，取小的那个
+np.fmin(a, b)  
+# 两个数组各元素进行求模运算
+np.mod(a, b)  
+# 将 b 中各元素的符号赋值给 a 中各元素
+np.copysign(a, b)
 ```
 
 ### Numpy 中的重要随机函数
